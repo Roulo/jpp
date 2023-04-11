@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.jpp.WatchView">
+    <AnchorPane>
+        <Button fx:id="backBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#Back" text="Back" />
+        <Button fx:id="startBtn" layoutX="62.0" layoutY="559.0" mnemonicParsing="false" onAction="#StartVideo" text="Démarrer la vidéo" />
+    </AnchorPane>
+</VBox>

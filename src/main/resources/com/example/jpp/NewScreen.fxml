@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.jpp.NewScreenController">
+    <SplitPane dividerPositions="0.16277128547579298" focusTraversable="true" VBox.vgrow="NEVER">
+        <AnchorPane prefWidth="280.0">
+            <Button fx:id="disconnectBtn" layoutX="62.0" layoutY="559.0" mnemonicParsing="false" onAction="#Deconnection" text="Se déconnecter" />
+            <Button layoutX="64.0" layoutY="527.0" onAction="#displayVideos" text="Display Videos" />
+        </AnchorPane>
+        <AnchorPane prefHeight="598.0" prefWidth="163.0">
+            <Button fx:id="watchBtn" layoutX="14.0" layoutY="559.0" mnemonicParsing="false" onAction="#Watch" text="Voir" />
+        </AnchorPane>
+    </SplitPane>
+</VBox>
