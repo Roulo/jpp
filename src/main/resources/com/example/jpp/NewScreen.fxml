@@ -12,7 +12,7 @@
         <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="200.0">
             <Button fx:id="backBtn" alignment="CENTER" layoutX="10.0" layoutY="410.0" mnemonicParsing="false" onAction="#Back" text="Back" />
             <Button fx:id="watchBtn" alignment="CENTER" layoutX="81.0" layoutY="410.0" mnemonicParsing="false" onAction="#Watch" text="Voir" />
-            <Button fx:id="profileBtn" alignment="CENTER" layoutX="120.0" layoutY="410.0" mnemonicParsing="false" onAction="#Comtpe" text="Mon compte" />
+            <Button fx:id="profileBtn" alignment="CENTER" layoutX="120.0" layoutY="410.0" mnemonicParsing="false" onAction="#Compte" text="Mon compte" />
         </AnchorPane>
     </SplitPane>
 </VBox>
