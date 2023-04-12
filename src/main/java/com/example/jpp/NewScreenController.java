@@ -190,5 +190,6 @@ public class NewScreenController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.out.println("User searching a video.");
     }
 }
