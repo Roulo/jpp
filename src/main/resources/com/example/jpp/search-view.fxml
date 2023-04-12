@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.jpp.SearchView"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.jpp.SearchView">
+    <Label layoutX="12.0" layoutY="14.0" prefHeight="18.0" prefWidth="234.0" text="Titre" />
+   <TextField layoutX="14.0" layoutY="33.0" prefHeight="26.0" prefWidth="233.0" />
+   <Label layoutX="12.0" layoutY="63.0" prefHeight="18.0" prefWidth="234.0" text="Réalisateur" />
+   <TextField layoutX="14.0" layoutY="81.0" prefHeight="26.0" prefWidth="233.0" />
+   <Label layoutX="12.0" layoutY="114.0" prefHeight="18.0" prefWidth="234.0" text="Acteurs" />
+   <TextField layoutX="14.0" layoutY="132.0" prefHeight="26.0" prefWidth="233.0" />
+   <Label layoutX="12.0" layoutY="165.0" prefHeight="18.0" prefWidth="234.0" text="Année" />
+   <TextField layoutX="14.0" layoutY="183.0" prefHeight="26.0" prefWidth="233.0" />
+   <Label layoutX="365.0" layoutY="14.0" prefHeight="18.0" prefWidth="150.0" text="Genre" />
+   <ChoiceBox layoutX="365.0" layoutY="33.0" prefWidth="150.0" />
+   <Label layoutX="365.0" layoutY="72.0" prefHeight="18.0" prefWidth="150.0" text="Trier" />
+   <ChoiceBox layoutX="365.0" layoutY="91.0" prefWidth="150.0" />
+    <Button fx:id="searchBtn" layoutX="81.0" layoutY="236.0" mnemonicParsing="false" onAction="#Search" text="Rechercher">
+      <font>
+         <Font size="70.0" />
+      </font></Button>
+   <Button fx:id="backBtn" layoutX="14.0" layoutY="360.0" mnemonicParsing="false" onAction="#Back" text="Menu" />
 </AnchorPane>

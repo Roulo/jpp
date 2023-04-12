@@ -18,13 +18,11 @@ import java.sql.*;
 
 public class NewScreenController {
 
-    //the url for the MySQL database
     private static final String DB_URL = "jdbc:mysql://localhost:3306/netflix?user=root&password=";
     private Connection conn;
 
     public NewScreenController() {
         try {
-            //establish a connection to the MySQL database
             conn = DriverManager.getConnection(DB_URL);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -33,10 +31,7 @@ public class NewScreenController {
 
     @FXML private Font x1;@FXML private Color x2;@FXML private Font x3;@FXML private Color x4;
 
-    @FXML
-    private Button disconnectBtn;
-    public Button watchBtn;
-    public Button backBtn;
+    @FXML private Button disconnectBtn;@FXML private Button watchBtn;@FXML private Button backBtn;
 
     @FXML
     private void Deconnection(ActionEvent event) {
