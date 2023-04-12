@@ -3,12 +3,14 @@ package com.example.jpp;
 import javafx.event.ActionEvent;
 import javafx.fxml.*;
 import javafx.geometry.Insets;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.scene.web.WebView;
 
@@ -29,8 +31,8 @@ public class WatchView {
 
     @FXML
     private Button backBtn;
-
-    @FXML Button startBtn;
+    @FXML
+    Button startBtn;
 
     @FXML
     private void StartVideo(){
@@ -40,9 +42,9 @@ public class WatchView {
             ResultSet result = statement.executeQuery(sqlStatement);
             result.next();
             String video = result.getString("selected_video");
-            System.out.println(video);
-            //webview
+
             WebView webView = new WebView();
+            webView.setPrefSize(((AnchorPane)backBtn.getParent()).getWidth(), ((AnchorPane)backBtn.getParent()).getHeight() * 0.95);
             webView.getEngine().load("https://www.youtube.com/embed/" + video);
             ((AnchorPane)backBtn.getParent()).getChildren().add(webView);
         } catch (SQLException e) {
@@ -56,10 +58,10 @@ public class WatchView {
         Stage stage = (Stage) backBtn.getScene().getWindow();
         stage.close();
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("NewScreen.fxml"));
             Parent root = fxmlLoader.load();
             Stage stage1 = new Stage();
-            stage1.setTitle("Hello!");
+            stage1.setTitle("Netflix");
             stage1.setScene(new Scene(root));
             stage1.show();
         } catch (IOException e) {

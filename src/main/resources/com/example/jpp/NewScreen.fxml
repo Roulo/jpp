@@ -3,14 +3,16 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.jpp.NewScreenController">
-    <SplitPane dividerPositions="0.16277128547579298" focusTraversable="true" VBox.vgrow="NEVER">
-        <AnchorPane prefWidth="280.0">
-            <Button fx:id="disconnectBtn" layoutX="62.0" layoutY="559.0" mnemonicParsing="false" onAction="#Deconnection" text="Se déconnecter" />
-            <Button layoutX="64.0" layoutY="527.0" onAction="#displayVideos" text="Display Videos" />
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.jpp.NewScreenController">
+    <SplitPane dividerPositions="0.5134048257372654" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="1000.0" VBox.vgrow="NEVER">
+        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="800.0">
+            <Button layoutX="692.0" layoutY="14.0" onAction="#displayVideos" text="Display Videos" />
+            <Button fx:id="disconnectBtn" layoutX="689.0" layoutY="410.0" mnemonicParsing="false" onAction="#Deconnection" text="Se déconnecter" />
         </AnchorPane>
-        <AnchorPane prefHeight="598.0" prefWidth="163.0">
-            <Button fx:id="watchBtn" layoutX="14.0" layoutY="559.0" mnemonicParsing="false" onAction="#Watch" text="Voir" />
+        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="200.0">
+            <Button fx:id="backBtn" alignment="CENTER" layoutX="10.0" layoutY="410.0" mnemonicParsing="false" onAction="#Back" text="Back" />
+            <Button fx:id="watchBtn" alignment="CENTER" layoutX="81.0" layoutY="410.0" mnemonicParsing="false" onAction="#Watch" text="Voir" />
+            <Button fx:id="profileBtn" alignment="CENTER" layoutX="120.0" layoutY="410.0" mnemonicParsing="false" onAction="#Comtpe" text="Mon compte" />
         </AnchorPane>
     </SplitPane>
 </VBox>

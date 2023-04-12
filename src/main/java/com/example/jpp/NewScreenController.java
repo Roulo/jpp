@@ -1,5 +1,6 @@
 package com.example.jpp;
 
+import com.almasb.fxgl.entity.action.Action;
 import javafx.event.ActionEvent;
 import javafx.fxml.*;
 import javafx.geometry.Insets;
@@ -35,6 +36,7 @@ public class NewScreenController {
     @FXML
     private Button disconnectBtn;
     public Button watchBtn;
+    public Button backBtn;
 
     @FXML
     private void Deconnection(ActionEvent event) {
@@ -79,6 +81,7 @@ public class NewScreenController {
                         String duree = resultSet1.getString("duree");
                         String realisateur = resultSet1.getString("realisateur");
 
+
                         System.out.println("Titre: " + titre);
                         System.out.println("Résumé: " + resume);
                         System.out.println("Catégorie: " + categorie);
@@ -87,6 +90,7 @@ public class NewScreenController {
                         System.out.println("Réalisateur: " + realisateur);
 
                         // display those details
+
                         ((AnchorPane)disconnectBtn.getParent()).getChildren().remove(vBox);
                         VBox vBox1 = new VBox();
                         vBox1.setPadding(new Insets(10));
@@ -104,23 +108,9 @@ public class NewScreenController {
 
                         // create a WebView
                         WebView webView = new WebView();
+                        webView.setPrefSize(800, 450);
                         webView.getEngine().load("https://www.youtube.com/embed/" + resultSet1.getString("teaser"));
                         ((AnchorPane)disconnectBtn.getParent()).getChildren().add(webView);
-
-                        // create a button to go back to the list of videos
-                        Button backBtn = new Button("Go back");
-                        backBtn.setOnAction(event1 -> {
-                            // remove the video from the third pane
-                            ((AnchorPane)disconnectBtn.getParent()).getChildren().remove(webView);
-                            // remove the button from the third pane
-                            ((AnchorPane)disconnectBtn.getParent()).getChildren().remove(backBtn);
-                            // display the list of videos in the second pane
-                            ((AnchorPane)disconnectBtn.getParent()).getChildren().remove(vBox1);
-                            ((AnchorPane)disconnectBtn.getParent()).getChildren().add(vBox);
-                        });
-
-                        ((AnchorPane)disconnectBtn.getParent()).getChildren().add(backBtn);
-
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
                     }
@@ -137,6 +127,24 @@ public class NewScreenController {
     }
 
     @FXML
+    private void Back(ActionEvent event){
+        System.out.println("User going back to the list of videos.");
+        Stage stage = (Stage) backBtn.getScene().getWindow();
+        stage.close();
+
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("NewScreen.fxml"));
+            Parent root = fxmlLoader.load();
+            Stage stage1 = new Stage();
+            stage1.setTitle("New Screen!");
+            stage1.setScene(new Scene(root));
+            stage1.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
     private void Watch(ActionEvent event) {
         System.out.println("User watching a video.");
         //close the current window
@@ -148,6 +156,40 @@ public class NewScreenController {
             Parent root = fxmlLoader.load();
             Stage stage1 = new Stage();
             stage1.setTitle("Watch!");
+            stage1.setScene(new Scene(root));
+            stage1.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void Compte(ActionEvent event){
+        System.out.println("User going to his account.");
+        Stage stage = (Stage) watchBtn.getScene().getWindow();
+        stage.close();
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("compte-view.fxml"));
+            Parent root = fxmlLoader.load();
+            Stage stage1 = new Stage();
+            stage1.setTitle("Compte!");
+            stage1.setScene(new Scene(root));
+            stage1.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void Search(ActionEvent event){
+        System.out.println("User searching a video.");
+        Stage stage = (Stage) watchBtn.getScene().getWindow();
+        stage.close();
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("search-view.fxml"));
+            Parent root = fxmlLoader.load();
+            Stage stage1 = new Stage();
+            stage1.setTitle("Search!");
             stage1.setScene(new Scene(root));
             stage1.show();
         } catch (IOException e) {
