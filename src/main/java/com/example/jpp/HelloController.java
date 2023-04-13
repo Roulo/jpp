@@ -12,7 +12,6 @@ import java.sql.*;
 
 public class HelloController {
 
-    //the url for the MySQL database
     private static final String DB_URL = "jdbc:mysql://localhost:3306/netflix?user=root&password=";
     private Connection conn;
     @FXML private TextField Username;
