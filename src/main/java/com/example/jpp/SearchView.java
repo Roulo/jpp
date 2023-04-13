@@ -1,17 +1,21 @@
 package com.example.jpp;
 
-import com.almasb.fxgl.entity.action.Action;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class SearchView {
@@ -45,8 +49,63 @@ public class SearchView {
         }
     }
 
+    @FXML private TextField titre; @FXML private TextField real; @FXML private TextField acteurs; @FXML private TextField annee;
+    ObservableList<Object> genreList = FXCollections.observableArrayList();
+    ObservableList<Object> trierList = FXCollections.observableArrayList();
+    @FXML private ChoiceBox<Object> genre; @FXML private ChoiceBox<Object> trier;
+    @FXML private Button loadBtn;
+
     @FXML
-    private void Search(ActionEvent event){
-        System.out.println("Search");
+    private void LoadData(ActionEvent event) {
+        genreList.removeAll(genreList);
+        trierList.removeAll(trierList);
+        String query = "SELECT DISTINCT categorie FROM videos;";
+        try {
+            ResultSet rs = conn.createStatement().executeQuery(query);
+            while (rs.next()) {
+                genreList.add(rs.getString("categorie"));
+            }
+            genre.setItems(genreList);
+            String b = "note croissante";
+            String c = "note décroissante";
+            String d = "année croissante";
+            String e = "année décroissante";
+            trierList.addAll(b, c, d, e);
+            trier.setItems(trierList);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
+
+    @FXML
+    private void Search(ActionEvent event) {
+        String title = titre.getText();
+        String director = real.getText();
+        String actor = acteurs.getText();
+        String year = annee.getText();
+
+        String query = "SELECT * FROM videos WHERE "
+                + "titre LIKE '%" + title + "%'"
+                + "AND realisateur LIKE '%" + director + "%'"
+                + "AND acteurs LIKE '%" + actor + "%'"
+                + "AND annee LIKE '%" + year + "%'";
+        try {
+            ResultSet rs = conn.createStatement().executeQuery(query);
+
+            while (rs.next()) {
+                System.out.println(rs.getString("titre"));
+                System.out.print(" ");
+                System.out.print(rs.getString("realisateur"));
+                System.out.print(" ");
+                System.out.print(rs.getString("acteurs"));
+                System.out.print(" ");
+                System.out.print(rs.getString("annee"));
+                System.out.print(" ");
+                System.out.println(rs.getString("categorie"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

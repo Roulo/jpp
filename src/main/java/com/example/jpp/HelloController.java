@@ -19,7 +19,6 @@ public class HelloController {
 
     public HelloController() {
         try {
-            //establish a connection to the MySQL database
             conn = DriverManager.getConnection(DB_URL);
         } catch (SQLException e) {
             e.printStackTrace();

@@ -1,6 +1,5 @@
 package com.example.jpp;
 
-import com.almasb.fxgl.entity.action.Action;
 import javafx.event.ActionEvent;
 import javafx.fxml.*;
 import javafx.geometry.Insets;
@@ -8,8 +7,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.scene.web.WebView;
 
@@ -19,8 +16,7 @@ import java.sql.*;
 public class NewScreenController {
 
     private static final String DB_URL = "jdbc:mysql://localhost:3306/netflix?user=root&password=";
-    private Connection conn;
-
+    @FXML private Button profileBtn;    private Connection conn;
     public NewScreenController() {
         try {
             conn = DriverManager.getConnection(DB_URL);
@@ -28,8 +24,6 @@ public class NewScreenController {
             e.printStackTrace();
         }
     }
-
-    @FXML private Font x1;@FXML private Color x2;@FXML private Font x3;@FXML private Color x4;
 
     @FXML private Button disconnectBtn;@FXML private Button watchBtn;@FXML private Button backBtn;
 
@@ -190,6 +184,5 @@ public class NewScreenController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("User searching a video.");
     }
 }
