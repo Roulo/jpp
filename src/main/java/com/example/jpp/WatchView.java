@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.sql.*;
 
 public class WatchView {
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/netflix?user=root&password=";
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/temporaire?user=root&password=";
     private Connection conn;
 
     public WatchView() {
@@ -33,7 +33,7 @@ public class WatchView {
     private void StartVideo(){
         try {
             Statement statement = conn.createStatement();
-            String sqlStatement = "SELECT selected_video FROM utilisateurs WHERE id = 1";
+            String sqlStatement = "SELECT selected_video FROM compte WHERE id = 1";
             ResultSet result = statement.executeQuery(sqlStatement);
             result.next();
             String video = result.getString("selected_video");

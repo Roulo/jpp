@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.sql.*;
 
 public class NewScreenController {
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/netflix?user=root&password=";
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/temporaire?user=root&password=";
     private Connection conn;
     public NewScreenController() {
         try {
@@ -60,13 +60,19 @@ public class NewScreenController {
                     System.out.println(label.getText() + " selected");
                     try {
                         ResultSet resultSet1 = statement.executeQuery("SELECT * FROM videos WHERE titre='" + label.getText() + "'");
+
                         resultSet1.next();
                         String titre = resultSet1.getString("titre");
                         String resume = resultSet1.getString("resume");
-                        String categorie = resultSet1.getString("categorie");
                         String date = resultSet1.getString("annee");
                         String duree = resultSet1.getString("duree");
                         String realisateur = resultSet1.getString("realisateur");
+                        String note = resultSet1.getString("note");
+                        String id = resultSet1.getString("id");
+
+                        ResultSet resultSet2 = statement.executeQuery("SELECT DISTINCT genre.type FROM genre, videos, definit WHERE genre.id = definit.id AND definit.id__Videos = '" + id + "'");
+                        resultSet2.next();
+                        String categorie = resultSet2.getString("type");
 
                         System.out.println("Titre: " + titre);
                         System.out.println("Résumé: " + resume);
@@ -74,6 +80,7 @@ public class NewScreenController {
                         System.out.println("Date: " + date);
                         System.out.println("Durée: " + duree);
                         System.out.println("Réalisateur: " + realisateur);
+                        System.out.println("Note: " + note);
 
                         ((AnchorPane)disconnectBtn.getParent()).getChildren().remove(vBox);
                         VBox vBox1 = new VBox();
@@ -85,6 +92,7 @@ public class NewScreenController {
                         vBox1.getChildren().add(new Label("Date: " + date));
                         vBox1.getChildren().add(new Label("Durée: " + duree));
                         vBox1.getChildren().add(new Label("Réalisateur: " + realisateur));
+                        vBox1.getChildren().add(new Label("Note: " + note));
                         ((AnchorPane)watchBtn.getParent()).getChildren().add(vBox1);
 
                         ((AnchorPane)disconnectBtn.getParent()).getChildren().remove(vBox);

@@ -20,7 +20,7 @@ import java.io.IOException;
 import java.sql.*;
 
 public class CompteView {
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/netflix?user=root&password=";
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/temporaire?user=root&password=";
     private Connection conn;
 
     public CompteView() {
@@ -48,7 +48,7 @@ public class CompteView {
     @FXML
     private void LoadData(ActionEvent event) {
         genreList.removeAll(genreList);
-        String query = "SELECT DISTINCT categorie FROM videos;";
+        String query = "SELECT type FROM genre;";
         try {
             ResultSet rs = conn.createStatement().executeQuery(query);
             while (rs.next()) {
@@ -121,6 +121,7 @@ public class CompteView {
 
     @FXML
     private void Historique(){
+        ((AnchorPane)resultat.getParent()).getChildren().clear();
         try {
             Statement statement = conn.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM videos");
@@ -142,6 +143,7 @@ public class CompteView {
 
     @FXML
     private void Liste(){
+        ((AnchorPane)resultat.getParent()).getChildren().clear();
         try {
             Statement statement = conn.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM videos");
@@ -150,7 +152,6 @@ public class CompteView {
             vBox.setPadding(new Insets(10));
             vBox.setSpacing(10);
 
-            //insert where the label resultat is the title of the videos
             while (resultSet.next()) {
                 Label label = new Label(resultSet.getString("titre"));
                 vBox.getChildren().add(label);

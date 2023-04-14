@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.sql.*;
 
 public class HelloController {
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/netflix?user=root&password=";
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/temporaire?user=root&password=";
     private Connection conn;
     public HelloController() {
         try {
@@ -25,13 +25,13 @@ public class HelloController {
 
     @FXML
     private void Sinscrire(ActionEvent event) {
-        String nom_utilisateur = Username.getText();
-        String mot_de_passe = Password.getText();
-        String query = "INSERT INTO utilisateurs (nom_utilisateur, mot_de_passe) VALUES (?,?)";
+        String identifiant = Username.getText();
+        String mdp = Password.getText();
+        String query = "INSERT INTO compte (identifiant,mdp) VALUES (?,?)";
         try {
             PreparedStatement statement = conn.prepareStatement(query);
-            statement.setString(1, nom_utilisateur);
-            statement.setString(2, mot_de_passe);
+            statement.setString(1, identifiant);
+            statement.setString(2, mdp);
             int rows = statement.executeUpdate();
             if (rows > 0) {
                 System.out.println("User registered successfully");
@@ -45,13 +45,13 @@ public class HelloController {
 
     @FXML
     private void Connection(ActionEvent event) {
-        String nom_utilisateur = Username.getText();
-        String mot_de_passe = Password.getText();
-        String query = "SELECT * FROM utilisateurs WHERE nom_utilisateur=? AND mot_de_passe=?";
+        String identifiant = Username.getText();
+        String mdp = Password.getText();
+        String query = "SELECT * FROM compte WHERE identifiant=? AND mdp=?";
         try {
             PreparedStatement statement = conn.prepareStatement(query);
-            statement.setString(1, nom_utilisateur);
-            statement.setString(2, mot_de_passe);
+            statement.setString(1, identifiant);
+            statement.setString(2, mdp);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 System.out.println("User logged in successfully");

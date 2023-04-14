@@ -19,7 +19,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class SearchView {
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/netflix?user=root&password=";
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/temporaire?user=root&password=";
     private Connection conn;
 
     public SearchView() {
@@ -59,7 +59,7 @@ public class SearchView {
     private void LoadData(ActionEvent event) {
         genreList.removeAll(genreList);
         trierList.removeAll(trierList);
-        String query = "SELECT DISTINCT categorie FROM videos;";
+        String query = "SELECT DISTINCT type FROM genre;";
         try {
             ResultSet rs = conn.createStatement().executeQuery(query);
             while (rs.next()) {
