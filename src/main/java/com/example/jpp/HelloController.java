@@ -11,12 +11,8 @@ import java.io.IOException;
 import java.sql.*;
 
 public class HelloController {
-
     private static final String DB_URL = "jdbc:mysql://localhost:3306/netflix?user=root&password=";
     private Connection conn;
-    @FXML private TextField Username;
-    @FXML private TextField Password;
-
     public HelloController() {
         try {
             conn = DriverManager.getConnection(DB_URL);
@@ -24,6 +20,8 @@ public class HelloController {
             e.printStackTrace();
         }
     }
+
+    @FXML private TextField Username; @FXML private TextField Password;
 
     @FXML
     private void Sinscrire(ActionEvent event) {

@@ -14,9 +14,8 @@ import java.io.IOException;
 import java.sql.*;
 
 public class NewScreenController {
-
     private static final String DB_URL = "jdbc:mysql://localhost:3306/netflix?user=root&password=";
-    @FXML private Button profileBtn;    private Connection conn;
+    private Connection conn;
     public NewScreenController() {
         try {
             conn = DriverManager.getConnection(DB_URL);
@@ -26,6 +25,7 @@ public class NewScreenController {
     }
 
     @FXML private Button disconnectBtn;@FXML private Button watchBtn;@FXML private Button backBtn;
+    @FXML private Button profileBtn;
 
     @FXML
     private void Deconnection(ActionEvent event) {
@@ -47,9 +47,7 @@ public class NewScreenController {
     @FXML
     private void displayVideos() {
         try {
-            // create a Statement object
             Statement statement = conn.createStatement();
-
             ResultSet resultSet = statement.executeQuery("SELECT titre FROM videos");
 
             VBox vBox = new VBox();
@@ -70,15 +68,12 @@ public class NewScreenController {
                         String duree = resultSet1.getString("duree");
                         String realisateur = resultSet1.getString("realisateur");
 
-
                         System.out.println("Titre: " + titre);
                         System.out.println("Résumé: " + resume);
                         System.out.println("Catégorie: " + categorie);
                         System.out.println("Date: " + date);
                         System.out.println("Durée: " + duree);
                         System.out.println("Réalisateur: " + realisateur);
-
-                        // display those details
 
                         ((AnchorPane)disconnectBtn.getParent()).getChildren().remove(vBox);
                         VBox vBox1 = new VBox();
@@ -90,12 +85,10 @@ public class NewScreenController {
                         vBox1.getChildren().add(new Label("Date: " + date));
                         vBox1.getChildren().add(new Label("Durée: " + duree));
                         vBox1.getChildren().add(new Label("Réalisateur: " + realisateur));
-                        // display the VBox in the second pane of the split pane
                         ((AnchorPane)watchBtn.getParent()).getChildren().add(vBox1);
 
                         ((AnchorPane)disconnectBtn.getParent()).getChildren().remove(vBox);
 
-                        // create a WebView
                         WebView webView = new WebView();
                         webView.setPrefSize(800, 450);
                         webView.getEngine().load("https://www.youtube.com/embed/" + resultSet1.getString("teaser"));
@@ -106,10 +99,7 @@ public class NewScreenController {
                 });
                 vBox.getChildren().add(label);
             }
-
-            // display the VBox in the first pane
             ((AnchorPane)disconnectBtn.getParent()).getChildren().add(vBox);
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -136,10 +126,8 @@ public class NewScreenController {
     @FXML
     private void Watch(ActionEvent event) {
         System.out.println("User watching a video.");
-        //close the current window
         Stage stage = (Stage) watchBtn.getScene().getWindow();
         stage.close();
-        //change fxml file
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("watch-view.fxml"));
             Parent root = fxmlLoader.load();
