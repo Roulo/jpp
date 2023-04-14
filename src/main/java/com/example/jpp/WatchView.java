@@ -33,10 +33,11 @@ public class WatchView {
     private void StartVideo(){
         try {
             Statement statement = conn.createStatement();
-            String sqlStatement = "SELECT selected_video FROM compte WHERE id = 1";
+            String sqlStatement = "SELECT selected_video FROM compte WHERE compte.id = 3";
             ResultSet result = statement.executeQuery(sqlStatement);
             result.next();
             String video = result.getString("selected_video");
+            System.out.println(video);
 
             WebView webView = new WebView();
             webView.setPrefSize(((AnchorPane)backBtn.getParent()).getWidth(), ((AnchorPane)backBtn.getParent()).getHeight() * 0.95);
