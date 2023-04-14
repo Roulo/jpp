@@ -69,10 +69,18 @@ public class NewScreenController {
                         String realisateur = resultSet1.getString("realisateur");
                         String note = resultSet1.getString("note");
                         String id = resultSet1.getString("id");
+                        String teaser = resultSet1.getString("teaser");
 
-                        ResultSet resultSet2 = statement.executeQuery("SELECT DISTINCT genre.type FROM genre, videos, definit WHERE genre.id = definit.id AND definit.id__Videos = '" + id + "'");
-                        resultSet2.next();
-                        String categorie = resultSet2.getString("type");
+                        WebView webView = new WebView();
+                        webView.setPrefSize(800, 450);
+                        webView.getEngine().load("https://www.youtube.com/embed/" + teaser);
+                        ((AnchorPane)disconnectBtn.getParent()).getChildren().add(webView);
+
+                        resultSet1 = statement.executeQuery("SELECT DISTINCT genre.type FROM genre, videos, definit WHERE genre.id = definit.id AND definit.id__Videos = '" + id + "'" );
+                        resultSet1.next();
+                        String categorie = resultSet1.getString("type");
+
+                        statement.executeUpdate("UPDATE compte SET selected_video = '" + teaser + "' WHERE id = '3'");
 
                         System.out.println("Titre: " + titre);
                         System.out.println("Résumé: " + resume);
@@ -96,11 +104,6 @@ public class NewScreenController {
                         ((AnchorPane)watchBtn.getParent()).getChildren().add(vBox1);
 
                         ((AnchorPane)disconnectBtn.getParent()).getChildren().remove(vBox);
-
-                        WebView webView = new WebView();
-                        webView.setPrefSize(800, 450);
-                        webView.getEngine().load("https://www.youtube.com/embed/" + resultSet1.getString("teaser"));
-                        ((AnchorPane)disconnectBtn.getParent()).getChildren().add(webView);
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
                     }
