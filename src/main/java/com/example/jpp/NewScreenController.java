@@ -61,6 +61,7 @@ public class NewScreenController {
                     try {
                         ResultSet resultSet1 = statement.executeQuery("SELECT * FROM videos WHERE titre='" + label.getText() + "'");
 
+
                         resultSet1.next();
                         String titre = resultSet1.getString("titre");
                         String resume = resultSet1.getString("resume");
