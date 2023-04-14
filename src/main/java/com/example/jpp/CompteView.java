@@ -19,7 +19,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.*;
 
-public class CompteView {
+public class CompteView{
     private static final String DB_URL = "jdbc:mysql://localhost:3306/temporaire?user=root&password=";
     private Connection conn;
 
@@ -161,5 +161,26 @@ public class CompteView {
         catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+
+
+    private String nature;
+    private String identifiant;
+
+    public String getIdentifiant() {
+        return identifiant;
+    }
+
+    public String getNature() {
+        return nature;
+    }
+
+    public void setIdentifiant(String identifiant) {
+        this.identifiant = identifiant;
+    }
+
+    public void setNature(String nature) {
+        this.nature = nature;
     }
 }
