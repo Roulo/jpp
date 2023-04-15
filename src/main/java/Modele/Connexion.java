@@ -51,6 +51,7 @@ public class Connexion extends DAO implements ConnexionDAO {
                 }
                 else {
                     statement.executeUpdate("UPDATE status SET status = 'Client' WHERE status.id = 1;");
+
                 }
                 //update status
                 System.out.println("User logged in successfully");
