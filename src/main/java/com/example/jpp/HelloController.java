@@ -33,6 +33,10 @@ public class HelloController extends CompteView {
             PreparedStatement statement = conn.prepareStatement(query);
             statement.setString(1, identifiant);
             statement.setString(2, mdp);
+            if (identifiant.isEmpty() || mdp.isEmpty()) {
+                System.out.println("Error: Empty fields");
+                return;
+            }
             int rows = statement.executeUpdate();
             if (rows > 0) {
                 System.out.println("User registered successfully");

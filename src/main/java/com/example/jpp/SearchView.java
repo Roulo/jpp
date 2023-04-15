@@ -18,7 +18,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class SearchView {
+public class SearchView{
     private static final String DB_URL = "jdbc:mysql://localhost:3306/temporaire?user=root&password=";
     private Connection conn;
 
@@ -50,9 +50,9 @@ public class SearchView {
     }
 
     @FXML private TextField titre; @FXML private TextField real; @FXML private TextField acteurs; @FXML private TextField annee;
-    ObservableList<Object> genreList = FXCollections.observableArrayList();
-    ObservableList<Object> trierList = FXCollections.observableArrayList();
-    @FXML private ChoiceBox<Object> genre; @FXML private ChoiceBox<Object> trier;
+    ObservableList<String> genreList = FXCollections.observableArrayList();
+    ObservableList<String> trierList = FXCollections.observableArrayList();
+    @FXML private ChoiceBox<String> genre; @FXML private ChoiceBox<String> trier;
     @FXML private Button loadBtn;
 
     @FXML
@@ -61,15 +61,17 @@ public class SearchView {
         trierList.removeAll(trierList);
         String query = "SELECT DISTINCT type FROM genre;";
         try {
+            genre.setValue("Select");
+            trier.setValue("Select");
             ResultSet rs = conn.createStatement().executeQuery(query);
             while (rs.next()) {
                 genreList.add(rs.getString("type"));
             }
             genre.setItems(genreList);
-            String b = "note croissante";
-            String c = "note décroissante";
-            String d = "année croissante";
-            String e = "année décroissante";
+            String b = "note ASC";
+            String c = "note DESC";
+            String d = "annee ASC";
+            String e = "annee DESC";
             trierList.addAll(b, c, d, e);
             trier.setItems(trierList);
         } catch (SQLException e) {
@@ -82,11 +84,9 @@ public class SearchView {
         String title = titre.getText();
         String director = real.getText();
         String year = annee.getText();
+        String actors = acteurs.getText();
 
-        String query = "SELECT * FROM videos WHERE "
-                + "titre LIKE '%" + title + "%'"
-                + "AND realisateur LIKE '%" + director + "%'"
-                + "AND annee LIKE '%" + year + "%'";
+        String query = "SELECT * FROM videos WHERE titre LIKE '%" + title + "%';";
         try {
             ResultSet rs = conn.createStatement().executeQuery(query);
 
