@@ -63,7 +63,7 @@ public class SearchView {
         try {
             ResultSet rs = conn.createStatement().executeQuery(query);
             while (rs.next()) {
-                genreList.add(rs.getString("categorie"));
+                genreList.add(rs.getString("type"));
             }
             genre.setItems(genreList);
             String b = "note croissante";
@@ -81,13 +81,11 @@ public class SearchView {
     private void Search(ActionEvent event) {
         String title = titre.getText();
         String director = real.getText();
-        String actor = acteurs.getText();
         String year = annee.getText();
 
         String query = "SELECT * FROM videos WHERE "
                 + "titre LIKE '%" + title + "%'"
                 + "AND realisateur LIKE '%" + director + "%'"
-                + "AND acteurs LIKE '%" + actor + "%'"
                 + "AND annee LIKE '%" + year + "%'";
         try {
             ResultSet rs = conn.createStatement().executeQuery(query);
@@ -97,11 +95,7 @@ public class SearchView {
                 System.out.print(" ");
                 System.out.print(rs.getString("realisateur"));
                 System.out.print(" ");
-                System.out.print(rs.getString("acteurs"));
-                System.out.print(" ");
                 System.out.print(rs.getString("annee"));
-                System.out.print(" ");
-                System.out.println(rs.getString("categorie"));
             }
         } catch (SQLException e) {
             e.printStackTrace();

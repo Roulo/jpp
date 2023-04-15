@@ -15,9 +15,6 @@ import java.sql.*;
 public class WatchView extends CompteView {
     private static final String DB_URL = "jdbc:mysql://localhost:3306/temporaire?user=root&password=";
     private Connection conn;
-
-    private CompteView obj1 = new CompteView();
-
     public WatchView() {
         try {
             conn = DriverManager.getConnection(DB_URL);
@@ -26,10 +23,7 @@ public class WatchView extends CompteView {
         }
     }
 
-    @FXML
-    private Button backBtn;
-    @FXML
-    Button startBtn;
+    @FXML private Button backBtn; @FXML Button startBtn;
 
     @FXML
     private void StartVideo(){

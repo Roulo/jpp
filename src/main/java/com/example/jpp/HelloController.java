@@ -14,8 +14,6 @@ public class HelloController extends CompteView {
     private static final String DB_URL = "jdbc:mysql://localhost:3306/temporaire?user=root&password=";
     private Connection conn;
 
-    private CompteView obj1 = new CompteView();
-
     public HelloController() {
         try {
             conn = DriverManager.getConnection(DB_URL);
@@ -51,8 +49,6 @@ public class HelloController extends CompteView {
         String identifiant = Username.getText();
         String mdp = Password.getText();
 
-        obj1.setIdentifiant(identifiant);
-
         String query = "SELECT * FROM compte WHERE identifiant=? AND mdp=?";
         try {
             PreparedStatement statement = conn.prepareStatement(query);
@@ -62,11 +58,6 @@ public class HelloController extends CompteView {
             if (resultSet.next()) {
                 resultSet = statement.executeQuery("SELECT compte.admin FROM compte WHERE compte.identifiant ='"+identifiant+"';");
                 resultSet.next();
-
-                obj1.setNature(resultSet.getString("admin"));
-                System.out.println(obj1.getNature());
-
-                statement.executeUpdate("UPDATE status SET status = '" + obj1.getNature() + "'");
 
                 System.out.println("User logged in successfully");
                 Stage stage1 = (Stage) Username.getScene().getWindow();
