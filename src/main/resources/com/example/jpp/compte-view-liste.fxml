@@ -8,18 +8,28 @@
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.jpp.CompteView">
     <SplitPane dividerPositions="0.5134048257372654" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="1000.0">
         <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="300.0">
-            <Label layoutX="86.0" layoutY="14.0" prefHeight="30.0" prefWidth="144.0" text="MON COMPTE"><font><Font name="System Bold" size="20.0" /></font></Label>
+            <Label layoutX="86.0" layoutY="14.0" prefHeight="30.0" prefWidth="144.0" text="MON COMPTE">
+                <font>
+                    <Font name="System Bold" size="20.0" />
+                </font>
+            </Label>
             <!--            <Label layoutX="14.0" layoutY="98.0" prefHeight="18.0" prefWidth="144.0" text="Historique" />-->
             <!--            <Button fx:id="historiqueBtn" layoutX="14.0" layoutY="116.0" mnemonicParsing="false" onAction="#Historique" text="Mon historique" />-->
             <Label layoutX="14.0" layoutY="154.0" prefHeight="18.0" prefWidth="144.0" text="Liste" />
             <Button fx:id="listeBtn" layoutX="14.0" layoutY="172.0" mnemonicParsing="false" onAction="#Liste" text="Ma liste" />
-            <Label layoutX="10.0" layoutY="301.0" prefHeight="18.0" prefWidth="144.0" text="Ajouter" />
-            <Button fx:id="ajouterBtn" layoutX="10.0" layoutY="319.0" mnemonicParsing="false" onAction="#Ajouter" text="Ajouter un film" />
+            <Label layoutX="10.0" layoutY="301.0" prefHeight="18.0" prefWidth="144.0" text="Ajouter film" />
+            <Button fx:id="ajouterBtn" disable="false" layoutX="10.0" layoutY="319.0" mnemonicParsing="false" onAction="#Ajouter" text="Ajouter un film" />
             <Button fx:id="disconnectBtn" layoutX="200.0" layoutY="412.0" mnemonicParsing="false" onAction="#Deconnection" text="Déconnexion" />
             <Button fx:id="backBtn" layoutX="10.0" layoutY="412.0" mnemonicParsing="false" onAction="#Back" text="Retour" />
-            <Label layoutX="180.0" layoutY="301.0" prefHeight="18.0" prefWidth="109.0" text="Supprimer" />
-            <Button fx:id="supprBtn" layoutX="180.0" layoutY="319.0" mnemonicParsing="false" onAction="#Supprimer" text="Supprimer un film" />
-            <cursor><Cursor fx:constant="DEFAULT" /></cursor>
+            <Label layoutX="165.0" layoutY="301.0" prefHeight="18.0" prefWidth="109.0" text="Supprimer film" />
+            <Button fx:id="supprBtn" disable="false" layoutX="165.0" layoutY="319.0" mnemonicParsing="false" onAction="#Supprimer" text="Supprimer un film" />
+            <Label layoutX="9.0" layoutY="244.0" prefHeight="18.0" prefWidth="144.0" text="Ajouter compte" />
+            <Button fx:id="addcompteBtn" disable="false" layoutX="9.0" layoutY="262.0" mnemonicParsing="false" onAction="#AjouterCompte" text="Ajouter un compte" />
+            <Label layoutX="164.0" layoutY="244.0" prefHeight="18.0" prefWidth="109.0" text="Supprimer compte" />
+            <Button fx:id="delcompteBtn" disable="false" layoutX="164.0" layoutY="262.0" mnemonicParsing="false" onAction="#SupprimerCompte" text="Supprimer un compte" />
+            <cursor>
+                <Cursor fx:constant="DEFAULT" />
+            </cursor>
         </AnchorPane>
         <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="700.0">
             <Label fx:id="resultat" layoutX="577.0" layoutY="14.0" prefHeight="30.0" prefWidth="109.0" text="RESULTAT"><font><Font name="System Bold" size="20.0" /></font></Label>

@@ -26,7 +26,7 @@
             <Label layoutX="9.0" layoutY="244.0" prefHeight="18.0" prefWidth="144.0" text="Ajouter compte" />
             <Button fx:id="addcompteBtn" disable="false" layoutX="9.0" layoutY="262.0" mnemonicParsing="false" onAction="#AjouterCompte" text="Ajouter un compte" />
             <Label layoutX="164.0" layoutY="244.0" prefHeight="18.0" prefWidth="109.0" text="Supprimer compte" />
-            <Button fx:id="delcompteBtn" disable="false" layoutX="164.0" layoutY="262.0" mnemonicParsing="false" onAction="#SupprimerCompte" text="Supprimer un compte" />
+            <Button fx:id="deluserBtn" disable="false" layoutX="164.0" layoutY="262.0" mnemonicParsing="false" onAction="#SupprimerCompte" text="Supprimer un compte" />
             <cursor>
                 <Cursor fx:constant="DEFAULT" />
             </cursor>
@@ -34,9 +34,9 @@
         <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="300.0">
             <Label fx:id="resultat" layoutX="-1000.0" layoutY="-1000.0" prefHeight="30.0" prefWidth="109.0" text="RESULTAT"><font><Font name="System Bold" size="20.0" /></font></Label>
 
-            <Label layoutX="12.0" layoutY="14.0" prefHeight="18.0" prefWidth="234.0" text="Titre" />
+            <Label layoutX="12.0" layoutY="14.0" prefHeight="18.0" prefWidth="234.0" text="Nom d'utilisateur" />
             <TextField fx:id="titre" alignment="CENTER" layoutX="14.0" layoutY="33.0" prefHeight="26.0" prefWidth="233.0" />
-            <Button fx:id="deleteBtn" layoutX="100.0" layoutY="100.0" mnemonicParsing="false" onAction="#Delete" prefHeight="37.0" prefWidth="96.0" text="Supprimer" />
+            <Button fx:id="delcompteBtn" layoutX="100.0" layoutY="100.0" mnemonicParsing="false" onAction="#DeleteCompte" prefHeight="37.0" prefWidth="96.0" text="Supprimer" />
         </AnchorPane>
     </SplitPane>
 </VBox>

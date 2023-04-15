@@ -10,10 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -39,19 +36,50 @@ public class CompteView{
     ObservableList<Object> genreList = FXCollections.observableArrayList();
     @FXML private ChoiceBox<Object> genre;
     @FXML private Button loadBtn; @FXML private Button addBtn;
-    @FXML private TextField titre;
-    @FXML private TextField real;
-    @FXML private TextField acteurs;
-    @FXML private TextField annee;
-    @FXML private TextField resume;
-    @FXML private TextField lien;
-    @FXML private TextField duree;
+    @FXML private TextField titre;@FXML private TextField real;@FXML private TextField acteurs;@FXML private TextField annee;
+    @FXML private TextField resume;@FXML private TextField lien;@FXML private TextField duree;
+    @FXML private Button addcompteBtn;@FXML private Button delcompteBtn ;@FXML private TextField username;@FXML private TextField mdp;@FXML private CheckBox adminBox;
 
     @FXML
     private void LoadData(ActionEvent event) {
         Compte Don = new Compte();
         Don.Charger(genreList,genre);
     }
+
+    @FXML
+    private void Liste(){
+        Stage stage = (Stage) listeBtn.getScene().getWindow(); //je prend la page
+        stage.close(); //je la ferme
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("compte-view-liste.fxml")); //je charge la page
+            Parent root = fxmlLoader.load(); //je la charge
+            Stage stage1 = new Stage();
+            stage1.setTitle("Liste des vidéos");
+            stage1.setScene(new Scene(root));
+            stage1.show(); //je l'affiche
+            //youhou on a rechargé la page
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void ChargerListe(){
+        chargerlistBtn.setVisible(false);
+        //je cache le bouton pck sinon le gars peux rechager les videos et ça se superpose
+
+        VBox vBox = new VBox();
+        vBox.setPadding(new Insets(10));
+        vBox.setSpacing(10);
+
+        Compte com = new Compte();
+        com.ListePerso(vBox);
+
+        ((AnchorPane)resultat.getParent()).getChildren().add(vBox);
+    }
+
+
+
 
     @FXML
     private void Ajouter(ActionEvent event){
@@ -68,7 +96,6 @@ public class CompteView{
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
     }
 
     @FXML
@@ -113,17 +140,81 @@ public class CompteView{
         else {
             tech.AjouterFilm(resultat, title, director, year, duration, resume, link, note, genre);
         }
+    }
 
-        /*
-        String query = "INSERT INTO videos (titre, realisateur, acteurs, annee, resume, lien, duree, categorie) VALUES ('" + title + "', '" + director + "', '" + actor + "', '" + year + "', '" + resume + "', '" + link + "', '" + duration + "', '" + genre + "')";
+
+
+    @FXML
+    private void Supprimer(){
+        Stage stage = (Stage) listeBtn.getScene().getWindow(); //je prend la page
+        stage.close(); //je la ferme
         try {
-            conn.createStatement().executeUpdate(query);
-            resultat.setText("Video ajoutée avec succès");
-        } catch (SQLException e) {
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("compte-view-delvideos.fxml")); //je charge la page
+            Parent root = fxmlLoader.load(); //je la charge
+            Stage stage1 = new Stage();
+            stage1.setTitle("UPDATE des vidéos");
+            stage1.setScene(new Scene(root));
+            stage1.show(); //je l'affiche
+            //youhou on a rechargé la page
+        } catch (IOException e) {
             e.printStackTrace();
         }
-        */
     }
+
+    @FXML
+    private void Delete(ActionEvent event){
+        // à coder
+    }
+
+
+
+    @FXML
+    private void AjouterCompte(){
+        Stage stage = (Stage) listeBtn.getScene().getWindow(); //je prend la page
+        stage.close(); //je la ferme
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("compte-view-addcompte.fxml")); //je charge la page
+            Parent root = fxmlLoader.load(); //je la charge
+            Stage stage1 = new Stage();
+            stage1.setTitle("UPDATE des vidéos");
+            stage1.setScene(new Scene(root));
+            stage1.show(); //je l'affiche
+            //youhou on a rechargé la page
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void AddCompte(ActionEvent actionEvent) {
+        // à coder
+    }
+
+
+
+    @FXML
+    private void SupprimerCompte(){
+        Stage stage = (Stage) listeBtn.getScene().getWindow(); //je prend la page
+        stage.close(); //je la ferme
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("compte-view-delcompte.fxml")); //je charge la page
+            Parent root = fxmlLoader.load(); //je la charge
+            Stage stage1 = new Stage();
+            stage1.setTitle("UPDATE des vidéos");
+            stage1.setScene(new Scene(root));
+            stage1.show(); //je l'affiche
+            //youhou on a rechargé la page
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void DeleteCompte(ActionEvent actionEvent) {
+        // à coder
+    }
+
+
 
     @FXML
     private void Deconnection(ActionEvent event) {
@@ -159,6 +250,8 @@ public class CompteView{
             e.printStackTrace();
         }
     }
+}
+
 
 //    @FXML
 //    private void Historique(){
@@ -182,92 +275,3 @@ public class CompteView{
 //        }
 //    }
 
-    @FXML
-    private void Liste(){
-        Stage stage = (Stage) listeBtn.getScene().getWindow(); //je prend la page
-        stage.close(); //je la ferme
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("compte-view-liste.fxml")); //je charge la page
-            Parent root = fxmlLoader.load(); //je la charge
-            Stage stage1 = new Stage();
-            stage1.setTitle("Liste des vidéos");
-            stage1.setScene(new Scene(root));
-            stage1.show(); //je l'affiche
-            //youhou on a rechargé la page
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    ////////// TRUC NOUVEAU //////////
-    @FXML
-    private void ChargerListe(){
-        chargerlistBtn.setVisible(false);
-        //je cache le bouton pck sinon le gars peux rechager les videos et ça se superpose
-
-        VBox vBox = new VBox();
-        vBox.setPadding(new Insets(10));
-        vBox.setSpacing(10);
-
-        Compte com = new Compte();
-        com.ListePerso(vBox);
-
-        ((AnchorPane)resultat.getParent()).getChildren().add(vBox);
-    }
-    ////////// FIN TRUC NOUVEAU //////////
-
-    @FXML
-    private void Supprimer(){
-        VBox vBox = new VBox();
-        vBox.setPadding(new Insets(10));
-        vBox.setSpacing(10);
-
-        Compte con = new Compte();
-        con.SupprimerFonc(vBox);
-        /*
-        try {
-            Statement statement = conn.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM videos");
-
-            VBox vBox = new VBox();
-            vBox.setPadding(new Insets(10));
-            vBox.setSpacing(10);
-
-            while (resultSet.next()) {
-                Label label = new Label(resultSet.getString("titre"));
-                vBox.getChildren().add(label);
-            }
-            ((AnchorPane)resultat.getParent()).getChildren().add(vBox);
-        }
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-         */
-        ((AnchorPane)resultat.getParent()).getChildren().add(vBox);
-    }
-
-    @FXML
-    private void Delete(ActionEvent event){
-        String title = titre.getText();
-        AdminFonction con1 = new AdminFonction();
-
-        if (title.isEmpty()) {
-            System.out.println("Le champs de titre est vide, Veuillez le compléter.");
-        }
-        else {
-            con1.SupprimerFilm(resultat,title);
-        }
-
-
-        /*
-        String query = "DELETE FROM videos WHERE titre = '" + title + "'";
-        try {
-            conn.createStatement().executeUpdate(query);
-            resultat.setText("Video supprimée avec succès");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        */
-    }
-}
