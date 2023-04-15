@@ -101,5 +101,4 @@ public class SearchView{
             e.printStackTrace();
         }
     }
-
 }
