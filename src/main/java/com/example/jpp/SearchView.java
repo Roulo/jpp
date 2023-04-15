@@ -1,7 +1,5 @@
 package com.example.jpp;
 
-
-import Modele.Donnes;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,12 +15,12 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class SearchView {
     private static final String DB_URL = "jdbc:mysql://localhost:3306/temporaire?user=root&password=";
     private Connection conn;
-
 
     public SearchView() {
         try {
@@ -40,7 +38,7 @@ public class SearchView {
         Stage stage = (Stage) backBtn.getScene().getWindow();
         stage.close();
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("com/NewScreen.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("NewScreen.fxml"));
             Parent root = fxmlLoader.load();
             Stage stage1 = new Stage();
             stage1.setTitle("Hello!");
@@ -61,10 +59,6 @@ public class SearchView {
     private void LoadData(ActionEvent event) {
         genreList.removeAll(genreList);
         trierList.removeAll(trierList);
-
-        Donnes dona = new Donnes();
-        dona.ChargerData(genre,genreList,trier,trierList);
-        /*
         String query = "SELECT DISTINCT type FROM genre;";
         try {
             ResultSet rs = conn.createStatement().executeQuery(query);
@@ -81,7 +75,6 @@ public class SearchView {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        */
     }
 
     @FXML
@@ -90,9 +83,6 @@ public class SearchView {
         String director = real.getText();
         String year = annee.getText();
 
-        Donnes dona = new Donnes();
-        dona.Recherche(title,director,year);
-        /*
         String query = "SELECT * FROM videos WHERE "
                 + "titre LIKE '%" + title + "%'"
                 + "AND realisateur LIKE '%" + director + "%'"
@@ -110,7 +100,6 @@ public class SearchView {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        */
     }
 
 }
