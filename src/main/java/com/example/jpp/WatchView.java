@@ -15,6 +15,7 @@ import java.sql.*;
 public class WatchView extends CompteView {
     private static final String DB_URL = "jdbc:mysql://localhost:3306/temporaire?user=root&password=";
     private Connection conn;
+
     public WatchView() {
         try {
             conn = DriverManager.getConnection(DB_URL);

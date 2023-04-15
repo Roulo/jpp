@@ -31,7 +31,7 @@ public class CompteView{
         }
     }
 
-    @FXML private Button disconnectBtn; @FXML private Button backBtn; @FXML private Button historiqueBtn; @FXML private Button listeBtn;
+    @FXML private Button disconnectBtn; @FXML private Button backBtn; @FXML private Button historiqueBtn; @FXML private Button listeBtn; @FXML private Button supprBtn;
     @FXML private Button ajouterBtn;
     @FXML private Label resultat;
     ObservableList<Object> genreList = FXCollections.observableArrayList();
@@ -119,8 +119,30 @@ public class CompteView{
         }
     }
 
+//    @FXML
+//    private void Historique(){
+//        ((AnchorPane)resultat.getParent()).getChildren().clear();
+//        try {
+//            Statement statement = conn.createStatement();
+//            ResultSet resultSet = statement.executeQuery("SELECT * FROM videos");
+//
+//            VBox vBox = new VBox();
+//            vBox.setPadding(new Insets(10));
+//            vBox.setSpacing(10);
+//
+//            while (resultSet.next()) {
+//                Label label = new Label(resultSet.getString("titre"));
+//                vBox.getChildren().add(label);
+//            }
+//            ((AnchorPane)resultat.getParent()).getChildren().add(vBox);
+//        }
+//        catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//    }
+
     @FXML
-    private void Historique(){
+    private void Liste(){
         ((AnchorPane)resultat.getParent()).getChildren().clear();
         try {
             Statement statement = conn.createStatement();
@@ -142,7 +164,7 @@ public class CompteView{
     }
 
     @FXML
-    private void Liste(){
+    private void Supprimer(){
         ((AnchorPane)resultat.getParent()).getChildren().clear();
         try {
             Statement statement = conn.createStatement();
@@ -159,6 +181,18 @@ public class CompteView{
             ((AnchorPane)resultat.getParent()).getChildren().add(vBox);
         }
         catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void Delete(ActionEvent event){
+        String title = titre.getText();
+        String query = "DELETE FROM videos WHERE titre = '" + title + "'";
+        try {
+            conn.createStatement().executeUpdate(query);
+            resultat.setText("Video supprimée avec succès");
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
