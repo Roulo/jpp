@@ -8,7 +8,7 @@
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.jpp.NewScreenController">
     <SplitPane dividerPositions="0.5134048257372654" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="1000.0">
         <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="800.0">
-            <Button layoutX="692.0" layoutY="14.0" onAction="#displayVideos" text="Display Videos" />
+            <Button fx:id="displayBtn" layoutX="692.0" layoutY="14.0" onAction="#displayVideos" text="Display Videos" />
             <Button layoutX="692.0" layoutY="50.0" onAction="#Search" text="Rechercher"/>
             <Button fx:id="disconnectBtn" layoutX="689.0" layoutY="410.0" mnemonicParsing="false" onAction="#Deconnection" text="Se déconnecter" />
         </AnchorPane>

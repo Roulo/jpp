@@ -25,7 +25,7 @@ public class NewScreenController {
     }
 
     @FXML private Button disconnectBtn;@FXML private Button watchBtn;@FXML private Button backBtn;
-    @FXML private Button profileBtn;
+    @FXML private Button profileBtn; @FXML private Button displayBtn;
 
     @FXML
     private void Deconnection(ActionEvent event) {
@@ -53,6 +53,8 @@ public class NewScreenController {
             VBox vBox = new VBox();
             vBox.setPadding(new Insets(10));
             vBox.setSpacing(10);
+
+            displayBtn.setVisible(false);
 
             while (resultSet.next()) {
                 Label label = new Label(resultSet.getString("titre"));
