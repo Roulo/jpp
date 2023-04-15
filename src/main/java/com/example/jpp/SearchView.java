@@ -66,6 +66,14 @@ public class SearchView {
 
     @FXML
     private void Search(ActionEvent event) {
+        //if the user didn't choose a genre, the genre will be "Tous"
+        if (this.genre.getValue() == null){
+            genre.setValue("Tous");
+        }
+        //if the user didn't choose a trier, the trier will be "Tous"
+        if (this.trier.getValue() == null){
+            trier.setValue("annee DESC");
+        }
         String title = titre.getText();
         String director = real.getText();
         String year = annee.getText();
@@ -73,6 +81,7 @@ public class SearchView {
         String trier = this.trier.getValue().toString();
 
         Donnes dona = new Donnes();
+        dona.Search();
         dona.Recherche(title,director,year,genre,trier);
     }
 }

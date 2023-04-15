@@ -27,7 +27,7 @@ public class Compte extends DAO {
         try {
             ResultSet rs = conn.createStatement().executeQuery(query);
             while (rs.next()) {
-                genreList.add(rs.getString("categorie"));
+                genreList.add(rs.getString("type"));
             }
             genre.setItems(genreList);
         } catch (SQLException e) {
