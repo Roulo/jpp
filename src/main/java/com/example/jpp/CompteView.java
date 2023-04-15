@@ -159,11 +159,20 @@ public class CompteView{
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    };
 
     @FXML
     private void Delete(ActionEvent event){
         // à coder
+        String title = titre.getText();
+        AdminFonction tech = new AdminFonction();
+
+        if (title.isEmpty()) {
+            System.out.println("Le champ est vide, Veuillez remplir le champ");
+        }
+        else {
+            tech.SupprimerFilm(resultat,title);
+        }
     }
 
 
@@ -176,7 +185,7 @@ public class CompteView{
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("compte-view-addcompte.fxml")); //je charge la page
             Parent root = fxmlLoader.load(); //je la charge
             Stage stage1 = new Stage();
-            stage1.setTitle("UPDATE des vidéos");
+            stage1.setTitle("UPDATE des Comptes");
             stage1.setScene(new Scene(root));
             stage1.show(); //je l'affiche
             //youhou on a rechargé la page
@@ -188,6 +197,24 @@ public class CompteView{
     @FXML
     private void AddCompte(ActionEvent actionEvent) {
         // à coder
+        String identifiant = username.getText();
+        String mdp1 = mdp.getText();
+        int administrateur=0;
+
+        if (adminBox.isSelected()) {
+            administrateur=1;
+
+        }
+
+        AdminFonction tech = new AdminFonction();
+
+        if ((identifiant.isEmpty()) || (mdp1.isEmpty())) {
+            System.out.println("Des champs sont vides, Veuillez remplir les champs");
+        }
+        else {
+            tech.AjouterClient(resultat,identifiant,mdp1,administrateur);
+        }
+
     }
 
 
@@ -200,7 +227,7 @@ public class CompteView{
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("compte-view-delcompte.fxml")); //je charge la page
             Parent root = fxmlLoader.load(); //je la charge
             Stage stage1 = new Stage();
-            stage1.setTitle("UPDATE des vidéos");
+            stage1.setTitle("UPDATE des Comptes");
             stage1.setScene(new Scene(root));
             stage1.show(); //je l'affiche
             //youhou on a rechargé la page
@@ -212,6 +239,17 @@ public class CompteView{
     @FXML
     private void DeleteCompte(ActionEvent actionEvent) {
         // à coder
+        String identifiant = titre.getText();
+
+
+        AdminFonction tech = new AdminFonction();
+
+        if (identifiant.isEmpty()) {
+            System.out.println("Des champs sont vides, Veuillez remplir les champs");
+        }
+        else {
+            tech.SupprimerClient(resultat,identifiant);
+        }
     }
 
 

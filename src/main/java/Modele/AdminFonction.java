@@ -30,10 +30,43 @@ public class AdminFonction implements AdminDAO {
         }
     };
 
-    public void AjouterClient(){
+    public int AdminStatus(){
+        return 0;
+    }
 
+
+    public void AjouterClient(Label resultat,String identifiant, String mdp1, int administrateur){
+        String sorte;
+        if (administrateur==1) {
+            sorte = "Admin";
+        }
+        else {
+            sorte = "Client";
+        }
+
+        String query = "INSERT INTO compte (identifiant, mdp, admin, qualite, sous_titres, id_Liste, id_Historique, selected_video) VALUES ('" +identifiant+ "','" +mdp1+ "','" +sorte+ "', 0, 'nul', 2, 2, 'a');";
+
+        try {
+            conn.createStatement().executeUpdate(query);
+            resultat.setText("Compte ajoutée avec succès");
+            System.out.println("Compte ajoutée avec succès");
+
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
     };
-    public void SupprimerClient(){
+    public void SupprimerClient(Label resultat,String identifiant){
+
+        String query = "DELETE FROM compte WHERE identifiant = '" + identifiant + "';";
+
+        try {
+            conn.createStatement().executeUpdate(query);
+            resultat.setText("Compte supprimé avec succès");
+            System.out.println("Compte supprimé avec succès");
+
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     };
     public void AjouterFilm(Label resultat, String title, String director, int year, int duration, String resume, String link,int note, String genre){
