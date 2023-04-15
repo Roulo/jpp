@@ -76,18 +76,34 @@ public class CompteView{
         String title = titre.getText();
         String director = real.getText();
         String actor = acteurs.getText();
+        int duration = 0;
+        int year=0;
 
         String anee = annee.getText();
-        int year = Integer.parseInt(anee);
+        if (anee.isEmpty()) {
+            anee = "0";
+        }
+        else {
+            year = Integer.parseInt(anee);
+        }
 
         String resume = this.resume.getText();
         String link = lien.getText();
 
         String durationn = duree.getText();
-        int duration = Integer.parseInt(durationn);
+        if (durationn.isEmpty()) {
+            durationn = "0";
+        }
+        else {
+            duration = Integer.parseInt(durationn);
+        }
+
+        if (this.genre.getValue() == null){
+            genre.setValue("");
+        }
 
         String genre = this.genre.getValue().toString();
-        int note = 4;
+        int note = 0;
 
         AdminFonction tech = new AdminFonction();
 
