@@ -1,6 +1,5 @@
 package com.example.jpp;
 
-
 import Modele.*;
 
 import javafx.collections.FXCollections;
@@ -35,7 +34,7 @@ public class CompteView{
     }
 
     @FXML private Button disconnectBtn; @FXML private Button backBtn; @FXML private Button historiqueBtn; @FXML private Button listeBtn; @FXML private Button supprBtn;
-    @FXML private Button ajouterBtn;
+    @FXML private Button ajouterBtn; @FXML private Button chargerlistBtn;
     @FXML private Label resultat;
     ObservableList<Object> genreList = FXCollections.observableArrayList();
     @FXML private ChoiceBox<Object> genre;
@@ -52,12 +51,11 @@ public class CompteView{
     private void LoadData(ActionEvent event) {
         Compte Don = new Compte();
         Don.Charger(genreList,genre);
-
     }
 
     @FXML
     private void Ajouter(ActionEvent event){
-        //if the user is not an admin, show an error message
+        
     }
 
     @FXML
@@ -142,41 +140,41 @@ public class CompteView{
 //    }
 
     @FXML
-
     private void Liste(){
-        ((AnchorPane)resultat.getParent()).getChildren().clear();
+        Stage stage = (Stage) listeBtn.getScene().getWindow(); //je prend la page
+        stage.close(); //je la ferme
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("compte-view-liste.fxml")); //je charge la page
+            Parent root = fxmlLoader.load(); //je la charge
+            Stage stage1 = new Stage();
+            stage1.setTitle("Liste des vidéos");
+            stage1.setScene(new Scene(root));
+            stage1.show(); //je l'affiche
+            //youhou on a rechargé la page
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    ////////// TRUC NOUVEAU //////////
+    @FXML
+    private void ChargerListe(){
+        chargerlistBtn.setVisible(false);
+        //je cache le bouton pck sinon le gars peux rechager les videos et ça se superpose
+
         VBox vBox = new VBox();
         vBox.setPadding(new Insets(10));
         vBox.setSpacing(10);
 
         Compte com = new Compte();
         com.ListePerso(vBox);
-        /*
-        try {
-            Statement statement = conn.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM videos");
 
-            VBox vBox = new VBox();
-            vBox.setPadding(new Insets(10));
-            vBox.setSpacing(10);
-
-            while (resultSet.next()) {
-                Label label = new Label(resultSet.getString("titre"));
-                vBox.getChildren().add(label);
-            }
-            ((AnchorPane)resultat.getParent()).getChildren().add(vBox);
-        }
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-         */
         ((AnchorPane)resultat.getParent()).getChildren().add(vBox);
     }
+    ////////// FIN TRUC NOUVEAU //////////
 
     @FXML
     private void Supprimer(){
-        ((AnchorPane)resultat.getParent()).getChildren().clear();
         VBox vBox = new VBox();
         vBox.setPadding(new Insets(10));
         vBox.setSpacing(10);
@@ -221,26 +219,5 @@ public class CompteView{
             e.printStackTrace();
         }
         */
-    }
-
-
-
-    private String nature;
-    private String identifiant;
-
-    public String getIdentifiant() {
-        return identifiant;
-    }
-
-    public String getNature() {
-        return nature;
-    }
-
-    public void setIdentifiant(String identifiant) {
-        this.identifiant = identifiant;
-    }
-
-    public void setNature(String nature) {
-        this.nature = nature;
     }
 }

@@ -18,6 +18,18 @@ public class AdminFonction implements AdminDAO {
         }
     }
 
+    public void AdminCommand(){
+        String query = "SELECT status FROM status";
+        if (query == "Admin") {
+            System.out.println("Vous êtes admin");
+            //Enable all buttons
+
+        }
+        else {
+            System.out.println("Vous n'êtes pas admin");
+        }
+    };
+
     public void AjouterClient(){
 
     };
