@@ -83,19 +83,26 @@ public class CompteView{
 
     @FXML
     private void Ajouter(ActionEvent event){
-        Stage stage = (Stage) listeBtn.getScene().getWindow(); //je prend la page
-        stage.close(); //je la ferme
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("compte-view-addvideos.fxml")); //je charge la page
-            Parent root = fxmlLoader.load(); //je la charge
-            Stage stage1 = new Stage();
-            stage1.setTitle("UPDATE des vidéos");
-            stage1.setScene(new Scene(root));
-            stage1.show(); //je l'affiche
-            //youhou on a rechargé la page
-        } catch (IOException e) {
-            e.printStackTrace();
+        AdminFonction tech = new AdminFonction();
+
+        int stat = tech.AdminCommand();
+
+        if (stat == 1) {
+            Stage stage = (Stage) listeBtn.getScene().getWindow(); //je prend la page
+            stage.close(); //je la ferme
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("compte-view-addvideos.fxml")); //je charge la page
+                Parent root = fxmlLoader.load(); //je la charge
+                Stage stage1 = new Stage();
+                stage1.setTitle("UPDATE des vidéos");
+                stage1.setScene(new Scene(root));
+                stage1.show(); //je l'affiche
+                //youhou on a rechargé la page
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+
     }
 
     @FXML
@@ -146,19 +153,27 @@ public class CompteView{
 
     @FXML
     private void Supprimer(){
-        Stage stage = (Stage) listeBtn.getScene().getWindow(); //je prend la page
-        stage.close(); //je la ferme
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("compte-view-delvideos.fxml")); //je charge la page
-            Parent root = fxmlLoader.load(); //je la charge
-            Stage stage1 = new Stage();
-            stage1.setTitle("UPDATE des vidéos");
-            stage1.setScene(new Scene(root));
-            stage1.show(); //je l'affiche
-            //youhou on a rechargé la page
-        } catch (IOException e) {
-            e.printStackTrace();
+        AdminFonction tech = new AdminFonction();
+
+        int stat = tech.AdminCommand();
+
+        if (stat == 1) {
+
+            Stage stage = (Stage) listeBtn.getScene().getWindow(); //je prend la page
+            stage.close(); //je la ferme
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("compte-view-delvideos.fxml")); //je charge la page
+                Parent root = fxmlLoader.load(); //je la charge
+                Stage stage1 = new Stage();
+                stage1.setTitle("UPDATE des vidéos");
+                stage1.setScene(new Scene(root));
+                stage1.show(); //je l'affiche
+                //youhou on a rechargé la page
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+
     };
 
     @FXML
@@ -179,19 +194,27 @@ public class CompteView{
 
     @FXML
     private void AjouterCompte(){
-        Stage stage = (Stage) listeBtn.getScene().getWindow(); //je prend la page
-        stage.close(); //je la ferme
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("compte-view-addcompte.fxml")); //je charge la page
-            Parent root = fxmlLoader.load(); //je la charge
-            Stage stage1 = new Stage();
-            stage1.setTitle("UPDATE des Comptes");
-            stage1.setScene(new Scene(root));
-            stage1.show(); //je l'affiche
-            //youhou on a rechargé la page
-        } catch (IOException e) {
-            e.printStackTrace();
+
+        AdminFonction tech = new AdminFonction();
+
+        int stat = tech.AdminCommand();
+
+        if (stat == 1) {
+            Stage stage = (Stage) listeBtn.getScene().getWindow(); //je prend la page
+            stage.close(); //je la ferme
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("compte-view-addcompte.fxml")); //je charge la page
+                Parent root = fxmlLoader.load(); //je la charge
+                Stage stage1 = new Stage();
+                stage1.setTitle("UPDATE des Comptes");
+                stage1.setScene(new Scene(root));
+                stage1.show(); //je l'affiche
+                //youhou on a rechargé la page
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+
     }
 
     @FXML
@@ -221,19 +244,29 @@ public class CompteView{
 
     @FXML
     private void SupprimerCompte(){
-        Stage stage = (Stage) listeBtn.getScene().getWindow(); //je prend la page
-        stage.close(); //je la ferme
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("compte-view-delcompte.fxml")); //je charge la page
-            Parent root = fxmlLoader.load(); //je la charge
-            Stage stage1 = new Stage();
-            stage1.setTitle("UPDATE des Comptes");
-            stage1.setScene(new Scene(root));
-            stage1.show(); //je l'affiche
-            //youhou on a rechargé la page
-        } catch (IOException e) {
-            e.printStackTrace();
+
+
+        AdminFonction tech = new AdminFonction();
+
+        int stat = tech.AdminCommand();
+        System.out.println(stat);
+
+        if (stat == 1) {
+            Stage stage = (Stage) listeBtn.getScene().getWindow(); //je prend la page
+            stage.close(); //je la ferme
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("compte-view-delcompte.fxml")); //je charge la page
+                Parent root = fxmlLoader.load(); //je la charge
+                Stage stage1 = new Stage();
+                stage1.setTitle("UPDATE des Comptes");
+                stage1.setScene(new Scene(root));
+                stage1.show(); //je l'affiche
+                //youhou on a rechargé la page
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+
     }
 
     @FXML

@@ -18,21 +18,38 @@ public class AdminFonction implements AdminDAO {
         }
     }
 
-    public void AdminCommand(){
+    public int AdminCommand(){
+        String quoi;
         String query = "SELECT status FROM status";
-        if (query == "Admin") {
-            System.out.println("Vous êtes admin");
-            //Enable all buttons
+        ResultSet resultSet1;
+        try {
+            resultSet1 = conn.createStatement().executeQuery(query);
 
+            System.out.println("status repris avec succès");
+            resultSet1.next();
+
+            quoi = resultSet1.getString("status");
+
+
+            if (quoi.equals("Admin")) {
+                System.out.println("Vous êtes admin");
+                //Enable all buttons
+
+                return 1;
+
+            }
+            else {
+                System.out.println("Vous n'êtes pas admin");
+                return 0;
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
         }
-        else {
-            System.out.println("Vous n'êtes pas admin");
-        }
+
+        return 0;
+
     };
 
-    public int AdminStatus(){
-        return 0;
-    }
 
 
     public void AjouterClient(Label resultat,String identifiant, String mdp1, int administrateur){
@@ -58,6 +75,7 @@ public class AdminFonction implements AdminDAO {
     public void SupprimerClient(Label resultat,String identifiant){
 
         String query = "DELETE FROM compte WHERE identifiant = '" + identifiant + "';";
+        System.out.println();
 
         try {
             conn.createStatement().executeUpdate(query);

@@ -6,6 +6,8 @@ public class Connexion extends DAO implements ConnexionDAO {
     private static final String DB_URL = "jdbc:mysql://localhost:3306/temporaire?user=root&password=";
     private Connection conn;
 
+    private String rang = "Client";
+
     public Connexion() {
         try {
             conn = DriverManager.getConnection(DB_URL);
@@ -45,6 +47,7 @@ public class Connexion extends DAO implements ConnexionDAO {
                 resultSet.next();
                 String status = resultSet.getString("admin");
                 System.out.println("status="+status);
+                rang = status;
                 if (status.equals("Admin")) {
                     //update status table
                     statement.executeUpdate("UPDATE status SET status = 'Admin' WHERE status.id = 1;");
