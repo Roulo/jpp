@@ -55,6 +55,19 @@ public class CompteView{
 
     @FXML
     private void Ajouter(ActionEvent event){
+        Stage stage = (Stage) listeBtn.getScene().getWindow(); //je prend la page
+        stage.close(); //je la ferme
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("compte-view-addvideos.fxml")); //je charge la page
+            Parent root = fxmlLoader.load(); //je la charge
+            Stage stage1 = new Stage();
+            stage1.setTitle("UPDATE des vidéos");
+            stage1.setScene(new Scene(root));
+            stage1.show(); //je l'affiche
+            //youhou on a rechargé la page
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         
     }
 
@@ -63,14 +76,28 @@ public class CompteView{
         String title = titre.getText();
         String director = real.getText();
         String actor = acteurs.getText();
-        String year = annee.getText();
+
+        String anee = annee.getText();
+        int year = Integer.parseInt(anee);
+
         String resume = this.resume.getText();
         String link = lien.getText();
-        String duration = duree.getText();
+
+        String durationn = duree.getText();
+        int duration = Integer.parseInt(durationn);
+
         String genre = this.genre.getValue().toString();
+        int note = 4;
 
         AdminFonction tech = new AdminFonction();
-        tech.AjouterFilm(resultat, title, director, actor, year, resume, link, duration, genre);
+
+        if ((title.isEmpty()) || (director.isEmpty()) || (anee.isEmpty()) || (resume.isEmpty()) || (link.isEmpty()) || (genre.isEmpty())) {
+            System.out.println("Un des champs est vide, Veuillez la compléter");
+        }
+        else {
+            tech.AjouterFilm(resultat, title, director, year, duration, resume, link, note, genre);
+        }
+
         /*
         String query = "INSERT INTO videos (titre, realisateur, acteurs, annee, resume, lien, duree, categorie) VALUES ('" + title + "', '" + director + "', '" + actor + "', '" + year + "', '" + resume + "', '" + link + "', '" + duration + "', '" + genre + "')";
         try {
@@ -208,7 +235,14 @@ public class CompteView{
     private void Delete(ActionEvent event){
         String title = titre.getText();
         AdminFonction con1 = new AdminFonction();
-        con1.SupprimerFilm(resultat,title);
+
+        if (title.isEmpty()) {
+            System.out.println("Le champs de titre est vide, Veuillez le compléter.");
+        }
+        else {
+            con1.SupprimerFilm(resultat,title);
+        }
+
 
         /*
         String query = "DELETE FROM videos WHERE titre = '" + title + "'";

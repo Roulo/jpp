@@ -36,11 +36,50 @@ public class AdminFonction implements AdminDAO {
     public void SupprimerClient(){
 
     };
-    public void AjouterFilm(Label resultat, String title, String director, String actor, String year, String resume, String link, String duration, String genre){
-        String query = "INSERT INTO videos (titre, realisateur, acteurs, annee, resume, lien, duree, categorie) VALUES ('" + title + "', '" + director + "', '" + actor + "', '" + year + "', '" + resume + "', '" + link + "', '" + duration + "', '" + genre + "')";
+    public void AjouterFilm(Label resultat, String title, String director, int year, int duration, String resume, String link,int note, String genre){
+        String query = "INSERT INTO videos (titre, realisateur, annee, duree, resume, teaser, note) VALUES ('" + title + "', '" + director + "', '" + year + "', '" + duration + "', '" + resume + "', '" + link + "', '" + note + "')";
         try {
             conn.createStatement().executeUpdate(query);
             resultat.setText("Video ajoutée avec succès");
+            System.out.println("Video ajoutée avec succès");
+
+            int id_neutral;
+            int id_genre;
+
+            query = "SELECT videos.id FROM videos WHERE videos.titre ='"+title+"';";
+            try {
+                ResultSet resultSet1 = conn.createStatement().executeQuery(query);
+                System.out.println("id_video récupéré avec succès");
+                resultSet1.next();
+
+                id_neutral = resultSet1.getInt("id");
+                //System.out.println("id_vid="+id_neutral);
+                query = "SELECT genre.id FROM genre WHERE genre.type ='"+genre+"';";
+
+                try {
+                    resultSet1 = conn.createStatement().executeQuery(query);
+                    System.out.println("id_genre récupéré avec succès");
+                    resultSet1.next();
+
+                    id_genre = resultSet1.getInt("id");
+                    //System.out.println("id_genre="+id_genre);
+                    query = "INSERT INTO definit (id, id__Videos) VALUES ("+id_genre+","+id_neutral+");";
+
+                    try {
+                        conn.createStatement().executeUpdate(query);
+                        System.out.println("Genre inséré avec succès");
+                    } catch (SQLException h) {
+                        h.printStackTrace();
+                    }
+
+                } catch (SQLException g) {
+                    g.printStackTrace();
+                }
+
+
+            } catch (SQLException f) {
+                f.printStackTrace();
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -49,13 +88,47 @@ public class AdminFonction implements AdminDAO {
     };
 
     public void SupprimerFilm(Label resultat, String title){
-        String query = "DELETE FROM videos WHERE titre = '" + title + "'";
+
+        int id_film;
+
+        String query = "SELECT videos.id FROM videos WHERE videos.titre='"+title+"';";
+
         try {
-            conn.createStatement().executeUpdate(query);
+            ResultSet resultSet1 = conn.createStatement().executeQuery(query);
+            resultSet1.next();
+
+            id_film = resultSet1.getInt("id");
+            System.out.println("Id_film récup avec succès");
+
+            query = "DELETE FROM definit WHERE id__Videos="+id_film+";";
+            try {
+                conn.createStatement().executeUpdate(query);
+                System.out.println("Suppresion des genres avec succès");
+
+                query = "DELETE FROM videos WHERE titre = '" + title + "';";
+                try {
+                    conn.createStatement().executeUpdate(query);
+                    System.out.println("Suppresion de la video avec succès");
+                }catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }catch (SQLException g) {
+                g.printStackTrace();
+            }
+        }catch (SQLException f) {
+            f.printStackTrace();
+        }
+
+        /*
+        String query1 = "DELETE FROM videos WHERE titre = '" + title + "';";
+        try {
+            conn.createStatement().executeUpdate(query1);
             resultat.setText("Video supprimée avec succès");
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+         */
 
     };
 
