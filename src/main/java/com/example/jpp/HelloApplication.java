@@ -20,4 +20,17 @@ public class HelloApplication extends Application {
     public static void main(String[] args) {
         launch();
     }
+
+    /*
+    supprimer/ajouter client;
+    ajouter/supprimer film;
+
+    afficher résultat recherche;
+
+    playlist;
+    timer;
+
+    menu principal : image;
+    ethétique;
+     */
 }
