@@ -90,7 +90,7 @@ public class CompteView{
         Stage stage = (Stage) disconnectBtn.getScene().getWindow();
         stage.close();
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("com/hello-view.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
             Parent root = fxmlLoader.load();
             Stage stage1 = new Stage();
             stage1.setTitle("Hello!");
@@ -108,7 +108,7 @@ public class CompteView{
         stage.close();
 
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("com/NewScreen.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("NewScreen.fxml"));
             Parent root = fxmlLoader.load();
             Stage stage1 = new Stage();
             stage1.setTitle("New Screen!");

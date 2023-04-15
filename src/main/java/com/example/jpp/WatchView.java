@@ -65,7 +65,7 @@ public class WatchView extends CompteView {
         Stage stage = (Stage) backBtn.getScene().getWindow();
         stage.close();
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("com/NewScreen.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("NewScreen.fxml"));
             Parent root = fxmlLoader.load();
             Stage stage1 = new Stage();
             stage1.setTitle("Netflix");

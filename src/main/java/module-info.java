@@ -14,6 +14,4 @@ module com.example.jpp {
     exports com.example.jpp;
     exports Modele;
     opens Modele to javafx.fxml;
-
-
 }

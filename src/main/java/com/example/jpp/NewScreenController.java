@@ -33,7 +33,7 @@ public class NewScreenController {
         Stage stage = (Stage) disconnectBtn.getScene().getWindow();
         stage.close();
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("com/hello-view.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
             Parent root = fxmlLoader.load();
             Stage stage1 = new Stage();
             stage1.setTitle("Hello!");
@@ -123,7 +123,7 @@ public class NewScreenController {
         stage.close();
 
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("com/NewScreen.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("NewScreen.fxml"));
             Parent root = fxmlLoader.load();
             Stage stage1 = new Stage();
             stage1.setTitle("New Screen!");
@@ -140,7 +140,7 @@ public class NewScreenController {
         Stage stage = (Stage) watchBtn.getScene().getWindow();
         stage.close();
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("com/watch-view.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("watch-view.fxml"));
             Parent root = fxmlLoader.load();
             Stage stage1 = new Stage();
             stage1.setTitle("Watch!");
@@ -157,7 +157,7 @@ public class NewScreenController {
         Stage stage = (Stage) watchBtn.getScene().getWindow();
         stage.close();
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("com/compte-view.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("compte-view.fxml"));
             Parent root = fxmlLoader.load();
             Stage stage1 = new Stage();
             stage1.setTitle("Compte!");
@@ -174,7 +174,7 @@ public class NewScreenController {
         Stage stage = (Stage) watchBtn.getScene().getWindow();
         stage.close();
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("com/search-view.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("search-view.fxml"));
             Parent root = fxmlLoader.load();
             Stage stage1 = new Stage();
             stage1.setTitle("Search!");
