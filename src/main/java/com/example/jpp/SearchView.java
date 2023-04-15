@@ -72,6 +72,23 @@ public class SearchView {
     }
 
     @FXML
+    private void Retry(ActionEvent event) {
+        System.out.println("restart.");
+        Stage stage = (Stage) backBtn.getScene().getWindow();
+        stage.close();
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("search-view.fxml"));
+            Parent root = fxmlLoader.load();
+            Stage stage1 = new Stage();
+            stage1.setTitle("Netflix");
+            stage1.setScene(new Scene(root));
+            stage1.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
     private void Search() throws SQLException {
         //if the user didn't choose a genre, the genre will be "Tous"
         if (this.genrebox.getValue() == null){
