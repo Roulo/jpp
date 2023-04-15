@@ -16,7 +16,6 @@ import java.sql.*;
 public class NewScreenController {
     private static final String DB_URL = "jdbc:mysql://localhost:3306/temporaire?user=root&password=";
     private Connection conn;
-
     public NewScreenController() {
         try {
             conn = DriverManager.getConnection(DB_URL);
@@ -34,7 +33,7 @@ public class NewScreenController {
         Stage stage = (Stage) disconnectBtn.getScene().getWindow();
         stage.close();
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("com/hello-view.fxml"));
             Parent root = fxmlLoader.load();
             Stage stage1 = new Stage();
             stage1.setTitle("Hello!");
@@ -124,7 +123,7 @@ public class NewScreenController {
         stage.close();
 
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("NewScreen.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("com/NewScreen.fxml"));
             Parent root = fxmlLoader.load();
             Stage stage1 = new Stage();
             stage1.setTitle("New Screen!");
@@ -141,7 +140,7 @@ public class NewScreenController {
         Stage stage = (Stage) watchBtn.getScene().getWindow();
         stage.close();
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("watch-view.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("com/watch-view.fxml"));
             Parent root = fxmlLoader.load();
             Stage stage1 = new Stage();
             stage1.setTitle("Watch!");
@@ -158,7 +157,7 @@ public class NewScreenController {
         Stage stage = (Stage) watchBtn.getScene().getWindow();
         stage.close();
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("compte-view.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("com/compte-view.fxml"));
             Parent root = fxmlLoader.load();
             Stage stage1 = new Stage();
             stage1.setTitle("Compte!");
@@ -175,7 +174,7 @@ public class NewScreenController {
         Stage stage = (Stage) watchBtn.getScene().getWindow();
         stage.close();
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("search-view.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("com/search-view.fxml"));
             Parent root = fxmlLoader.load();
             Stage stage1 = new Stage();
             stage1.setTitle("Search!");

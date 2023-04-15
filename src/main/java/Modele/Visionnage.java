@@ -1,22 +1,19 @@
-package com.example.jpp;
+package Modele;
 
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.web.WebView;
 
-import Modele.Visionnage;
-import javafx.event.ActionEvent;
-import javafx.fxml.*;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.stage.Stage;
-
-import java.io.IOException;
 import java.sql.*;
 
-public class WatchView extends CompteView {
+import javafx.scene.control.*;
+
+public class Visionnage extends DAO implements VisionnageDAO {
+
+
     private static final String DB_URL = "jdbc:mysql://localhost:3306/temporaire?user=root&password=";
     private Connection conn;
 
-    public WatchView() {
+    public Visionnage() {
         try {
             conn = DriverManager.getConnection(DB_URL);
         } catch (SQLException e) {
@@ -24,16 +21,8 @@ public class WatchView extends CompteView {
         }
     }
 
-    @FXML private Button backBtn; @FXML Button startBtn;
 
-    @FXML
-    private void StartVideo(){
-
-        Visionnage vision = new Visionnage();
-        vision.LancerVideo(backBtn);
-
-
-        /*
+    public void LancerVideo(Button backBtn) {
         try {
             Statement statement = conn.createStatement();
             String sqlStatement = "SELECT selected_video FROM compte WHERE compte.id = 3";
@@ -55,24 +44,6 @@ public class WatchView extends CompteView {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-         */
     }
 
-    @FXML
-    private void Back(ActionEvent event) {
-        System.out.println("User disconnected.");
-        Stage stage = (Stage) backBtn.getScene().getWindow();
-        stage.close();
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("com/NewScreen.fxml"));
-            Parent root = fxmlLoader.load();
-            Stage stage1 = new Stage();
-            stage1.setTitle("Netflix");
-            stage1.setScene(new Scene(root));
-            stage1.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }

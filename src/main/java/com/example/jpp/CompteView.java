@@ -1,5 +1,8 @@
 package com.example.jpp;
 
+
+import Modele.*;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -47,17 +50,9 @@ public class CompteView{
 
     @FXML
     private void LoadData(ActionEvent event) {
-        genreList.removeAll(genreList);
-        String query = "SELECT type FROM genre;";
-        try {
-            ResultSet rs = conn.createStatement().executeQuery(query);
-            while (rs.next()) {
-                genreList.add(rs.getString("categorie"));
-            }
-            genre.setItems(genreList);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        Compte Don = new Compte();
+        Don.Charger(genreList,genre);
+
     }
 
     @FXML
@@ -75,6 +70,10 @@ public class CompteView{
         String link = lien.getText();
         String duration = duree.getText();
         String genre = this.genre.getValue().toString();
+
+        AdminFonction tech = new AdminFonction();
+        tech.AjouterFilm(resultat, title, director, actor, year, resume, link, duration, genre);
+        /*
         String query = "INSERT INTO videos (titre, realisateur, acteurs, annee, resume, lien, duree, categorie) VALUES ('" + title + "', '" + director + "', '" + actor + "', '" + year + "', '" + resume + "', '" + link + "', '" + duration + "', '" + genre + "')";
         try {
             conn.createStatement().executeUpdate(query);
@@ -82,6 +81,7 @@ public class CompteView{
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        */
     }
 
     @FXML
@@ -90,7 +90,7 @@ public class CompteView{
         Stage stage = (Stage) disconnectBtn.getScene().getWindow();
         stage.close();
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("com/hello-view.fxml"));
             Parent root = fxmlLoader.load();
             Stage stage1 = new Stage();
             stage1.setTitle("Hello!");
@@ -108,7 +108,7 @@ public class CompteView{
         stage.close();
 
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("NewScreen.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("com/NewScreen.fxml"));
             Parent root = fxmlLoader.load();
             Stage stage1 = new Stage();
             stage1.setTitle("New Screen!");
@@ -142,8 +142,16 @@ public class CompteView{
 //    }
 
     @FXML
+
     private void Liste(){
         ((AnchorPane)resultat.getParent()).getChildren().clear();
+        VBox vBox = new VBox();
+        vBox.setPadding(new Insets(10));
+        vBox.setSpacing(10);
+
+        Compte com = new Compte();
+        com.ListePerso(vBox);
+        /*
         try {
             Statement statement = conn.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM videos");
@@ -161,11 +169,21 @@ public class CompteView{
         catch (SQLException e) {
             e.printStackTrace();
         }
+
+         */
+        ((AnchorPane)resultat.getParent()).getChildren().add(vBox);
     }
 
     @FXML
     private void Supprimer(){
         ((AnchorPane)resultat.getParent()).getChildren().clear();
+        VBox vBox = new VBox();
+        vBox.setPadding(new Insets(10));
+        vBox.setSpacing(10);
+
+        Compte con = new Compte();
+        con.SupprimerFonc(vBox);
+        /*
         try {
             Statement statement = conn.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM videos");
@@ -183,11 +201,18 @@ public class CompteView{
         catch (SQLException e) {
             e.printStackTrace();
         }
+
+         */
+        ((AnchorPane)resultat.getParent()).getChildren().add(vBox);
     }
 
     @FXML
     private void Delete(ActionEvent event){
         String title = titre.getText();
+        AdminFonction con1 = new AdminFonction();
+        con1.SupprimerFilm(resultat,title);
+
+        /*
         String query = "DELETE FROM videos WHERE titre = '" + title + "'";
         try {
             conn.createStatement().executeUpdate(query);
@@ -195,6 +220,7 @@ public class CompteView{
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        */
     }
 
 

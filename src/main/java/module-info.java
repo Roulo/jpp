@@ -12,4 +12,8 @@ module com.example.jpp {
 
     opens com.example.jpp to javafx.fxml;
     exports com.example.jpp;
+    exports Modele;
+    opens Modele to javafx.fxml;
+
+
 }
