@@ -20,28 +20,6 @@ public class Donnes {
         }
     }
 
-
-    public void Recherche(String title,String director,String year) {
-        String query = "SELECT * FROM videos WHERE "
-                + "titre LIKE '%" + title + "%'"
-                + "AND realisateur LIKE '%" + director + "%'"
-                + "AND annee LIKE '%" + year + "%'";
-        try {
-            ResultSet rs = conn.createStatement().executeQuery(query);
-
-            while (rs.next()) {
-                System.out.println();
-                System.out.println(rs.getString("titre"));
-                System.out.println(" ");
-                System.out.print(rs.getString("realisateur"));
-                System.out.println(" ");
-                System.out.print(rs.getString("annee"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
     public void ChargerData(ChoiceBox<Object> genre, ObservableList<Object> genreList, ChoiceBox<Object> trier,ObservableList<Object> trierList) {
         String query = "SELECT DISTINCT type FROM genre;";
         try {
@@ -50,12 +28,26 @@ public class Donnes {
                 genreList.add(rs.getString("type"));
             }
             genre.setItems(genreList);
-            String b = "note croissante";
-            String c = "note décroissante";
-            String d = "année croissante";
-            String e = "année décroissante";
+            String b = "note ASC";
+            String c = "note DESC";
+            String d = "annee ASC";
+            String e = "annee DESC";
             trierList.addAll(b, c, d, e);
             trier.setItems(trierList);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void Recherche(String title,String director,String year,String genre,String trier) {
+        String query = "";
+        try {
+            ResultSet rs = conn.createStatement().executeQuery(query);
+
+            while (rs.next()) {
+                System.out.println();
+                System.out.println(rs.getString("titre"));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }

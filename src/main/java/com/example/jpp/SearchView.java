@@ -62,24 +62,6 @@ public class SearchView {
 
         Donnes dona = new Donnes();
         dona.ChargerData(genre,genreList,trier,trierList);
-        /*
-        String query = "SELECT DISTINCT type FROM genre;";
-        try {
-            ResultSet rs = conn.createStatement().executeQuery(query);
-            while (rs.next()) {
-                genreList.add(rs.getString("type"));
-            }
-            genre.setItems(genreList);
-            String b = "note croissante";
-            String c = "note décroissante";
-            String d = "année croissante";
-            String e = "année décroissante";
-            trierList.addAll(b, c, d, e);
-            trier.setItems(trierList);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        */
     }
 
     @FXML
@@ -87,28 +69,10 @@ public class SearchView {
         String title = titre.getText();
         String director = real.getText();
         String year = annee.getText();
+        String genre = this.genre.getValue().toString();
+        String trier = this.trier.getValue().toString();
 
         Donnes dona = new Donnes();
-        dona.Recherche(title,director,year);
-        /*
-
-        String query = "SELECT * FROM videos WHERE "
-                + "titre LIKE '%" + title + "%'"
-                + "AND realisateur LIKE '%" + director + "%'"
-                + "AND annee LIKE '%" + year + "%'";
-        try {
-            ResultSet rs = conn.createStatement().executeQuery(query);
-
-            while (rs.next()) {
-                System.out.println(rs.getString("titre"));
-                System.out.print(" ");
-                System.out.print(rs.getString("realisateur"));
-                System.out.print(" ");
-                System.out.print(rs.getString("annee"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        */
+        dona.Recherche(title,director,year,genre,trier);
     }
 }
