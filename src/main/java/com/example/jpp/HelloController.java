@@ -12,11 +12,13 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.Scanner;
 
-public class HelloController extends CompteView {
+/** Page de connexion*/
+public class HelloController extends HelloApplication {
 
     @FXML private Button Inscription;
     @FXML private Button Connexion;
 
+    /** initialize*/
     public void initialize() {
         // Change Inscription button color
         Inscription.setStyle("-fx-background-color: lightblue");
@@ -38,6 +40,7 @@ public class HelloController extends CompteView {
     @FXML private TextField Username; @FXML private TextField Password;
 
 
+    /** Inscription*/
     @FXML
     private void Sinscrire(ActionEvent event) {
         String identifiant = Username.getText();
@@ -46,6 +49,7 @@ public class HelloController extends CompteView {
         connect.Inscription(identifiant,mdp);
     }
 
+    /** Connexion*/
     @FXML
     private void Connection(ActionEvent event) {
         String identifiant = Username.getText();

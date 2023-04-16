@@ -1,16 +1,8 @@
 package Modele;
 
 import javafx.collections.ObservableList;
-import javafx.geometry.Insets;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.web.WebView;
-
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Donnes implements DonnesDAO{
     private static final String DB_URL = "jdbc:mysql://localhost:3306/temporaire?user=root&password=";

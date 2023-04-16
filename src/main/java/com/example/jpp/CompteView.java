@@ -23,10 +23,12 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.sql.*;
 
+/** CompteView*/
 public class CompteView{
     private static final String DB_URL = "jdbc:mysql://localhost:3306/temporaire?user=root&password=";
     private Connection conn;
 
+    /** Nouveau CompteView*/
     public CompteView() {
         try {
             conn = DriverManager.getConnection(DB_URL);
@@ -45,12 +47,14 @@ public class CompteView{
     @FXML private TextField resume;@FXML private TextField lien;@FXML private TextField duree;
     @FXML private Button addcompteBtn;@FXML private Button delcompteBtn ;@FXML private TextField username;@FXML private TextField mdp;@FXML private CheckBox adminBox;
 
+    /** Charger les genre de film depuis la BDD*/
     @FXML
     private void LoadData(ActionEvent event) {
         Compte Don = new Compte();
         Don.Charger(genreList,genre);
     }
 
+    /** Ouvrir l'interface de playlist*/
     @FXML
     private void Liste(){
         Stage stage = (Stage) listeBtn.getScene().getWindow(); //je prend la page
@@ -68,6 +72,7 @@ public class CompteView{
         }
     }
 
+    /** Charger et afficher la playlist*/
     @FXML
     private void ChargerListe(){
         chargerlistBtn.setVisible(false);
@@ -85,7 +90,7 @@ public class CompteView{
 
 
 
-
+    /** Ouvrir l'interface d'ajout de vidéo*/
     @FXML
     private void Ajouter(ActionEvent event){
         AdminFonction tech = new AdminFonction();
@@ -109,6 +114,7 @@ public class CompteView{
         }
     }
 
+    /** Ajouter une vidéo*/
     @FXML
     private void Add(ActionEvent event){
         String title = titre.getText();
@@ -154,7 +160,7 @@ public class CompteView{
     }
 
 
-
+    /** Ouvrir l'interface de suppression de vidéo*/
     @FXML
     private void Supprimer(){
         AdminFonction tech = new AdminFonction();
@@ -180,6 +186,7 @@ public class CompteView{
 
     };
 
+    /** Supprimer une vidéo*/
     @FXML
     private void Delete(ActionEvent event){
         // à coder
@@ -195,7 +202,7 @@ public class CompteView{
     }
 
 
-
+    /** Ouvrir l'interface d'ajout de compte*/
     @FXML
     private void AjouterCompte(){
 
@@ -221,6 +228,7 @@ public class CompteView{
 
     }
 
+    /** Ajouter un compte*/
     @FXML
     private void AddCompte(ActionEvent actionEvent) {
         // à coder
@@ -245,7 +253,7 @@ public class CompteView{
     }
 
 
-
+    /** Ouvrir l'interface de suppression de compte*/
     @FXML
     private void SupprimerCompte(){
         AdminFonction tech = new AdminFonction();
@@ -270,6 +278,7 @@ public class CompteView{
         }
     }
 
+    /** Supprimer un compte*/
     @FXML
     private void DeleteCompte(ActionEvent actionEvent) {
         // à coder
@@ -287,7 +296,7 @@ public class CompteView{
     }
 
 
-
+    /** Déconnection*/
     @FXML
     private void Deconnection(ActionEvent event) {
         System.out.println("User disconnected.");
@@ -305,6 +314,7 @@ public class CompteView{
         }
     }
 
+    /** Retour à la liste des vidéos*/
     @FXML
     private void Back(ActionEvent event){
         System.out.println("User going back to the list of videos.");
@@ -329,6 +339,7 @@ public class CompteView{
     @FXML
     private ImageView imageView;
 
+    /** Ajouter une image dans src/main/images*/
     @FXML
     private void Image(ActionEvent actionEvent){
         FileChooser fileChooser = new FileChooser();
@@ -361,7 +372,7 @@ public class CompteView{
     }
 
 
-
+    /** Reprendre une vidéo*/
     @FXML
     private void Reprendre(ActionEvent event){
         Stage stage = (Stage) listeBtn.getScene().getWindow(); //je prend la page
@@ -379,27 +390,4 @@ public class CompteView{
         }
     }
 }
-
-
-//    @FXML
-//    private void Historique(){
-//        ((AnchorPane)resultat.getParent()).getChildren().clear();
-//        try {
-//            Statement statement = conn.createStatement();
-//            ResultSet resultSet = statement.executeQuery("SELECT * FROM videos");
-//
-//            VBox vBox = new VBox();
-//            vBox.setPadding(new Insets(10));
-//            vBox.setSpacing(10);
-//
-//            while (resultSet.next()) {
-//                Label label = new Label(resultSet.getString("titre"));
-//                vBox.getChildren().add(label);
-//            }
-//            ((AnchorPane)resultat.getParent()).getChildren().add(vBox);
-//        }
-//        catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
 

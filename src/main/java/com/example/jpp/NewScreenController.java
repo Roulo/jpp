@@ -20,6 +20,7 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.*;
 
+/** Page d'accueil*/
 public class NewScreenController {
     @FXML private Button disconnectBtn;@FXML private Button watchBtn;@FXML private Button backBtn;@FXML private Button SupprimerBtn;
     @FXML private Button profileBtn; @FXML private Button displayBtn; @FXML private Button AjouterBtn; @FXML private Button noteBtn; @FXML private MenuButton noteMenu;
@@ -36,6 +37,7 @@ public class NewScreenController {
     }
 
     // displayVideos method
+    /** initialize*/
     @FXML
     private void initialize() {
         int id_now;
@@ -926,6 +928,7 @@ public class NewScreenController {
         }
     }
 
+    /** Déconnection*/
     @FXML
     private void Deconnection(ActionEvent event) {
         System.out.println("User disconnected.");
@@ -943,7 +946,7 @@ public class NewScreenController {
         }
     }
 
-
+    /** Retour à la liste des vidéos*/
     @FXML
     private void Back(ActionEvent event){
         System.out.println("User going back to the list of videos.");
@@ -962,6 +965,7 @@ public class NewScreenController {
         }
     }
 
+    /** Aller regarder la vidéo*/
     @FXML
     private void Watch(ActionEvent event) {
         System.out.println("User watching a video.");
@@ -979,6 +983,7 @@ public class NewScreenController {
         }
     }
 
+    /** Aller sur son compte*/
     @FXML
     private void Compte(ActionEvent event){
         System.out.println("User going to his account.");
@@ -996,6 +1001,7 @@ public class NewScreenController {
         }
     }
 
+    /** Aller sur la page de recherche*/
     @FXML
     private void Search(ActionEvent event){
         System.out.println("User searching a video.");
@@ -1013,12 +1019,14 @@ public class NewScreenController {
         }
     }
 
+    /** Ajouter à la playlist*/
     @FXML
     private void AjouterPlaylist(ActionEvent actionEvent) {
         ClientFonction tech = new ClientFonction();
         tech.AjouterFilmPlaylist();
     }
 
+    /** Noter la vidéo*/
     @FXML
     private void Noter(ActionEvent event) {
         String notation = noteField.getText();
@@ -1028,6 +1036,7 @@ public class NewScreenController {
         tech.Notage(note);
     }
 
+    /** Supprimer de la playlist*/
     @FXML
     private void SupprimerPlaylist(ActionEvent event) {
         ClientFonction tech = new ClientFonction();

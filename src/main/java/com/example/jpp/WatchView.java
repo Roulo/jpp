@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.*;
 
+/** Page de visionnage*/
 public class WatchView extends CompteView {
     private static final String DB_URL = "jdbc:mysql://localhost:3306/temporaire?user=root&password=";
     private Connection conn;
@@ -27,18 +28,21 @@ public class WatchView extends CompteView {
     @FXML private Button backBtn; @FXML Button startBtn;
     @FXML private TextField temps;
 
+    /** Démarrer la vidéo*/
     @FXML
     private void StartVideo(){
         Visionnage vision = new Visionnage();
         vision.LancerVideo(backBtn);
     }
 
+    /** Reprendre la vidéo*/
     @FXML
     private void ReprendreVid(){
         Visionnage vision = new Visionnage();
         vision.Reprendre(backBtn);
     }
 
+    /** Retourner à la page d'accueil*/
     @FXML
     private void Back(ActionEvent event) {
         System.out.println("User disconnected.");
@@ -56,6 +60,7 @@ public class WatchView extends CompteView {
         }
     }
 
+    /** Enregistrer le temps de visionnage*/
     @FXML
     private void EnregistrerTemps(ActionEvent actionEvent) {
         //ici

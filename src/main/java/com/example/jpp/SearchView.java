@@ -24,6 +24,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/** Page de recherche*/
 public class SearchView {
     private static final String DB_URL = "jdbc:mysql://localhost:3306/temporaire?user=root&password=";
     private Connection conn;
@@ -38,6 +39,7 @@ public class SearchView {
 
     @FXML private Button backBtn; @FXML private Button searchBtn;
 
+    /** initialize*/
     public void initialize() {
         genreList.removeAll(genreList);
         trierList.removeAll(trierList);
@@ -46,6 +48,7 @@ public class SearchView {
         dona.ChargerData(genrebox,genreList,trierbox,trierList);
     }
 
+    /** Retour au menu principal*/
     @FXML
     private void Back(ActionEvent event){
         System.out.println("Back to the main page.");
@@ -70,11 +73,13 @@ public class SearchView {
     @FXML private Button loadBtn; @FXML private Button watchBtn;
     @FXML private Label resultat; @FXML private Label a; @FXML private Label b; @FXML private Label c; @FXML private Label d; @FXML private Label z;
 
+    /** Charger les données*/
     @FXML
     private void LoadData(ActionEvent event) {
 
     }
 
+    /** Recommencer une recherche*/
     @FXML
     private void Retry(ActionEvent event) {
         System.out.println("restart.");
@@ -92,6 +97,7 @@ public class SearchView {
         }
     }
 
+    /** Lancer la recherche*/
     @FXML
     private void Search() throws SQLException {
         //if the user didn't choose a genre, the genre will be "Tous"
@@ -295,6 +301,7 @@ public class SearchView {
         }
     }
 
+    /** Aller regarder la vidéo **/
     @FXML
     private void Watch(ActionEvent event) {
         System.out.println("User watching a video.");
@@ -312,6 +319,7 @@ public class SearchView {
         }
     }
 
+    /** Aller sur son compte **/
     @FXML
     private void Compte(ActionEvent event){
         System.out.println("User going to his account.");
@@ -329,7 +337,7 @@ public class SearchView {
         }
     }
 
-
+    /** Ajouter à une playlist **/
     @FXML
     private void AjouterPlaylist(ActionEvent event){
 
