@@ -46,4 +46,8 @@ public class Visionnage extends DAO implements VisionnageDAO {
         }
     }
 
+    public void EnregistrerTemps(){
+        //ici
+    }
+
 }

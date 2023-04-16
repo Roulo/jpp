@@ -1,6 +1,7 @@
 package com.example.jpp;
 
 import Modele.Donnes;
+import com.almasb.fxgl.entity.action.Action;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -339,5 +340,10 @@ public class SearchView {
         }
     }
 
+
+    @FXML
+    private void AjouterPlaylist(ActionEvent event){
+
+    }
 
 }

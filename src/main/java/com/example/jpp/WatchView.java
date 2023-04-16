@@ -28,35 +28,8 @@ public class WatchView extends CompteView {
 
     @FXML
     private void StartVideo(){
-
         Visionnage vision = new Visionnage();
         vision.LancerVideo(backBtn);
-
-
-        /*
-        try {
-            Statement statement = conn.createStatement();
-            String sqlStatement = "SELECT selected_video FROM compte WHERE compte.id = 3";
-            ResultSet result = statement.executeQuery(sqlStatement);
-            result.next();
-            String video = result.getString("selected_video");
-            System.out.println(video);
-
-            sqlStatement = "SELECT status FROM status";
-            result = statement.executeQuery(sqlStatement);
-            result.next();
-            String status = result.getString("status");
-            System.out.println(status);
-
-            WebView webView = new WebView();
-            webView.setPrefSize(((AnchorPane)backBtn.getParent()).getWidth(), ((AnchorPane)backBtn.getParent()).getHeight() * 0.95);
-            webView.getEngine().load("https://www.youtube.com/embed/" + video);
-            ((AnchorPane)backBtn.getParent()).getChildren().add(webView);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-         */
     }
 
     @FXML
@@ -74,5 +47,10 @@ public class WatchView extends CompteView {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    private void EnregistrerTemps(ActionEvent actionEvent) {
+        //ici
     }
 }

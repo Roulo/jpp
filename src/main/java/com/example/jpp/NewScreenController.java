@@ -186,4 +186,9 @@ public class NewScreenController {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    private void AjouterPlaylist(ActionEvent actionEvent) {
+        //ici
+    }
 }
