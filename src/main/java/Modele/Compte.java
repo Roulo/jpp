@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class Compte extends DAO {
 
@@ -63,6 +64,53 @@ public class Compte extends DAO {
          */
 
     public void ListePerso(VBox vBox) {
+
+        int id_now;
+        ArrayList<Integer> liste = new ArrayList<>();
+        int taille;
+
+        ResultSet resultSet;
+        String query = "SELECT status.id_current FROM status WHERE status.id = 1;";
+
+        try {
+            resultSet = conn.createStatement().executeQuery(query);
+            resultSet.next();
+
+            id_now = resultSet.getInt("id_current");
+            query = "SELECT regarde.id__Videos FROM regarde WHERE regarde.id ="+id_now+";";
+
+            try {
+                resultSet = conn.createStatement().executeQuery(query);
+
+                while(resultSet.next()) {
+                    liste.add(resultSet.getInt("id__Videos"));
+                }
+
+
+                for (int i=0;i<liste.size();i++) {
+
+                    query = "SELECT videos.titre FROM videos WHERE videos.id="+liste.get(i)+";";
+
+                    try {
+                        resultSet = conn.createStatement().executeQuery(query);
+                        resultSet.next();
+
+                        Label label = new Label(resultSet.getString("titre"));
+                        vBox.getChildren().add(label);
+                    }catch (SQLException j) {
+                        j.printStackTrace();
+                    }
+
+                }
+
+
+            }catch (SQLException f) {
+                f.printStackTrace();
+            }
+        }catch (SQLException h) {
+            h.printStackTrace();
+        }
+        /*
         try {
             Statement statement = conn.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM videos");
@@ -77,6 +125,7 @@ public class Compte extends DAO {
         catch (SQLException e) {
             e.printStackTrace();
         }
+        */
 
     }
 
