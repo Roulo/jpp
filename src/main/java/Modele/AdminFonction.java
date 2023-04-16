@@ -50,16 +50,10 @@ public class AdminFonction implements AdminDAO {
 
     };
 
-
-
     public void AjouterClient(Label resultat,String identifiant, String mdp1, int administrateur){
         String sorte;
-        if (administrateur==1) {
-            sorte = "Admin";
-        }
-        else {
-            sorte = "Client";
-        }
+        if (administrateur==1) sorte = "Admin";
+        else sorte = "Client";
 
         String query = "INSERT INTO compte (identifiant, mdp, admin, qualite, sous_titres, id_Liste, id_Historique, selected_video) VALUES ('" +identifiant+ "','" +mdp1+ "','" +sorte+ "', 0, 'nul', 2, 2, 'a');";
 

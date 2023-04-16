@@ -102,7 +102,6 @@ public class CompteView{
                 e.printStackTrace();
             }
         }
-
     }
 
     @FXML

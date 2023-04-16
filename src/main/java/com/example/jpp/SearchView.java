@@ -201,7 +201,6 @@ public class SearchView {
         }
         else {
             String query = "SELECT id FROM videos WHERE titre LIKE '%" + title + "%';";
-            //insert the value in a string
             String id = "";
             try {
                 ResultSet rs = conn.createStatement().executeQuery(query);
