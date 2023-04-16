@@ -10,6 +10,7 @@
                 <Button fx:id="displayBtn" layoutX="683.0" layoutY="14.0" onAction="#displayVideos" text="Display Videos" />
                 <Button layoutX="703.0" layoutY="50.0" onAction="#Search" text="Rechercher" />
                 <Button fx:id="disconnectBtn" layoutX="681.0" layoutY="411.0" mnemonicParsing="false" onAction="#Deconnection" text="Se déconnecter" />
+            <Separator layoutX="667.0" orientation="VERTICAL" prefHeight="2000.0" prefWidth="1.0" />
             </AnchorPane>
         </ScrollPane>
         <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="200.0">
