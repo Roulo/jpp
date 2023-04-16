@@ -51,8 +51,6 @@ public class Visionnage extends DAO implements VisionnageDAO {
     }
 
     public void Reprendre(Button backBtn){
-
-
         int id_now;
         String query = "SELECT status.id_current FROM status WHERE status.id = 1;";
 
@@ -83,7 +81,4 @@ public class Visionnage extends DAO implements VisionnageDAO {
         }
     }
 
-    public void EnregistrerTemps(){
-        //ici
-    }
 }

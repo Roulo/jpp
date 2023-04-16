@@ -12,7 +12,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Donnes {
+public class Donnes implements DonnesDAO{
     private static final String DB_URL = "jdbc:mysql://localhost:3306/temporaire?user=root&password=";
     private Connection conn;
 
@@ -43,11 +43,4 @@ public class Donnes {
         }
     }
 
-    public void Search(){
-
-    }
-
-    public void Recherche(String title,String director,String year,String genre,String trier) {
-
-    }
 }

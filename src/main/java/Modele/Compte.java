@@ -8,7 +8,7 @@ import javafx.scene.layout.VBox;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class Compte extends DAO {
+public class Compte extends DAO implements CompteDAO {
 
     private static final String DB_URL = "jdbc:mysql://localhost:3306/temporaire?user=root&password=";
     private Connection conn;
@@ -128,7 +128,6 @@ public class Compte extends DAO {
         */
 
     }
-
 
     public void SupprimerFonc(VBox vBox) {
         try {
