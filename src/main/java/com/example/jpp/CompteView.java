@@ -346,7 +346,7 @@ public class CompteView{
             image = new Image(selectedFile.toURI().toString());
             imageView.setImage(image);
 
-            String path = "C:\\Users\\zheng\\Bureau\\Bureau\\jpp\\src\\main\\images\\" + selectedFile.getName();
+            String path = "src\\main\\images\\" + selectedFile.getName();
             System.out.println(path);
 
             try {

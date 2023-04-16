@@ -78,7 +78,7 @@ public class NewScreenController {
                 while (resultSet.next()) {
                     Label label = new Label(resultSet.getString("titre"));
                     String title = resultSet.getString("titre");
-                    File file = new File("C:\\Users\\zheng\\Bureau\\Bureau\\jpp\\src\\main\\images\\" + title + ".jpg");
+                    File file = new File("src\\main\\images\\" + title + ".jpg");
                     Image image = new Image(file.toURI().toString());
                     ImageView imageView = new ImageView(image);
 
