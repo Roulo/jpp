@@ -47,76 +47,89 @@ public class NewScreenController {
 
     @FXML
     private void displayVideos() {
+        int id_now;
+        String query = "SELECT status.id_current FROM status WHERE status.id = 1;";
+
         try {
-            Statement statement = conn.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT titre FROM videos");
+            ResultSet resultSet2 = conn.createStatement().executeQuery(query);
+            resultSet2.next();
+            id_now = resultSet2.getInt("id_current");
 
-            VBox vBox = new VBox();
-            vBox.setPadding(new Insets(10));
-            vBox.setSpacing(10);
+            try {
+                Statement statement = conn.createStatement();
+                ResultSet resultSet = statement.executeQuery("SELECT titre FROM videos");
 
-            displayBtn.setVisible(false);
+                VBox vBox = new VBox();
+                vBox.setPadding(new Insets(10));
+                vBox.setSpacing(10);
 
-            while (resultSet.next()) {
-                Label label = new Label(resultSet.getString("titre"));
-                label.setOnMouseClicked(event -> {
-                    System.out.println(label.getText() + " selected");
-                    try {
-                        ResultSet resultSet1 = statement.executeQuery("SELECT * FROM videos WHERE titre='" + label.getText() + "'");
+                displayBtn.setVisible(false);
 
-                        resultSet1.next();
-                        String titre = resultSet1.getString("titre");
-                        String resume = resultSet1.getString("resume");
-                        String date = resultSet1.getString("annee");
-                        String duree = resultSet1.getString("duree");
-                        String realisateur = resultSet1.getString("realisateur");
-                        String note = resultSet1.getString("note");
-                        String id = resultSet1.getString("id");
-                        String teaser = resultSet1.getString("teaser");
+                while (resultSet.next()) {
+                    Label label = new Label(resultSet.getString("titre"));
+                    label.setOnMouseClicked(event -> {
+                        System.out.println(label.getText() + " selected");
+                        try {
+                            ResultSet resultSet1 = statement.executeQuery("SELECT * FROM videos WHERE titre='" + label.getText() + "'");
 
-                        WebView webView = new WebView();
-                        webView.setPrefSize(800, 450);
-                        webView.getEngine().load("https://www.youtube.com/embed/" + teaser);
-                        ((AnchorPane)disconnectBtn.getParent()).getChildren().add(webView);
+                            resultSet1.next();
+                            String titre = resultSet1.getString("titre");
+                            String resume = resultSet1.getString("resume");
+                            String date = resultSet1.getString("annee");
+                            String duree = resultSet1.getString("duree");
+                            String realisateur = resultSet1.getString("realisateur");
+                            String note = resultSet1.getString("note");
+                            String id = resultSet1.getString("id");
+                            String teaser = resultSet1.getString("teaser");
 
-                        resultSet1 = statement.executeQuery("SELECT DISTINCT genre.type FROM genre, videos, definit WHERE genre.id = definit.id AND definit.id__Videos = '" + id + "'" );
-                        resultSet1.next();
-                        String categorie = resultSet1.getString("type");
+                            WebView webView = new WebView();
+                            webView.setPrefSize(800, 450);
+                            webView.getEngine().load("https://www.youtube.com/embed/" + teaser);
+                            ((AnchorPane)disconnectBtn.getParent()).getChildren().add(webView);
 
-                        statement.executeUpdate("UPDATE compte SET selected_video = '" + teaser + "' WHERE id = '3'");
+                            resultSet1 = statement.executeQuery("SELECT DISTINCT genre.type FROM genre, videos, definit WHERE genre.id = definit.id AND definit.id__Videos = '" + id + "'" );
+                            resultSet1.next();
+                            String categorie = resultSet1.getString("type");
 
-                        System.out.println("Titre: " + titre);
-                        System.out.println("Résumé: " + resume);
-                        System.out.println("Catégorie: " + categorie);
-                        System.out.println("Date: " + date);
-                        System.out.println("Durée: " + duree);
-                        System.out.println("Réalisateur: " + realisateur);
-                        System.out.println("Note: " + note);
+                            statement.executeUpdate("UPDATE compte SET selected_video = '" + teaser + "' WHERE id = "+id_now+";");
 
-                        ((AnchorPane)disconnectBtn.getParent()).getChildren().remove(vBox);
-                        VBox vBox1 = new VBox();
-                        vBox1.setPadding(new Insets(10));
-                        vBox1.setSpacing(10);
-                        vBox1.getChildren().add(new Label("Titre: " + titre));
-                        vBox1.getChildren().add(new Label("Résumé: " + resume));
-                        vBox1.getChildren().add(new Label("Catégorie: " + categorie));
-                        vBox1.getChildren().add(new Label("Date: " + date));
-                        vBox1.getChildren().add(new Label("Durée: " + duree));
-                        vBox1.getChildren().add(new Label("Réalisateur: " + realisateur));
-                        vBox1.getChildren().add(new Label("Note: " + note));
-                        ((AnchorPane)watchBtn.getParent()).getChildren().add(vBox1);
+                            System.out.println("Titre: " + titre);
+                            System.out.println("Résumé: " + resume);
+                            System.out.println("Catégorie: " + categorie);
+                            System.out.println("Date: " + date);
+                            System.out.println("Durée: " + duree);
+                            System.out.println("Réalisateur: " + realisateur);
+                            System.out.println("Note: " + note);
 
-                        ((AnchorPane)disconnectBtn.getParent()).getChildren().remove(vBox);
-                    } catch (SQLException e) {
-                        throw new RuntimeException(e);
-                    }
-                });
-                vBox.getChildren().add(label);
+                            ((AnchorPane)disconnectBtn.getParent()).getChildren().remove(vBox);
+                            VBox vBox1 = new VBox();
+                            vBox1.setPadding(new Insets(10));
+                            vBox1.setSpacing(10);
+                            vBox1.getChildren().add(new Label("Titre: " + titre));
+                            vBox1.getChildren().add(new Label("Résumé: " + resume));
+                            vBox1.getChildren().add(new Label("Catégorie: " + categorie));
+                            vBox1.getChildren().add(new Label("Date: " + date));
+                            vBox1.getChildren().add(new Label("Durée: " + duree));
+                            vBox1.getChildren().add(new Label("Réalisateur: " + realisateur));
+                            vBox1.getChildren().add(new Label("Note: " + note));
+                            ((AnchorPane)watchBtn.getParent()).getChildren().add(vBox1);
+
+                            ((AnchorPane)disconnectBtn.getParent()).getChildren().remove(vBox);
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        }
+                    });
+                    vBox.getChildren().add(label);
+                }
+                ((AnchorPane)disconnectBtn.getParent()).getChildren().add(vBox);
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-            ((AnchorPane)disconnectBtn.getParent()).getChildren().add(vBox);
-        } catch (SQLException e) {
-            e.printStackTrace();
+
+        }catch (SQLException h) {
+            h.printStackTrace();
         }
+
     }
 
     @FXML

@@ -22,27 +22,41 @@ public class Visionnage extends DAO implements VisionnageDAO {
     }
 
     public void LancerVideo(Button backBtn) {
+
+        int id_now;
+        String query = "SELECT status.id_current FROM status WHERE status.id = 1;";
+
         try {
-            Statement statement = conn.createStatement();
-            String sqlStatement = "SELECT selected_video FROM compte WHERE compte.id = 3";
-            ResultSet result = statement.executeQuery(sqlStatement);
-            result.next();
-            String video = result.getString("selected_video");
-            System.out.println(video);
+            ResultSet resultSet1 = conn.createStatement().executeQuery(query);
+            resultSet1.next();
+            id_now = resultSet1.getInt("id_current");
 
-            sqlStatement = "SELECT status FROM status";
-            result = statement.executeQuery(sqlStatement);
-            result.next();
-            String status = result.getString("status");
-            System.out.println(status);
+            try {
+                Statement statement = conn.createStatement();
+                String sqlStatement = "SELECT selected_video FROM compte WHERE compte.id ="+id_now+";";
+                ResultSet result = statement.executeQuery(sqlStatement);
+                result.next();
+                String video = result.getString("selected_video");
+                System.out.println(video);
 
-            WebView webView = new WebView();
-            webView.setPrefSize(((AnchorPane)backBtn.getParent()).getWidth(), ((AnchorPane)backBtn.getParent()).getHeight() * 0.95);
-            webView.getEngine().load("https://www.youtube.com/embed/" + video);
-            ((AnchorPane)backBtn.getParent()).getChildren().add(webView);
-        } catch (SQLException e) {
-            e.printStackTrace();
+                sqlStatement = "SELECT status FROM status";
+                result = statement.executeQuery(sqlStatement);
+                result.next();
+                String status = result.getString("status");
+                System.out.println(status);
+
+                WebView webView = new WebView();
+                webView.setPrefSize(((AnchorPane)backBtn.getParent()).getWidth(), ((AnchorPane)backBtn.getParent()).getHeight() * 0.95);
+                webView.getEngine().load("https://www.youtube.com/embed/" + video);
+                ((AnchorPane)backBtn.getParent()).getChildren().add(webView);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        }catch (SQLException h) {
+            h.printStackTrace();
         }
+
     }
 
     public void Reprendre(Button backBtn){
