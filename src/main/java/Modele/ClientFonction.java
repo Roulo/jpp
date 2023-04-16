@@ -97,7 +97,7 @@ public class ClientFonction implements ClientDAO {
                     resultSet.next();
                     id_video_now = resultSet.getInt("id");
 
-                    String video_en_cours = video_now+"&t="+time+"s";
+                    String video_en_cours = video_now+"?start="+time;
                     query = "UPDATE watchnow SET id_compte="+id_now+", linknow='"+video_en_cours+"' WHERE id="+id_now+";";
 
                     try {
