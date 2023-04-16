@@ -79,8 +79,8 @@ public class AdminFonction implements AdminDAO {
         }catch (SQLException e) {
             e.printStackTrace();
         }
-
     };
+
     public void AjouterFilm(Label resultat, String title, String director, int year, int duration, String resume, String link,int note, String genre){
         String query = "INSERT INTO videos (titre, realisateur, annee, duree, resume, teaser, note) VALUES ('" + title + "', '" + director + "', '" + year + "', '" + duration + "', '" + resume + "', '" + link + "', '" + note + "')";
         try {
@@ -116,20 +116,15 @@ public class AdminFonction implements AdminDAO {
                     } catch (SQLException h) {
                         h.printStackTrace();
                     }
-
                 } catch (SQLException g) {
                     g.printStackTrace();
                 }
-
-
             } catch (SQLException f) {
                 f.printStackTrace();
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     };
 
     public void SupprimerFilm(Label resultat, String title){
@@ -163,19 +158,5 @@ public class AdminFonction implements AdminDAO {
         }catch (SQLException f) {
             f.printStackTrace();
         }
-
-        /*
-        String query1 = "DELETE FROM videos WHERE titre = '" + title + "';";
-        try {
-            conn.createStatement().executeUpdate(query1);
-            resultat.setText("Video supprimée avec succès");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-         */
-
     };
-
-
 }

@@ -2,6 +2,7 @@
 
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
@@ -27,12 +28,18 @@
             <Button fx:id="addcompteBtn" disable="false" layoutX="9.0" layoutY="262.0" mnemonicParsing="false" onAction="#AjouterCompte" text="Ajouter un compte" />
             <Label layoutX="164.0" layoutY="244.0" prefHeight="18.0" prefWidth="109.0" text="Supprimer compte" />
             <Button fx:id="delcompteBtn" disable="false" layoutX="164.0" layoutY="262.0" mnemonicParsing="false" onAction="#SupprimerCompte" text="Supprimer un compte" />
+            <Label layoutX="179.0" layoutY="154.0" prefHeight="18.0" prefWidth="103.0" text="Reprendre la vidéo" />
+            <Button fx:id="reprendreBtn" layoutX="207.0" layoutY="172.0" mnemonicParsing="false" onAction="#Reprendre" text="Reprendre" />
             <cursor>
                 <Cursor fx:constant="DEFAULT" />
             </cursor>
         </AnchorPane>
         <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="700.0">
-            <Label fx:id="resultat" layoutX="577.0" layoutY="14.0" prefHeight="30.0" prefWidth="109.0" text="RESULTAT"><font><Font name="System Bold" size="20.0" /></font></Label>
+            <Label fx:id="resultat" layoutX="577.0" layoutY="14.0" prefHeight="30.0" prefWidth="109.0" text="RESULTAT">
+                <font>
+                    <Font name="System Bold" size="20.0" />
+                </font>
+            </Label>
 
             <Button fx:id="addBtn" layoutX="590.0" layoutY="399.0" mnemonicParsing="false" onAction="#Add" prefHeight="37.0" prefWidth="96.0" text="Ajouter" />
             <Label layoutX="12.0" layoutY="14.0" prefHeight="18.0" prefWidth="234.0" text="Titre" />
@@ -54,6 +61,9 @@
             <Label layoutX="301.0" layoutY="165.0" prefHeight="18.0" prefWidth="234.0" text="Durée (min.)" />
             <TextField fx:id="duree" layoutX="303.0" layoutY="183.0" prefHeight="26.0" prefWidth="233.0" />
             <Label layoutX="303.0" layoutY="225.0" prefHeight="18.0" prefWidth="234.0" text="Image" />
+            <!-- add image from file -->
+            <Button fx:id="imageBtn" layoutX="303.0" layoutY="243.0" mnemonicParsing="false" onAction="#Image" text="Choisir une image" />
+            <ImageView fx:id="imageView" fitHeight="151.0" fitWidth="150.0" layoutX="303.0" layoutY="282.0" pickOnBounds="true" preserveRatio="true" />
         </AnchorPane>
     </SplitPane>
 </VBox>

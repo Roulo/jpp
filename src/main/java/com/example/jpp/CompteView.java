@@ -11,11 +11,16 @@ import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.sql.*;
 
 public class CompteView{
@@ -243,8 +248,6 @@ public class CompteView{
 
     @FXML
     private void SupprimerCompte(){
-
-
         AdminFonction tech = new AdminFonction();
 
         int stat = tech.AdminCommand();
@@ -318,6 +321,43 @@ public class CompteView{
             stage1.show();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private Image image;
+
+    @FXML
+    private ImageView imageView;
+
+    @FXML
+    private void Image(ActionEvent actionEvent){
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open Resource File");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
+        File selectedFile = fileChooser.showOpenDialog(null);
+
+        if (selectedFile != null) {
+            System.out.println(selectedFile.getName());
+            System.out.println(selectedFile.getAbsolutePath());
+            System.out.println(selectedFile.toURI().toString());
+            System.out.println(selectedFile.toURI().toString().substring(6));
+
+            image = new Image(selectedFile.toURI().toString());
+            imageView.setImage(image);
+
+            String path = "C:\\Users\\zheng\\Bureau\\Bureau\\jpp\\src\\main\\images\\" + selectedFile.getName();
+            System.out.println(path);
+
+            try {
+                Files.copy(selectedFile.toPath(), new File(path).toPath());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else {
+            System.out.println("File is not valid.");
         }
     }
 }
