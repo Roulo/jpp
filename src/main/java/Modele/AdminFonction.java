@@ -18,6 +18,7 @@ public class AdminFonction implements AdminDAO {
         }
     }
 
+
     public int AdminCommand(){
         String quoi;
         String query = "SELECT status FROM status";
