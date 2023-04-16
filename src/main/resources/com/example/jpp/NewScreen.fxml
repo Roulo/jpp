@@ -9,15 +9,19 @@
             <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="2000.0" prefWidth="779.0">
                 <Button fx:id="displayBtn" layoutX="683.0" layoutY="14.0" onAction="#displayVideos" text="Display Videos" />
                 <Button layoutX="703.0" layoutY="50.0" onAction="#Search" text="Rechercher" />
-                <Button fx:id="disconnectBtn" layoutX="681.0" layoutY="411.0" mnemonicParsing="false" onAction="#Deconnection" text="Se déconnecter" />
+                <Button fx:id="disconnectBtn" layoutX="681.0" layoutY="411.0" mnemonicParsing="false" onAction="#Deconnection" text="Se déconnecter" visible="false" />
             <Separator layoutX="667.0" orientation="VERTICAL" prefHeight="2000.0" prefWidth="1.0" />
             </AnchorPane>
         </ScrollPane>
         <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="200.0">
             <Button fx:id="backBtn" alignment="CENTER" layoutX="10.0" layoutY="410.0" mnemonicParsing="false" onAction="#Back" text="Back" />
-            <Button fx:id="watchBtn" alignment="CENTER" layoutX="62.0" layoutY="410.0" mnemonicParsing="false" onAction="#Watch" text="Voir" />
+            <Button fx:id="watchBtn" alignment="CENTER" layoutX="62.0" layoutY="410.0" mnemonicParsing="false" onAction="#Watch" text="Voir" visible="false" />
             <Button fx:id="profileBtn" alignment="CENTER" layoutX="109.0" layoutY="410.0" mnemonicParsing="false" onAction="#Compte" text="Mon compte" />
-            <Button fx:id="AjouterBtn" alignment="CENTER" layoutX="73.0" layoutY="375.0" mnemonicParsing="false" onAction="#AjouterPlaylist" text="Ajouter" />
+            <Button fx:id="AjouterBtn" alignment="CENTER" layoutX="139.0" layoutY="379.0" mnemonicParsing="false" onAction="#AjouterPlaylist" text="Ajouter" visible="false" />
+            <Button fx:id="noteBtn" alignment="CENTER" layoutX="100.0" layoutY="331.0" mnemonicParsing="false" onAction="#Noter" text="Noter" visible="false" />
+            <TextField fx:id="noteField" layoutX="10.0" layoutY="331.0" prefHeight="25.0" prefWidth="80.0" visible="false" />
+            <Label fx:id="noteLabel" layoutX="10.0" layoutY="311.0" text="Note /5" visible="false" />
+         <Button fx:id="SupprimerBtn" alignment="CENTER" layoutX="10.0" layoutY="379.0" mnemonicParsing="false" onAction="#SupprimerPlaylist" text="Supprimer" visible="false" />
         </AnchorPane>
     </SplitPane>
 </VBox>

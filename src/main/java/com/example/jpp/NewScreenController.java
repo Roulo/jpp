@@ -1,6 +1,8 @@
 package com.example.jpp;
 
 import Modele.ClientFonction;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.*;
 import javafx.geometry.Insets;
@@ -29,7 +31,8 @@ public class NewScreenController {
     }
 
     @FXML private Button disconnectBtn;@FXML private Button watchBtn;@FXML private Button backBtn;
-    @FXML private Button profileBtn; @FXML private Button displayBtn;
+    @FXML private Button profileBtn; @FXML private Button displayBtn; @FXML private Button AjouterBtn; @FXML private Button noteBtn; @FXML private MenuButton noteMenu;
+    @FXML private TextField noteField; @FXML private Label noteLabel;
 
     @FXML
     private void Deconnection(ActionEvent event) {
@@ -83,6 +86,11 @@ public class NewScreenController {
                     ImageView imageView = new ImageView(image);
 
                     label.setOnMouseClicked(event -> {
+                        AjouterBtn.setVisible(true);
+                        noteBtn.setVisible(true);
+                        noteField.setVisible(true);
+                        noteLabel.setVisible(true);
+
                         System.out.println(label.getText() + " selected");
                         try {
                             ResultSet resultSet1 = statement.executeQuery("SELECT * FROM videos WHERE titre='" + label.getText() + "'");
@@ -136,6 +144,11 @@ public class NewScreenController {
                     });
 
                     imageView.setOnMouseClicked(event -> {
+                        AjouterBtn.setVisible(true);
+                        noteBtn.setVisible(true);
+                        noteField.setVisible(true);
+                        noteLabel.setVisible(true);
+
                         System.out.println(label.getText() + " selected");
                         try {
                             ResultSet resultSet1 = statement.executeQuery("SELECT * FROM videos WHERE titre='" + label.getText() + "'");
@@ -280,10 +293,15 @@ public class NewScreenController {
 
     @FXML
     private void AjouterPlaylist(ActionEvent actionEvent) {
-        //ici
         ClientFonction tech = new ClientFonction();
-
         tech.AjouterFilmPlaylist();
+    }
 
+    @FXML
+    private void Noter(ActionEvent event) {
+    }
+
+    @FXML
+    private void SupprimerPlaylist(ActionEvent event) {
     }
 }
