@@ -43,17 +43,19 @@ public class Connexion extends DAO implements ConnexionDAO {
             statement.setString(2, mdp);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                resultSet = statement.executeQuery("SELECT compte.admin FROM compte WHERE compte.identifiant ='" + identifiant + "';");
+                resultSet = statement.executeQuery("SELECT compte.id, compte.admin FROM compte WHERE compte.identifiant ='" + identifiant + "';");
                 resultSet.next();
+                int idd = resultSet.getInt("id");
                 String status = resultSet.getString("admin");
+
                 System.out.println("status="+status);
                 rang = status;
                 if (status.equals("Admin")) {
                     //update status table
-                    statement.executeUpdate("UPDATE status SET status = 'Admin' WHERE status.id = 1;");
+                    statement.executeUpdate("UPDATE status SET status = 'Admin', id_current="+idd+" WHERE status.id = 1;");
                 }
                 else {
-                    statement.executeUpdate("UPDATE status SET status = 'Client' WHERE status.id = 1;");
+                    statement.executeUpdate("UPDATE status SET status = 'Client', id_current="+idd+" WHERE status.id = 1;");
                 }
                 //update status
                 System.out.println("User logged in successfully");

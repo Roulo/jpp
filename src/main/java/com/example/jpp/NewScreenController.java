@@ -1,5 +1,6 @@
 package com.example.jpp;
 
+import Modele.ClientFonction;
 import javafx.event.ActionEvent;
 import javafx.fxml.*;
 import javafx.geometry.Insets;
@@ -190,5 +191,9 @@ public class NewScreenController {
     @FXML
     private void AjouterPlaylist(ActionEvent actionEvent) {
         //ici
+        ClientFonction tech = new ClientFonction();
+
+        tech.AjouterFilmPlaylist();
+
     }
 }
