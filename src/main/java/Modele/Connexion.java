@@ -18,15 +18,15 @@ public class Connexion extends DAO implements ConnexionDAO {
 
 
     public void Inscription(String identifiant, String mdp) {
-        String query = "INSERT INTO compte (identifiant,mdp) VALUES (?,?)";
+        String query = "INSERT INTO compte (identifiant,mdp) VALUES (?,?)"; //on insère les données dans la table
         try {
             PreparedStatement statement = conn.prepareStatement(query);
-            statement.setString(1, identifiant);
-            statement.setString(2, mdp);
+            statement.setString(1, identifiant); //on remplace les ? par les données
+            statement.setString(2, mdp); //on remplace les ? par les données
             int rows = statement.executeUpdate();
-            if (rows > 0) {
+            if (rows > 0) { //si l'insertion s'est bien passée
                 System.out.println("User registered successfully");
-            } else {
+            } else { //sinon
                 System.out.println("Error: User already exists");
             }
         } catch (SQLException e) {
@@ -39,23 +39,23 @@ public class Connexion extends DAO implements ConnexionDAO {
         String query = "SELECT * FROM compte WHERE identifiant=? AND mdp=?";
         try {
             PreparedStatement statement = conn.prepareStatement(query);
-            statement.setString(1, identifiant);
-            statement.setString(2, mdp);
+            statement.setString(1, identifiant); //on remplace les ? par les données
+            statement.setString(2, mdp); //on remplace les ? par les données
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                resultSet = statement.executeQuery("SELECT compte.id, compte.admin FROM compte WHERE compte.identifiant ='" + identifiant + "';");
+                resultSet = statement.executeQuery("SELECT compte.id, compte.admin FROM compte WHERE compte.identifiant ='" + identifiant + "';"); //on récupère l'id et le rang de l'utilisateur
                 resultSet.next();
                 int idd = resultSet.getInt("id");
                 String status = resultSet.getString("admin");
 
                 System.out.println("status="+status);
                 rang = status;
-                if (status.equals("Admin")) {
+                if (status.equals("Admin")) { //si l'utilisateur est admin
                     //update status table
-                    statement.executeUpdate("UPDATE status SET status = 'Admin', id_current="+idd+" WHERE status.id = 1;");
+                    statement.executeUpdate("UPDATE status SET status = 'Admin', id_current="+idd+" WHERE status.id = 1;"); //on met à jour la table status
                 }
                 else {
-                    statement.executeUpdate("UPDATE status SET status = 'Client', id_current="+idd+" WHERE status.id = 1;");
+                    statement.executeUpdate("UPDATE status SET status = 'Client', id_current="+idd+" WHERE status.id = 1;"); //on met à jour la table status
                 }
                 //update status
                 System.out.println("User logged in successfully");

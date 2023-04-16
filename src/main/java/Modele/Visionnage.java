@@ -21,16 +21,16 @@ public class Visionnage extends DAO implements VisionnageDAO {
 
     public void LancerVideo(Button backBtn) {
         int id_now;
-        String query = "SELECT status.id_current FROM status WHERE status.id = 1;";
+        String query = "SELECT status.id_current FROM status WHERE status.id = 1;"; //sql query
 
         try {
             ResultSet resultSet1 = conn.createStatement().executeQuery(query);
             resultSet1.next();
-            id_now = resultSet1.getInt("id_current");
+            id_now = resultSet1.getInt("id_current"); //id du compte connecté
 
             try {
                 Statement statement = conn.createStatement();
-                String sqlStatement = "SELECT selected_video FROM compte WHERE compte.id ="+id_now+";";
+                String sqlStatement = "SELECT selected_video FROM compte WHERE compte.id ="+id_now+";"; // on récupère le lien de la vidéo sélectionnée
                 ResultSet result = statement.executeQuery(sqlStatement);
                 result.next();
                 String video = result.getString("selected_video");
@@ -38,30 +38,28 @@ public class Visionnage extends DAO implements VisionnageDAO {
 
                 WebView webView = new WebView();
                 webView.setPrefSize(((AnchorPane)backBtn.getParent()).getWidth(), ((AnchorPane)backBtn.getParent()).getHeight() * 0.95);
-                webView.getEngine().load("https://www.youtube.com/embed/" + video);
+                webView.getEngine().load("https://www.youtube.com/embed/" + video); //on charge la vidéo dans le webview
                 ((AnchorPane)backBtn.getParent()).getChildren().add(webView);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-
         }catch (SQLException h) {
             h.printStackTrace();
         }
-
     }
 
     public void Reprendre(Button backBtn){
         int id_now;
-        String query = "SELECT status.id_current FROM status WHERE status.id = 1;";
+        String query = "SELECT status.id_current FROM status WHERE status.id = 1;"; //sql query
 
         try {
             ResultSet resultSet1 = conn.createStatement().executeQuery(query);
             resultSet1.next();
-            id_now = resultSet1.getInt("id_current");
+            id_now = resultSet1.getInt("id_current"); //id du compte connecté
 
             try {
                 Statement statement = conn.createStatement();
-                String sqlStatement = "SELECT linknow FROM watchnow WHERE watchnow.id_compte ="+id_now+";";
+                String sqlStatement = "SELECT linknow FROM watchnow WHERE watchnow.id_compte ="+id_now+";"; // on récupère le lien de la vidéo dernière visionnée
                 ResultSet result = statement.executeQuery(sqlStatement);
                 result.next();
                 String video = result.getString("linknow");
@@ -69,7 +67,7 @@ public class Visionnage extends DAO implements VisionnageDAO {
 
                 WebView webView = new WebView();
                 webView.setPrefSize(((AnchorPane)backBtn.getParent()).getWidth(), ((AnchorPane)backBtn.getParent()).getHeight() * 0.95);
-                webView.getEngine().load("https://www.youtube.com/embed/" + video);
+                webView.getEngine().load("https://www.youtube.com/embed/" + video); //on charge la vidéo dans le webview
 
                 ((AnchorPane)backBtn.getParent()).getChildren().add(webView);
             } catch (SQLException e) {

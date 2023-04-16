@@ -19,16 +19,16 @@ public class Donnes implements DonnesDAO{
     public void ChargerData(ChoiceBox<Object> genre, ObservableList<Object> genreList, ChoiceBox<Object> trier,ObservableList<Object> trierList) {
         String query = "SELECT DISTINCT type FROM genre;";
         try {
-            ResultSet rs = conn.createStatement().executeQuery(query);
+            ResultSet rs = conn.createStatement().executeQuery(query); //on récupère les genres
             while (rs.next()) {
-                genreList.add(rs.getString("type"));
+                genreList.add(rs.getString("type"));    //on ajoute les genres dans la liste
             }
-            genre.setItems(genreList);
+            genre.setItems(genreList); //on ajoute les genres dans la liste déroulante
             String b = "note ASC";
             String c = "note DESC";
             String d = "annee ASC";
             String e = "annee DESC";
-            trierList.addAll(b, c, d, e);
+            trierList.addAll(b, c, d, e); //on ajoute les options de tri dans la liste déroulante
             trier.setItems(trierList);
         } catch (SQLException e) {
             e.printStackTrace();
