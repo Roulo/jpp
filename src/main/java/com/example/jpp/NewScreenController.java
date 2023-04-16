@@ -7,10 +7,13 @@ import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.scene.web.WebView;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.*;
 
@@ -65,8 +68,17 @@ public class NewScreenController {
 
                 displayBtn.setVisible(false);
 
+
+                GridPane gridPane = new GridPane();
+                int row = 0;
+                int col = 0;
                 while (resultSet.next()) {
                     Label label = new Label(resultSet.getString("titre"));
+                    String title = resultSet.getString("titre");
+                    File file = new File("C:\\Users\\zheng\\Bureau\\Bureau\\jpp\\src\\main\\images\\" + title + ".jpg");
+                    Image image = new Image(file.toURI().toString());
+                    ImageView imageView = new ImageView(image);
+
                     label.setOnMouseClicked(event -> {
                         System.out.println(label.getText() + " selected");
                         try {
@@ -119,8 +131,18 @@ public class NewScreenController {
                             throw new RuntimeException(e);
                         }
                     });
-                    vBox.getChildren().add(label);
+///
+                    imageView.setFitWidth(100);
+                    imageView.setFitHeight(135.5);
+                    gridPane.add(label, col, row);
+                    gridPane.add(imageView, col, row+1);
+                    col++;
+                    if (col == 4) {
+                        col = 0;
+                        row += 2;
+                    }
                 }
+                vBox.getChildren().add(gridPane);
                 ((AnchorPane)disconnectBtn.getParent()).getChildren().add(vBox);
             } catch (SQLException e) {
                 e.printStackTrace();
