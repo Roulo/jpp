@@ -1,5 +1,6 @@
 package com.example.jpp;
 
+import Modele.Client;
 import Modele.ClientFonction;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -34,6 +35,7 @@ public class NewScreenController {
     @FXML private Button profileBtn; @FXML private Button displayBtn; @FXML private Button AjouterBtn; @FXML private Button noteBtn; @FXML private MenuButton noteMenu;
     @FXML private TextField noteField; @FXML private Label noteLabel;
 
+    @FXML private Button SupprimerBtn;
     @FXML
     private void Deconnection(ActionEvent event) {
         System.out.println("User disconnected.");
@@ -87,6 +89,7 @@ public class NewScreenController {
 
                     label.setOnMouseClicked(event -> {
                         AjouterBtn.setVisible(true);
+                        SupprimerBtn.setVisible(true);
                         noteBtn.setVisible(true);
                         noteField.setVisible(true);
                         noteLabel.setVisible(true);
@@ -145,6 +148,7 @@ public class NewScreenController {
 
                     imageView.setOnMouseClicked(event -> {
                         AjouterBtn.setVisible(true);
+                        SupprimerBtn.setVisible(true);
                         noteBtn.setVisible(true);
                         noteField.setVisible(true);
                         noteLabel.setVisible(true);
@@ -299,9 +303,19 @@ public class NewScreenController {
 
     @FXML
     private void Noter(ActionEvent event) {
+        String notation = noteField.getText();
+        float note = Float.parseFloat(notation);
+
+        ClientFonction tech = new ClientFonction();
+        tech.Notage(note);
+
+
     }
 
     @FXML
     private void SupprimerPlaylist(ActionEvent event) {
+        ClientFonction tech = new ClientFonction();
+        tech.SupprimerFilmPlaylist();
+
     }
 }

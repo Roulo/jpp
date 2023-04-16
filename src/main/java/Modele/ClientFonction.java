@@ -18,7 +18,51 @@ public class ClientFonction implements ClientDAO {
         }
     }
 
-    public void Noter(){
+    public void Notage(float note){
+
+        int id_now;
+        String video_now;
+        int id_video_now;
+        ResultSet resultSet;
+        String query = "SELECT status.id_current FROM status WHERE status.id = 1;";
+
+        try {
+            resultSet = conn.createStatement().executeQuery(query);
+            resultSet.next();
+
+            id_now = resultSet.getInt("id_current");
+            query = "SELECT compte.selected_video FROM compte WHERE compte.id = "+id_now+";";
+
+            try {
+                resultSet = conn.createStatement().executeQuery(query);
+                resultSet.next();
+                video_now = resultSet.getString("selected_video");
+                query = "SELECT videos.id FROM videos WHERE videos.teaser='"+video_now+"';";
+
+                try {
+                    resultSet = conn.createStatement().executeQuery(query);
+                    resultSet.next();
+                    id_video_now = resultSet.getInt("id");
+
+                    query = "INSERT INTO notage (id_compte, id_video, note) VALUES ("+id_now+","+id_video_now+","+note+");";
+
+                    try {
+                        conn.createStatement().executeUpdate(query);
+                        System.out.println();
+                        System.out.println("Note ajoutée avec succès");
+                    }catch (SQLException h) {
+                        h.printStackTrace();
+                    }
+                }catch (SQLException g) {
+                    g.printStackTrace();
+                }
+
+            }catch (SQLException f) {
+                f.printStackTrace();
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     };
 
@@ -68,6 +112,53 @@ public class ClientFonction implements ClientDAO {
         }catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void SupprimerFilmPlaylist() {
+        int id_now;
+        String video_now;
+        int id_video_now;
+        ResultSet resultSet;
+        String query = "SELECT status.id_current FROM status WHERE status.id = 1;";
+
+        try {
+            resultSet = conn.createStatement().executeQuery(query);
+            resultSet.next();
+
+            id_now = resultSet.getInt("id_current");
+            query = "SELECT compte.selected_video FROM compte WHERE compte.id = "+id_now+";";
+
+            try {
+                resultSet = conn.createStatement().executeQuery(query);
+                resultSet.next();
+                video_now = resultSet.getString("selected_video");
+                query = "SELECT videos.id FROM videos WHERE videos.teaser='"+video_now+"';";
+
+                try {
+                    resultSet = conn.createStatement().executeQuery(query);
+                    resultSet.next();
+                    id_video_now = resultSet.getInt("id");
+
+                    query = "DELETE FROM regarde WHERE regarde.id="+id_now+" AND regarde.id__Videos="+id_video_now+";";
+
+                    try {
+                        conn.createStatement().executeUpdate(query);
+                        System.out.println();
+                        System.out.println("Video supprimé de la playlist avec succès");
+                    }catch (SQLException h) {
+                        h.printStackTrace();
+                    }
+                }catch (SQLException g) {
+                    g.printStackTrace();
+                }
+
+            }catch (SQLException f) {
+                f.printStackTrace();
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 
 
