@@ -71,8 +71,52 @@ public class ClientFonction implements ClientDAO {
     }
 
 
-    public void SauvegardeWatchTime() {
+    public void SauvegardeWatchTime(int time) {
 
+        int id_now;
+        String video_now;
+        int id_video_now;
+        ResultSet resultSet;
+        String query = "SELECT status.id_current FROM status WHERE status.id = 1;";
+
+        try {
+            resultSet = conn.createStatement().executeQuery(query);
+            resultSet.next();
+
+            id_now = resultSet.getInt("id_current");
+            query = "SELECT compte.selected_video FROM compte WHERE compte.id = "+id_now+";";
+
+            try {
+                resultSet = conn.createStatement().executeQuery(query);
+                resultSet.next();
+                video_now = resultSet.getString("selected_video");
+                query = "SELECT videos.id FROM videos WHERE videos.teaser='"+video_now+"';";
+
+                try {
+                    resultSet = conn.createStatement().executeQuery(query);
+                    resultSet.next();
+                    id_video_now = resultSet.getInt("id");
+
+                    String video_en_cours = video_now+"&t="+time+"s";
+                    query = "UPDATE watchnow SET id_compte="+id_now+", linknow='"+video_en_cours+"' WHERE id="+id_now+";";
+
+                    try {
+                        conn.createStatement().executeUpdate(query);
+                        System.out.println();
+                        System.out.println("WatchTime sauvegardé avec succès");
+                    }catch (SQLException h) {
+                        h.printStackTrace();
+                    }
+                }catch (SQLException g) {
+                    g.printStackTrace();
+                }
+
+            }catch (SQLException f) {
+                f.printStackTrace();
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
 }

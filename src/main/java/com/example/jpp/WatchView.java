@@ -1,6 +1,7 @@
 package com.example.jpp;
 
 
+import Modele.ClientFonction;
 import Modele.Visionnage;
 import javafx.event.ActionEvent;
 import javafx.fxml.*;
@@ -25,6 +26,7 @@ public class WatchView extends CompteView {
     }
 
     @FXML private Button backBtn; @FXML Button startBtn;
+    @FXML private TextField temps;
 
     @FXML
     private void StartVideo(){
@@ -52,5 +54,11 @@ public class WatchView extends CompteView {
     @FXML
     private void EnregistrerTemps(ActionEvent actionEvent) {
         //ici
+
+        String timer = temps.getText();
+        int time = Integer.parseInt(timer);
+        ClientFonction tech = new ClientFonction();
+
+        tech.SauvegardeWatchTime(time);
     }
 }
