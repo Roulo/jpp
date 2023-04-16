@@ -31,11 +31,11 @@ public class NewScreenController {
         }
     }
 
-    @FXML private Button disconnectBtn;@FXML private Button watchBtn;@FXML private Button backBtn;
+    @FXML private Button disconnectBtn;@FXML private Button watchBtn;@FXML private Button backBtn;@FXML private Button SupprimerBtn;
     @FXML private Button profileBtn; @FXML private Button displayBtn; @FXML private Button AjouterBtn; @FXML private Button noteBtn; @FXML private MenuButton noteMenu;
     @FXML private TextField noteField; @FXML private Label noteLabel;
+    @FXML private ScrollPane scrollPane;
 
-    @FXML private Button SupprimerBtn;
     @FXML
     private void Deconnection(ActionEvent event) {
         System.out.println("User disconnected.");
@@ -53,6 +53,7 @@ public class NewScreenController {
         }
     }
 
+    // displayVideos method
     @FXML
     private void displayVideos() {
         int id_now;
@@ -74,25 +75,37 @@ public class NewScreenController {
                 displayBtn.setVisible(false);
 
 
+                // GridPane
                 GridPane gridPane = new GridPane();
                 gridPane.setHgap(20);
                 gridPane.setVgap(25);
 
                 int row = 0;
                 int col = 0;
-                while (resultSet.next()) {
+                int videosDisplayed = 0;
+                while (resultSet.next() && videosDisplayed < 12) {
                     Label label = new Label(resultSet.getString("titre"));
                     String title = resultSet.getString("titre");
                     File file = new File("src\\main\\images\\" + title + ".jpg");
                     Image image = new Image(file.toURI().toString());
                     ImageView imageView = new ImageView(image);
-
+                    imageView.setFitWidth(130);imageView.setFitHeight(176.15);
+                    gridPane.add(label, col, row);
+                    gridPane.add(imageView, col, row+1);
+                    col++;
+                    if (col == 4) {
+                        col = 0;
+                        row += 2;
+                    }
+                    videosDisplayed++;
+                    /////////////////////////////
                     label.setOnMouseClicked(event -> {
                         AjouterBtn.setVisible(true);
                         SupprimerBtn.setVisible(true);
                         noteBtn.setVisible(true);
                         noteField.setVisible(true);
                         noteLabel.setVisible(true);
+                        scrollPane.setVvalue(0);
 
                         System.out.println(label.getText() + " selected");
                         try {
@@ -152,6 +165,7 @@ public class NewScreenController {
                         noteBtn.setVisible(true);
                         noteField.setVisible(true);
                         noteLabel.setVisible(true);
+                        scrollPane.setVvalue(0);
 
                         System.out.println(label.getText() + " selected");
                         try {
@@ -204,27 +218,344 @@ public class NewScreenController {
                             throw new RuntimeException(e);
                         }
                     });
-                    //130x176.15 120x162.6
-                    imageView.setFitWidth(130);imageView.setFitHeight(176.15);
-                    gridPane.add(label, col, row);
-                    gridPane.add(imageView, col, row+1);
-                    col++;
-                    if (col == 4) {
-                        col = 0;
-                        row += 2;
-                    }
+                    /////////////////////////////
                 }
                 vBox.getChildren().add(gridPane);
+                // End of GridPane
+
+                // Prio 1
+                vBox.getChildren().add(new Label(" "));
+                vBox.getChildren().add(new Label(" "));
+                Label label123 = new Label("Tendance du moment");
+                label123.setStyle("-fx-font-weight: bold; -fx-font-size: 18;");
+                vBox.getChildren().add(label123);
+                ResultSet resultSetPrio = statement.executeQuery("SELECT titre FROM videos WHERE prio='1'");
+
+                GridPane gridPanePrio = new GridPane();
+                gridPanePrio.setHgap(20);
+                gridPanePrio.setVgap(25);
+
+                int rowPrio = 0;
+                int colPrio = 0;
+                int videosDisplayedPrio = 0;
+                while (resultSetPrio.next() && videosDisplayedPrio < 12) {
+                    Label label = new Label(resultSetPrio.getString("titre"));
+                    String title = resultSetPrio.getString("titre");
+                    File file = new File("src\\main\\images\\" + title + ".jpg");
+                    Image image = new Image(file.toURI().toString());
+                    ImageView imageView = new ImageView(image);
+                    imageView.setFitWidth(130);imageView.setFitHeight(176.15);
+                    gridPanePrio.add(label, colPrio, rowPrio);
+                    gridPanePrio.add(imageView, colPrio, rowPrio+1);
+                    colPrio++;
+                    if (colPrio == 4) {
+                        colPrio = 0;
+                        rowPrio += 2;
+                    }
+                    videosDisplayedPrio++;
+                    /////////////////////////////
+                    label.setOnMouseClicked(event -> {
+                        AjouterBtn.setVisible(true);
+                        SupprimerBtn.setVisible(true);
+                        noteBtn.setVisible(true);
+                        noteField.setVisible(true);
+                        noteLabel.setVisible(true);
+                        scrollPane.setVvalue(0);
+
+                        System.out.println(label.getText() + " selected");
+                        try {
+                            ResultSet resultSet1 = statement.executeQuery("SELECT * FROM videos WHERE titre='" + label.getText() + "'");
+
+                            resultSet1.next();
+                            String titre = resultSet1.getString("titre");
+                            String resume = resultSet1.getString("resume");
+                            String date = resultSet1.getString("annee");
+                            String duree = resultSet1.getString("duree");
+                            String realisateur = resultSet1.getString("realisateur");
+                            String note = resultSet1.getString("note");
+                            String id = resultSet1.getString("id");
+                            String teaser = resultSet1.getString("teaser");
+
+                            WebView webView = new WebView();
+                            webView.setPrefSize(800, 450);
+                            webView.getEngine().load("https://www.youtube.com/embed/" + teaser);
+                            ((AnchorPane)disconnectBtn.getParent()).getChildren().add(webView);
+
+                            resultSet1 = statement.executeQuery("SELECT DISTINCT genre.type FROM genre, videos, definit WHERE genre.id = definit.id AND definit.id__Videos = '" + id + "'" );
+                            resultSet1.next();
+                            String categorie = resultSet1.getString("type");
+
+                            statement.executeUpdate("UPDATE compte SET selected_video = '" + teaser + "' WHERE id = "+id_now+";");
+
+                            System.out.println("Titre: " + titre);
+                            System.out.println("Résumé: " + resume);
+                            System.out.println("Catégorie: " + categorie);
+                            System.out.println("Date: " + date);
+                            System.out.println("Durée: " + duree);
+                            System.out.println("Réalisateur: " + realisateur);
+                            System.out.println("Note: " + note);
+
+                            ((AnchorPane)disconnectBtn.getParent()).getChildren().remove(vBox);
+                            VBox vBox1 = new VBox();
+                            vBox1.setPadding(new Insets(10));
+                            vBox1.setSpacing(10);
+                            vBox1.getChildren().add(new Label("Titre: " + titre));
+                            vBox1.getChildren().add(new Label("Résumé: " + resume));
+                            vBox1.getChildren().add(new Label("Catégorie: " + categorie));
+                            vBox1.getChildren().add(new Label("Date: " + date));
+                            vBox1.getChildren().add(new Label("Durée: " + duree));
+                            vBox1.getChildren().add(new Label("Réalisateur: " + realisateur));
+                            vBox1.getChildren().add(new Label("Note: " + note));
+                            ((AnchorPane)watchBtn.getParent()).getChildren().add(vBox1);
+
+                            ((AnchorPane)disconnectBtn.getParent()).getChildren().remove(vBox);
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        }
+                    });
+
+                    imageView.setOnMouseClicked(event -> {
+                        AjouterBtn.setVisible(true);
+                        SupprimerBtn.setVisible(true);
+                        noteBtn.setVisible(true);
+                        noteField.setVisible(true);
+                        noteLabel.setVisible(true);
+                        scrollPane.setVvalue(0);
+
+                        System.out.println(label.getText() + " selected");
+                        try {
+                            ResultSet resultSet1 = statement.executeQuery("SELECT * FROM videos WHERE titre='" + label.getText() + "'");
+
+                            resultSet1.next();
+                            String titre = resultSet1.getString("titre");
+                            String resume = resultSet1.getString("resume");
+                            String date = resultSet1.getString("annee");
+                            String duree = resultSet1.getString("duree");
+                            String realisateur = resultSet1.getString("realisateur");
+                            String note = resultSet1.getString("note");
+                            String id = resultSet1.getString("id");
+                            String teaser = resultSet1.getString("teaser");
+
+                            WebView webView = new WebView();
+                            webView.setPrefSize(800, 450);
+                            webView.getEngine().load("https://www.youtube.com/embed/" + teaser);
+                            ((AnchorPane)disconnectBtn.getParent()).getChildren().add(webView);
+
+                            resultSet1 = statement.executeQuery("SELECT DISTINCT genre.type FROM genre, videos, definit WHERE genre.id = definit.id AND definit.id__Videos = '" + id + "'" );
+                            resultSet1.next();
+                            String categorie = resultSet1.getString("type");
+
+                            statement.executeUpdate("UPDATE compte SET selected_video = '" + teaser + "' WHERE id = "+id_now+";");
+
+                            System.out.println("Titre: " + titre);
+                            System.out.println("Résumé: " + resume);
+                            System.out.println("Catégorie: " + categorie);
+                            System.out.println("Date: " + date);
+                            System.out.println("Durée: " + duree);
+                            System.out.println("Réalisateur: " + realisateur);
+                            System.out.println("Note: " + note);
+
+                            ((AnchorPane)disconnectBtn.getParent()).getChildren().remove(vBox);
+                            VBox vBox1 = new VBox();
+                            vBox1.setPadding(new Insets(10));
+                            vBox1.setSpacing(10);
+                            vBox1.getChildren().add(new Label("Titre: " + titre));
+                            vBox1.getChildren().add(new Label("Résumé: " + resume));
+                            vBox1.getChildren().add(new Label("Catégorie: " + categorie));
+                            vBox1.getChildren().add(new Label("Date: " + date));
+                            vBox1.getChildren().add(new Label("Durée: " + duree));
+                            vBox1.getChildren().add(new Label("Réalisateur: " + realisateur));
+                            vBox1.getChildren().add(new Label("Note: " + note));
+                            ((AnchorPane)watchBtn.getParent()).getChildren().add(vBox1);
+
+                            ((AnchorPane)disconnectBtn.getParent()).getChildren().remove(vBox);
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        }
+                    });
+                    /////////////////////////////
+                }
+                vBox.getChildren().add(gridPanePrio);
+
+
+
+
+
+                // Display videos with genre="Action"
+                vBox.getChildren().add(new Label(" "));
+                vBox.getChildren().add(new Label(" "));
+                Label labelAction = new Label("Drame");
+                labelAction.setStyle("-fx-font-weight: bold; -fx-font-size: 18;");
+                vBox.getChildren().add(labelAction);
+                // Display videos with genre="Action"
+                ResultSet resultSetAction = statement.executeQuery("SELECT DISTINCT videos.titre FROM videos, genre, definit WHERE videos.id= definit.id__Videos AND definit.id=10;");
+
+                GridPane gridPaneAction = new GridPane();
+                gridPaneAction.setHgap(20);
+                gridPaneAction.setVgap(25);
+
+                int rowAction = 0;
+                int colAction = 0;
+                int videosDisplayedAction = 0;
+                while (resultSetAction.next() && videosDisplayedAction < 12) {
+                    Label label = new Label(resultSetAction.getString("titre"));
+                    String title = resultSetAction.getString("titre");
+                    File file = new File("src\\main\\images\\" + title + ".jpg");
+                    Image image = new Image(file.toURI().toString());
+                    ImageView imageView = new ImageView(image);
+                    imageView.setFitWidth(130);imageView.setFitHeight(176.15);
+                    gridPaneAction.add(label, colAction, rowAction);
+                    gridPaneAction.add(imageView, colAction, rowAction+1);
+                    colAction++;
+                    if (colAction == 4) {
+                        colAction = 0;
+                        rowAction += 2;
+                    }
+                    videosDisplayedAction++;
+                    /////////////////////////////
+                    label.setOnMouseClicked(event -> {
+                        AjouterBtn.setVisible(true);
+                        SupprimerBtn.setVisible(true);
+                        noteBtn.setVisible(true);
+                        noteField.setVisible(true);
+                        noteLabel.setVisible(true);
+                        //return at the beginning of the scrollpane
+                        scrollPane.setVvalue(0);
+
+                        System.out.println(label.getText() + " selected");
+                        try {
+                            ResultSet resultSet1 = statement.executeQuery("SELECT * FROM videos WHERE titre='" + label.getText() + "'");
+
+                            resultSet1.next();
+                            String titre = resultSet1.getString("titre");
+                            String resume = resultSet1.getString("resume");
+                            String date = resultSet1.getString("annee");
+                            String duree = resultSet1.getString("duree");
+                            String realisateur = resultSet1.getString("realisateur");
+                            String note = resultSet1.getString("note");
+                            String id = resultSet1.getString("id");
+                            String teaser = resultSet1.getString("teaser");
+
+                            WebView webView = new WebView();
+                            webView.setPrefSize(800, 450);
+                            webView.getEngine().load("https://www.youtube.com/embed/" + teaser);
+                            ((AnchorPane)disconnectBtn.getParent()).getChildren().add(webView);
+
+                            resultSet1 = statement.executeQuery("SELECT DISTINCT genre.type FROM genre, videos, definit WHERE genre.id = definit.id AND definit.id__Videos = '" + id + "'" );
+                            resultSet1.next();
+                            String categorie = resultSet1.getString("type");
+
+                            statement.executeUpdate("UPDATE compte SET selected_video = '" + teaser + "' WHERE id = "+id_now+";");
+
+                            System.out.println("Titre: " + titre);
+                            System.out.println("Résumé: " + resume);
+                            System.out.println("Catégorie: " + categorie);
+                            System.out.println("Date: " + date);
+                            System.out.println("Durée: " + duree);
+                            System.out.println("Réalisateur: " + realisateur);
+                            System.out.println("Note: " + note);
+                            System.out.println("Teaser: " + teaser);
+
+                            ((AnchorPane)disconnectBtn.getParent()).getChildren().remove(vBox);
+                            VBox vBox1 = new VBox();
+                            vBox1.setPadding(new Insets(10));
+                            vBox1.setSpacing(10);
+                            vBox1.getChildren().add(new Label("Titre: " + titre));
+                            vBox1.getChildren().add(new Label("Résumé: " + resume));
+                            vBox1.getChildren().add(new Label("Catégorie: " + categorie));
+                            vBox1.getChildren().add(new Label("Date: " + date));
+                            vBox1.getChildren().add(new Label("Durée: " + duree));
+                            vBox1.getChildren().add(new Label("Réalisateur: " + realisateur));
+                            vBox1.getChildren().add(new Label("Note: " + note));
+                            ((AnchorPane)watchBtn.getParent()).getChildren().add(vBox1);
+
+                            ((AnchorPane)disconnectBtn.getParent()).getChildren().remove(vBox);
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        }
+                    });
+
+                    imageView.setOnMouseClicked(event -> {
+                        AjouterBtn.setVisible(true);
+                        SupprimerBtn.setVisible(true);
+                        noteBtn.setVisible(true);
+                        noteField.setVisible(true);
+                        noteLabel.setVisible(true);
+                        scrollPane.setVvalue(0);
+
+                        System.out.println(label.getText() + " selected");
+                        try {
+                            ResultSet resultSet1 = statement.executeQuery("SELECT * FROM videos WHERE titre='" + label.getText() + "'");
+
+                            resultSet1.next();
+                            String titre = resultSet1.getString("titre");
+                            String resume = resultSet1.getString("resume");
+                            String date = resultSet1.getString("annee");
+                            String duree = resultSet1.getString("duree");
+                            String realisateur = resultSet1.getString("realisateur");
+                            String note = resultSet1.getString("note");
+                            String id = resultSet1.getString("id");
+                            String teaser = resultSet1.getString("teaser");
+
+                            WebView webView = new WebView();
+                            webView.setPrefSize(800, 450);
+                            webView.getEngine().load("https://www.youtube.com/embed/" + teaser);
+                            ((AnchorPane)disconnectBtn.getParent()).getChildren().add(webView);
+
+                            resultSet1 = statement.executeQuery("SELECT DISTINCT genre.type FROM genre, videos, definit WHERE genre.id = definit.id AND definit.id__Videos = '" + id + "'" );
+                            resultSet1.next();
+                            String categorie = resultSet1.getString("type");
+
+                            statement.executeUpdate("UPDATE compte SET selected_video = '" + teaser + "' WHERE id = "+id_now+";");
+
+                            System.out.println("Titre: " + titre);
+                            System.out.println("Résumé: " + resume);
+                            System.out.println("Catégorie: " + categorie);
+                            System.out.println("Date: " + date);
+                            System.out.println("Durée: " + duree);
+                            System.out.println("Réalisateur: " + realisateur);
+                            System.out.println("Note: " + note);
+                            System.out.println("Teaser: " + teaser);
+
+                            ((AnchorPane)disconnectBtn.getParent()).getChildren().remove(vBox);
+                            VBox vBox1 = new VBox();
+                            vBox1.setPadding(new Insets(10));
+                            vBox1.setSpacing(10);
+                            vBox1.getChildren().add(new Label("Titre: " + titre));
+                            vBox1.getChildren().add(new Label("Résumé: " + resume));
+                            vBox1.getChildren().add(new Label("Catégorie: " + categorie));
+                            vBox1.getChildren().add(new Label("Date: " + date));
+                            vBox1.getChildren().add(new Label("Durée: " + duree));
+                            vBox1.getChildren().add(new Label("Réalisateur: " + realisateur));
+                            vBox1.getChildren().add(new Label("Note: " + note));
+                            ((AnchorPane)watchBtn.getParent()).getChildren().add(vBox1);
+
+                            ((AnchorPane)disconnectBtn.getParent()).getChildren().remove(vBox);
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        }
+                    });
+                    /////////////////////////////
+                }
+                vBox.getChildren().add(gridPaneAction);
+
+
+
+
+
+
+
+
+
                 ((AnchorPane)disconnectBtn.getParent()).getChildren().add(vBox);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-
-        }catch (SQLException h) {
+        } catch (SQLException h) {
             h.printStackTrace();
         }
-
     }
+
 
     @FXML
     private void Back(ActionEvent event){
@@ -308,14 +639,11 @@ public class NewScreenController {
 
         ClientFonction tech = new ClientFonction();
         tech.Notage(note);
-
-
     }
 
     @FXML
     private void SupprimerPlaylist(ActionEvent event) {
         ClientFonction tech = new ClientFonction();
         tech.SupprimerFilmPlaylist();
-
     }
 }
