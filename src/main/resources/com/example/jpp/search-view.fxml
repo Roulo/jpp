@@ -35,8 +35,7 @@
                  <Font size="20.0" />
               </font></Button>
             <Button fx:id="backBtn" alignment="CENTER" layoutX="10.0" layoutY="410.0" mnemonicParsing="false" onAction="#Back" text="Back" />
-            <Button fx:id="watchBtn" alignment="CENTER" layoutX="62.0" layoutY="410.0" mnemonicParsing="false" onAction="#Watch" text="Voir" />
-         <Button fx:id="AjouterBtn" alignment="CENTER" layoutX="136.0" layoutY="410.0" mnemonicParsing="false" onAction="#AjouterPlaylist" text="Ajouter" />
+            <Button fx:id="watchBtn" alignment="CENTER" layoutX="148.0" layoutY="410.0" mnemonicParsing="false" onAction="#Watch" text="Voir" />
         </AnchorPane>
     </SplitPane>
 </VBox>

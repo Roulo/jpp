@@ -55,7 +55,7 @@ public class AdminFonction implements AdminDAO {
         if (administrateur==1) sorte = "Admin";
         else sorte = "Client";
 
-        String query = "INSERT INTO compte (identifiant, mdp, admin, qualite, sous_titres, id_Liste, id_Historique, selected_video) VALUES ('" +identifiant+ "','" +mdp1+ "','" +sorte+ "', 0, 'nul', 2, 2, 'a');";
+        String query = "INSERT INTO compte (identifiant, mdp, admin, id_Liste, id_Historique, selected_video) VALUES ('" +identifiant+ "','" +mdp1+ "','" +sorte+ "', 2, 2, 'a');";
 
         try {
             conn.createStatement().executeUpdate(query);

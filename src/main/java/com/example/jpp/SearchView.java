@@ -109,27 +109,13 @@ public class SearchView {
         String trier = this.trierbox.getValue().toString();
 
         searchBtn.setVisible(false);
+        watchBtn.setVisible(true);
 
         Donnes dona = new Donnes();
         if (title.equals("") && director.equals("") && year.equals("") && genre.equals("Tous") && trier.equals("annee DESC")){
             String query1 = "SELECT * FROM videos ORDER BY annee DESC;";
             try {
                 ResultSet rs = conn.createStatement().executeQuery(query1);
-                while (rs.next()) {
-                    System.out.println();
-                    System.out.println(rs.getString("id"));
-                    System.out.print(" ");
-                    System.out.print(rs.getString("titre"));
-                    System.out.print(" ");
-                    System.out.print(rs.getString("realisateur"));
-                    System.out.print(" ");
-                    System.out.print(rs.getString("annee"));
-                    System.out.print(" ");
-                    System.out.print(rs.getString("note"));
-                    System.out.print(" ");
-                    System.out.println(rs.getString("duree"));
-                    System.out.println(rs.getString("resume"));
-                }
                 Statement statement = conn.createStatement();
                 ResultSet resultSet = statement.executeQuery(query1);
 
