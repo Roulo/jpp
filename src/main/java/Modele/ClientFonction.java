@@ -18,6 +18,7 @@ public class ClientFonction implements ClientDAO {
         }
     }
 
+    //Maj de la note dans la base de donnée
     public void Notage(float note){
         int id_now;
         String video_now;
@@ -25,6 +26,8 @@ public class ClientFonction implements ClientDAO {
         float note_tempo;
         float moy;
 
+
+        //recup de l'identité de l'utilisateur
         ResultSet resultSet;
         String query = "SELECT status.id_current FROM status WHERE status.id = 1;";
 
@@ -34,7 +37,7 @@ public class ClientFonction implements ClientDAO {
 
             id_now = resultSet.getInt("id_current");
             query = "SELECT compte.selected_video FROM compte WHERE compte.id = "+id_now+";";
-
+            //On retrouve la video qu'il souhaite noter
             try {
                 resultSet = conn.createStatement().executeQuery(query);
                 resultSet.next();
@@ -47,7 +50,7 @@ public class ClientFonction implements ClientDAO {
                     id_video_now = resultSet.getInt("id");
 
                     query = "UPDATE notage SET note="+note+"WHERE id_compte="+id_now+" AND id_video="+id_video_now+";";
-
+                    //On update sa note dans la base de donnée
                     try {
                         conn.createStatement().executeUpdate(query);
                         System.out.println();
@@ -62,7 +65,7 @@ public class ClientFonction implements ClientDAO {
                             moy = (note_tempo+note)/2;
 
                             query = "UPDATE videos SET note="+moy+"WHERE videos.id="+id_video_now+";";
-
+                            //On modifie la note moyenne de la video
                             try {
                                 conn.createStatement().executeUpdate(query);
                                 System.out.println();
@@ -87,7 +90,7 @@ public class ClientFonction implements ClientDAO {
         }
     };
 
-
+    //On ajoute un film a la playlist
     public void AjouterFilmPlaylist() {
 
         int id_now;
@@ -95,14 +98,14 @@ public class ClientFonction implements ClientDAO {
         int id_video_now;
         ResultSet resultSet;
         String query = "SELECT status.id_current FROM status WHERE status.id = 1;";
-
+        //Recup de l'identité de l'utilisateur
         try {
             resultSet = conn.createStatement().executeQuery(query);
             resultSet.next();
 
             id_now = resultSet.getInt("id_current");
             query = "SELECT compte.selected_video FROM compte WHERE compte.id = "+id_now+";";
-
+            //recup du film correspondant dans la base de donnée
             try {
                 resultSet = conn.createStatement().executeQuery(query);
                 resultSet.next();
@@ -115,7 +118,7 @@ public class ClientFonction implements ClientDAO {
                     id_video_now = resultSet.getInt("id");
 
                     query = "INSERT INTO regarde (id, id__Videos) VALUES ("+id_now+","+id_video_now+");";
-
+                    //Ajout du film à la playlist de l'utilisateur
                     try {
                         conn.createStatement().executeUpdate(query);
                         System.out.println();
@@ -134,21 +137,21 @@ public class ClientFonction implements ClientDAO {
             e.printStackTrace();
         }
     }
-
+    //Suppresion d'un film de la playlist
     public void SupprimerFilmPlaylist() {
         int id_now;
         String video_now;
         int id_video_now;
         ResultSet resultSet;
         String query = "SELECT status.id_current FROM status WHERE status.id = 1;";
-
+        //Recup de l'identité de l'utilisateur
         try {
             resultSet = conn.createStatement().executeQuery(query);
             resultSet.next();
 
             id_now = resultSet.getInt("id_current");
             query = "SELECT compte.selected_video FROM compte WHERE compte.id = "+id_now+";";
-
+            //recup de la donnée du film correspondant
             try {
                 resultSet = conn.createStatement().executeQuery(query);
                 resultSet.next();
@@ -161,7 +164,7 @@ public class ClientFonction implements ClientDAO {
                     id_video_now = resultSet.getInt("id");
 
                     query = "DELETE FROM regarde WHERE regarde.id="+id_now+" AND regarde.id__Videos="+id_video_now+";";
-
+                    //Suppresion du film de la table playlist de l'utilisateur
                     try {
                         conn.createStatement().executeUpdate(query);
                         System.out.println();
@@ -181,7 +184,7 @@ public class ClientFonction implements ClientDAO {
         }
     }
 
-
+    //Sauvegarde du watchtime d'une video
     public void SauvegardeWatchTime(int time) {
 
         int id_now;
@@ -189,14 +192,14 @@ public class ClientFonction implements ClientDAO {
         int id_video_now;
         ResultSet resultSet;
         String query = "SELECT status.id_current FROM status WHERE status.id = 1;";
-
+        //recup de l'identité de l'utilisateur
         try {
             resultSet = conn.createStatement().executeQuery(query);
             resultSet.next();
 
             id_now = resultSet.getInt("id_current");
             query = "SELECT compte.selected_video FROM compte WHERE compte.id = "+id_now+";";
-
+            //recup de la video correspondante
             try {
                 resultSet = conn.createStatement().executeQuery(query);
                 resultSet.next();
@@ -210,7 +213,7 @@ public class ClientFonction implements ClientDAO {
 
                     String video_en_cours = video_now+"?start="+time;
                     query = "UPDATE watchnow SET id_compte="+id_now+", linknow='"+video_en_cours+"' WHERE id="+id_now+";";
-
+                    //Creation et enregistrement du lien de video modifie pour le watchtime
                     try {
                         conn.createStatement().executeUpdate(query);
                         System.out.println();

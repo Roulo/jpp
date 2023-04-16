@@ -22,14 +22,16 @@ public class Compte extends DAO implements CompteDAO {
         }
     }
 
-
+    //Affichage des genres dans la liste
     public void Charger(ObservableList<Object> genreList, ChoiceBox<Object> genre) {
         genreList.removeAll(genreList);
         String query = "SELECT type FROM genre;";
+        //Requete SQL pour récupérer les genres
         try {
             ResultSet rs = conn.createStatement().executeQuery(query);
             while (rs.next()) {
                 genreList.add(rs.getString("type"));
+                //Ajout au container pour l'affichage
             }
             genre.setItems(genreList);
         } catch (SQLException e) {
