@@ -22,6 +22,9 @@ public class ClientFonction implements ClientDAO {
         int id_now;
         String video_now;
         int id_video_now;
+        float note_tempo;
+        float moy;
+
         ResultSet resultSet;
         String query = "SELECT status.id_current FROM status WHERE status.id = 1;";
 
@@ -43,12 +46,33 @@ public class ClientFonction implements ClientDAO {
                     resultSet.next();
                     id_video_now = resultSet.getInt("id");
 
-                    query = "INSERT INTO notage (id_compte, id_video, note) VALUES ("+id_now+","+id_video_now+","+note+");";
+                    query = "UPDATE notage SET note="+note+"WHERE id_compte="+id_now+" AND id_video="+id_video_now+";";
 
                     try {
                         conn.createStatement().executeUpdate(query);
                         System.out.println();
                         System.out.println("Note ajoutée avec succès");
+                        query = "SELECT videos.note FROM videos WHERE videos.id="+id_video_now+";";
+
+                        try {
+                            resultSet = conn.createStatement().executeQuery(query);
+                            resultSet.next();
+                            note_tempo = resultSet.getFloat("note");
+
+                            moy = (note_tempo+note)/2;
+
+                            query = "UPDATE videos SET note="+moy+"WHERE videos.id="+id_video_now+";";
+
+                            try {
+                                conn.createStatement().executeUpdate(query);
+                                System.out.println();
+                                System.out.println("Note update");
+                            }catch (SQLException m) {
+                                m.printStackTrace();
+                            }
+                        }catch (SQLException l) {
+                            l.printStackTrace();
+                        }
                     }catch (SQLException h) {
                         h.printStackTrace();
                     }
