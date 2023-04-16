@@ -35,6 +35,12 @@ public class WatchView extends CompteView {
     }
 
     @FXML
+    private void ReprendreVid(){
+        Visionnage vision = new Visionnage();
+        vision.Reprendre(backBtn);
+    }
+
+    @FXML
     private void Back(ActionEvent event) {
         System.out.println("User disconnected.");
         Stage stage = (Stage) backBtn.getScene().getWindow();

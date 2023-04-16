@@ -21,7 +21,6 @@ public class Visionnage extends DAO implements VisionnageDAO {
         }
     }
 
-
     public void LancerVideo(Button backBtn) {
         try {
             Statement statement = conn.createStatement();
@@ -46,8 +45,11 @@ public class Visionnage extends DAO implements VisionnageDAO {
         }
     }
 
+    public void Reprendre(Button backBtn){
+        System.out.println("Reprendre");
+    }
+
     public void EnregistrerTemps(){
         //ici
     }
-
 }

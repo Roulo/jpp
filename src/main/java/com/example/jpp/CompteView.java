@@ -268,7 +268,6 @@ public class CompteView{
                 e.printStackTrace();
             }
         }
-
     }
 
     @FXML
@@ -358,6 +357,25 @@ public class CompteView{
         }
         else {
             System.out.println("File is not valid.");
+        }
+    }
+
+
+
+    @FXML
+    private void Reprendre(ActionEvent event){
+        Stage stage = (Stage) listeBtn.getScene().getWindow(); //je prend la page
+        stage.close(); //je la ferme
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("watch-view-reprendre.fxml")); //je charge la page
+            Parent root = fxmlLoader.load(); //je la charge
+            Stage stage1 = new Stage();
+            stage1.setTitle("Reprise");
+            stage1.setScene(new Scene(root));
+            stage1.show(); //je l'affiche
+            //youhou on a rechargé la page
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
