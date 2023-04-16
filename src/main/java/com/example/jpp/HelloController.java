@@ -13,6 +13,18 @@ import java.sql.*;
 import java.util.Scanner;
 
 public class HelloController extends CompteView {
+
+    @FXML private Button Inscription;
+    @FXML private Button Connexion;
+
+    public void initialize() {
+        // Change Inscription button color
+        Inscription.setStyle("-fx-background-color: lightblue");
+
+        // Change Connexion button color
+        Connexion.setStyle("-fx-background-color: lightgreen");
+    }
+
     private static final String DB_URL = "jdbc:mysql://localhost:3306/temporaire?user=root&password=";
 
     public HelloController() {
@@ -24,7 +36,7 @@ public class HelloController extends CompteView {
     }
 
     @FXML private TextField Username; @FXML private TextField Password;
-    @FXML private Button Inscription; @FXML private Button Connexion;
+
 
     @FXML
     private void Sinscrire(ActionEvent event) {

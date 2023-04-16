@@ -7,8 +7,8 @@
     <SplitPane dividerPositions="0.5134048257372654" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="1000.0">
         <ScrollPane fx:id="scrollPane" VBox.vgrow="ALWAYS">
             <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="2000.0" prefWidth="779.0">
-                <Button fx:id="displayBtn" layoutX="683.0" layoutY="14.0" onAction="#displayVideos" text="Display Videos" />
-                <Button layoutX="703.0" layoutY="50.0" onAction="#Search" text="Rechercher" />
+                <Button fx:id="displayBtn" layoutX="14.0" layoutY="14.0" text="Display Videos" />
+                <Button layoutX="692.0" layoutY="14.0" onAction="#Search" text="Rechercher" />
                 <Button fx:id="disconnectBtn" layoutX="681.0" layoutY="411.0" mnemonicParsing="false" onAction="#Deconnection" text="Se déconnecter" visible="false" />
             <Separator layoutX="667.0" orientation="VERTICAL" prefHeight="2000.0" prefWidth="1.0" />
             </AnchorPane>

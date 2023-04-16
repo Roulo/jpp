@@ -26,7 +26,6 @@ import java.util.List;
 
 public class SearchView {
     private static final String DB_URL = "jdbc:mysql://localhost:3306/temporaire?user=root&password=";
-
     private Connection conn;
 
     public SearchView() {
@@ -38,6 +37,14 @@ public class SearchView {
     }
 
     @FXML private Button backBtn; @FXML private Button searchBtn;
+
+    public void initialize() {
+        genreList.removeAll(genreList);
+        trierList.removeAll(trierList);
+
+        Donnes dona = new Donnes();
+        dona.ChargerData(genrebox,genreList,trierbox,trierList);
+    }
 
     @FXML
     private void Back(ActionEvent event){
@@ -65,11 +72,7 @@ public class SearchView {
 
     @FXML
     private void LoadData(ActionEvent event) {
-        genreList.removeAll(genreList);
-        trierList.removeAll(trierList);
 
-        Donnes dona = new Donnes();
-        dona.ChargerData(genrebox,genreList,trierbox,trierList);
     }
 
     @FXML

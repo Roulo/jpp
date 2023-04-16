@@ -28,7 +28,7 @@
             <ChoiceBox fx:id="genrebox" layoutX="14.0" layoutY="229.0" prefWidth="150.0" />
             <Label fx:id="d" layoutX="14.0" layoutY="265.0" prefHeight="18.0" prefWidth="150.0" text="Trier" />
             <ChoiceBox fx:id="trierbox" layoutX="14.0" layoutY="284.0" prefWidth="150.0" />
-            <Button fx:id="loadBtn" layoutX="71.0" layoutY="176.0" mnemonicParsing="false" onAction="#LoadData" text="Charger" />
+            <Button fx:id="loadBtn" layoutX="71.0" layoutY="176.0" mnemonicParsing="false" onAction="#LoadData" text="Charger" visible="false" />
 
             <Button fx:id="searchBtn" layoutX="38.0" layoutY="355.0" mnemonicParsing="false" onAction="#Search" text="Rechercher">
               <font>

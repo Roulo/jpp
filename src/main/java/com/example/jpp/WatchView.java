@@ -1,6 +1,5 @@
 package com.example.jpp;
 
-
 import Modele.ClientFonction;
 import Modele.Visionnage;
 import javafx.event.ActionEvent;

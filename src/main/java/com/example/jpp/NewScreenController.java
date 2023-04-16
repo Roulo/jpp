@@ -21,6 +21,10 @@ import java.io.IOException;
 import java.sql.*;
 
 public class NewScreenController {
+    @FXML private Button disconnectBtn;@FXML private Button watchBtn;@FXML private Button backBtn;@FXML private Button SupprimerBtn;
+    @FXML private Button profileBtn; @FXML private Button displayBtn; @FXML private Button AjouterBtn; @FXML private Button noteBtn; @FXML private MenuButton noteMenu;
+    @FXML private TextField noteField; @FXML private Label noteLabel;
+    @FXML private ScrollPane scrollPane;
     private static final String DB_URL = "jdbc:mysql://localhost:3306/temporaire?user=root&password=";
     private Connection conn;
     public NewScreenController() {
@@ -31,31 +35,9 @@ public class NewScreenController {
         }
     }
 
-    @FXML private Button disconnectBtn;@FXML private Button watchBtn;@FXML private Button backBtn;@FXML private Button SupprimerBtn;
-    @FXML private Button profileBtn; @FXML private Button displayBtn; @FXML private Button AjouterBtn; @FXML private Button noteBtn; @FXML private MenuButton noteMenu;
-    @FXML private TextField noteField; @FXML private Label noteLabel;
-    @FXML private ScrollPane scrollPane;
-
-    @FXML
-    private void Deconnection(ActionEvent event) {
-        System.out.println("User disconnected.");
-        Stage stage = (Stage) disconnectBtn.getScene().getWindow();
-        stage.close();
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
-            Parent root = fxmlLoader.load();
-            Stage stage1 = new Stage();
-            stage1.setTitle("Hello!");
-            stage1.setScene(new Scene(root));
-            stage1.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     // displayVideos method
     @FXML
-    private void displayVideos() {
+    private void initialize() {
         int id_now;
         String query = "SELECT status.id_current FROM status WHERE status.id = 1;";
 
@@ -106,6 +88,7 @@ public class NewScreenController {
                         noteField.setVisible(true);
                         noteLabel.setVisible(true);
                         scrollPane.setVvalue(0);
+                        watchBtn.setVisible(true);
 
                         System.out.println(label.getText() + " selected");
                         try {
@@ -172,6 +155,7 @@ public class NewScreenController {
                         noteField.setVisible(true);
                         noteLabel.setVisible(true);
                         scrollPane.setVvalue(0);
+                        watchBtn.setVisible(true);
 
                         System.out.println(label.getText() + " selected");
                         try {
@@ -276,6 +260,7 @@ public class NewScreenController {
                         noteField.setVisible(true);
                         noteLabel.setVisible(true);
                         scrollPane.setVvalue(0);
+                        watchBtn.setVisible(true);
 
                         System.out.println(label.getText() + " selected");
                         try {
@@ -342,6 +327,7 @@ public class NewScreenController {
                         noteField.setVisible(true);
                         noteLabel.setVisible(true);
                         scrollPane.setVvalue(0);
+                        watchBtn.setVisible(true);
 
                         System.out.println(label.getText() + " selected");
                         try {
@@ -447,6 +433,7 @@ public class NewScreenController {
                         noteLabel.setVisible(true);
                         //return at the beginning of the scrollpane
                         scrollPane.setVvalue(0);
+                        watchBtn.setVisible(true);
 
                         System.out.println(label.getText() + " selected");
                         try {
@@ -514,6 +501,7 @@ public class NewScreenController {
                         noteField.setVisible(true);
                         noteLabel.setVisible(true);
                         scrollPane.setVvalue(0);
+                        watchBtn.setVisible(true);
 
                         System.out.println(label.getText() + " selected");
                         try {
@@ -619,6 +607,7 @@ public class NewScreenController {
                         noteLabel.setVisible(true);
                         //return at the beginning of the scrollpane
                         scrollPane.setVvalue(0);
+                        watchBtn.setVisible(true);
 
                         System.out.println(label.getText() + " selected");
                         try {
@@ -686,6 +675,7 @@ public class NewScreenController {
                         noteField.setVisible(true);
                         noteLabel.setVisible(true);
                         scrollPane.setVvalue(0);
+                        watchBtn.setVisible(true);
 
                         System.out.println(label.getText() + " selected");
                         try {
@@ -933,6 +923,23 @@ public class NewScreenController {
             }
         } catch (SQLException h) {
             h.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void Deconnection(ActionEvent event) {
+        System.out.println("User disconnected.");
+        Stage stage = (Stage) disconnectBtn.getScene().getWindow();
+        stage.close();
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
+            Parent root = fxmlLoader.load();
+            Stage stage1 = new Stage();
+            stage1.setTitle("Hello!");
+            stage1.setScene(new Scene(root));
+            stage1.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
