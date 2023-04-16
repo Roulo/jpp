@@ -19,6 +19,6 @@ public class HelloApplication extends Application {
 
     /** main*/
     public static void main(String[] args) {
-        launch();
+        launch(); //début de l'application
     }
 }

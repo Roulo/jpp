@@ -63,9 +63,7 @@ public class WatchView extends CompteView {
     /** Enregistrer le temps de visionnage*/
     @FXML
     private void EnregistrerTemps(ActionEvent actionEvent) {
-        //ici
-
-        String timer = temps.getText();
+        String timer = temps.getText(); //choper le temps de visionnage en secondes en un String
         int time = Integer.parseInt(timer);
         ClientFonction tech = new ClientFonction();
 

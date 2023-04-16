@@ -45,6 +45,7 @@ public class SearchView {
         trierList.removeAll(trierList);
 
         Donnes dona = new Donnes();
+        //charger les données
         dona.ChargerData(genrebox,genreList,trierbox,trierList);
     }
 
@@ -53,7 +54,8 @@ public class SearchView {
     private void Back(ActionEvent event){
         System.out.println("Back to the main page.");
         Stage stage = (Stage) backBtn.getScene().getWindow();
-        stage.close();
+        stage.close(); // Fermer la fenêtre
+        // Ouvrir une nouvelle fenêtre
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("NewScreen.fxml"));
             Parent root = fxmlLoader.load();
@@ -84,9 +86,9 @@ public class SearchView {
     private void Retry(ActionEvent event) {
         System.out.println("restart.");
         Stage stage = (Stage) backBtn.getScene().getWindow();
-        stage.close();
+        stage.close();//fermer la page actuelle
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("search-view.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("search-view.fxml")); //ouvre la page de recherche
             Parent root = fxmlLoader.load();
             Stage stage1 = new Stage();
             stage1.setTitle("Netflix");
@@ -100,11 +102,12 @@ public class SearchView {
     /** Lancer la recherche*/
     @FXML
     private void Search() throws SQLException {
-        //if the user didn't choose a genre, the genre will be "Tous"
+        //Si l'utilisateur n'a pas choisi de genre, le genre sera "Tous"
         if (this.genrebox.getValue() == null){
             genrebox.setValue("Tous");
         }
-        //if the user didn't choose a trier, the trier will be "Tous"
+
+        //Si l'utilisateur n'a pas choisi de trier, le trier sera "Tous"
         if (this.trierbox.getValue() == null){
             trierbox.setValue("annee DESC");
         }
@@ -306,9 +309,9 @@ public class SearchView {
     private void Watch(ActionEvent event) {
         System.out.println("User watching a video.");
         Stage stage = (Stage) watchBtn.getScene().getWindow();
-        stage.close();
+        stage.close(); //ferme la page
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("watch-view.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("watch-view.fxml")); //ouvre la page watch-view
             Parent root = fxmlLoader.load();
             Stage stage1 = new Stage();
             stage1.setTitle("Watch!");
@@ -324,9 +327,9 @@ public class SearchView {
     private void Compte(ActionEvent event){
         System.out.println("User going to his account.");
         Stage stage = (Stage) watchBtn.getScene().getWindow();
-        stage.close();
+        stage.close(); //ferme la page
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("compte-view.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("compte-view.fxml")); //ouvre la page compte-view
             Parent root = fxmlLoader.load();
             Stage stage1 = new Stage();
             stage1.setTitle("Compte!");

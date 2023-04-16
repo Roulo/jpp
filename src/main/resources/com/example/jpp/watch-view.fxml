@@ -5,11 +5,11 @@
 
 <VBox prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.jpp.WatchView">
     <AnchorPane prefHeight="657.0" prefWidth="1200.0">
-        <Label fx:id="z" layoutX="529.0" layoutY="577.0" prefHeight="18.0" prefWidth="41.0" text="min." />
+        <Label fx:id="z" layoutX="499.0" layoutY="577.0" prefHeight="18.0" prefWidth="52.0" text="secondes" />
 
         <Button fx:id="backBtn" layoutY="573.0" mnemonicParsing="false" onAction="#Back" text="Back" />
-        <TextField fx:id="temps" layoutX="379.0" layoutY="573.0" prefHeight="26.0" prefWidth="150.0" />
+        <TextField fx:id="temps" layoutX="349.0" layoutY="573.0" prefHeight="26.0" prefWidth="150.0" />
         <Button fx:id="startBtn" layoutX="1088.0" layoutY="573.0" mnemonicParsing="false" onAction="#StartVideo" text="Démarrer la vidéo" />
-      <Button fx:id="enregistrerBtn" layoutX="563.0" layoutY="573.0" mnemonicParsing="false" onAction="#EnregistrerTemps" text="Enregistrer" />
+      <Button fx:id="enregistrerBtn" layoutX="551.0" layoutY="573.0" mnemonicParsing="false" onAction="#EnregistrerTemps" text="Enregistrer" />
     </AnchorPane>
 </VBox>

@@ -36,12 +36,12 @@ public class NewScreenController {
         }
     }
 
-    // displayVideos method
+    // displayVideos methode
     /** initialize*/
     @FXML
     private void initialize() {
         int id_now;
-        String query = "SELECT status.id_current FROM status WHERE status.id = 1;";
+        String query = "SELECT status.id_current FROM status WHERE status.id = 1;"; // choper id_current
 
         try {
             ResultSet resultSet2 = conn.createStatement().executeQuery(query);
@@ -50,14 +50,13 @@ public class NewScreenController {
 
             try {
                 Statement statement = conn.createStatement();
-                ResultSet resultSet = statement.executeQuery("SELECT titre FROM videos");
+                ResultSet resultSet = statement.executeQuery("SELECT titre FROM videos"); //requete sql
 
-                VBox vBox = new VBox();
+                VBox vBox = new VBox(); //vbox
                 vBox.setPadding(new Insets(10));
                 vBox.setSpacing(10);
 
                 displayBtn.setVisible(false);
-
 
                 // GridPane
                 GridPane gridPane = new GridPane();
@@ -67,6 +66,7 @@ public class NewScreenController {
                 int row = 0;
                 int col = 0;
                 int videosDisplayed = 0;
+                // afficher les vidéos dans la gridpane
                 while (resultSet.next() && videosDisplayed < 12) {
                     Label label = new Label(resultSet.getString("titre"));
                     String title = resultSet.getString("titre");
@@ -225,7 +225,7 @@ public class NewScreenController {
 
 
                 // Prio 1
-                vBox.getChildren().add(new Label(" "));
+                vBox.getChildren().add(new Label(" ")); // Séparation
                 vBox.getChildren().add(new Label(" "));
                 Label label123 = new Label("Tendance du moment");
                 label123.setStyle("-fx-font-weight: bold; -fx-font-size: 18;");
@@ -239,6 +239,7 @@ public class NewScreenController {
                 int rowPrio = 0;
                 int colPrio = 0;
                 int videosDisplayedPrio = 0;
+                // afficher les vidéos dans la gridpane
                 while (resultSetPrio.next() && videosDisplayedPrio < 12) {
                     Label label = new Label(resultSetPrio.getString("titre"));
                     String title = resultSetPrio.getString("titre");
@@ -411,6 +412,7 @@ public class NewScreenController {
                 int rowDrame = 0;
                 int colDrame = 0;
                 int videosDisplayedDrame = 0;
+                //affichage des videos dans la gridpane
                 while (resultSetDrame.next() && videosDisplayedDrame < 12) {
                     Label label = new Label(resultSetDrame.getString("titre"));
                     String title = resultSetDrame.getString("titre");
@@ -585,6 +587,7 @@ public class NewScreenController {
                 int rowAction = 0;
                 int colAction = 0;
                 int videosDisplayedAction = 0;
+                // Afficher les vidéos dans la gridpane
                 while (resultSetAction.next() && videosDisplayedAction < 12) {
                     Label label = new Label(resultSetAction.getString("titre"));
                     String title = resultSetAction.getString("titre");
@@ -761,6 +764,7 @@ public class NewScreenController {
                 int rowAventure = 0;
                 int colAventure = 0;
                 int videosDisplayedAventure = 0;
+                // afficher les vidéos dans la gridpane
                 while (resultSetAventure.next() && videosDisplayedAventure < 12) {
                     Label label = new Label(resultSetAventure.getString("titre"));
                     String title = resultSetAventure.getString("titre");
@@ -933,9 +937,9 @@ public class NewScreenController {
     private void Deconnection(ActionEvent event) {
         System.out.println("User disconnected.");
         Stage stage = (Stage) disconnectBtn.getScene().getWindow();
-        stage.close();
+        stage.close(); // Fermeture de la fenêtre
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml")); // Chargement de la nouvelle fenêtre
             Parent root = fxmlLoader.load();
             Stage stage1 = new Stage();
             stage1.setTitle("Hello!");
@@ -949,7 +953,7 @@ public class NewScreenController {
     /** Retour à la liste des vidéos*/
     @FXML
     private void Back(ActionEvent event){
-        System.out.println("User going back to the list of videos.");
+        System.out.println("Retour à la liste des vidéos.");
         Stage stage = (Stage) backBtn.getScene().getWindow();
         stage.close();
 
@@ -968,11 +972,11 @@ public class NewScreenController {
     /** Aller regarder la vidéo*/
     @FXML
     private void Watch(ActionEvent event) {
-        System.out.println("User watching a video.");
+        System.out.println("Utilisateur va regarder la vidéo.");
         Stage stage = (Stage) watchBtn.getScene().getWindow();
-        stage.close();
+        stage.close(); //fermeture de la fenêtre
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("watch-view.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("watch-view.fxml")); //ouverture de la fenêtre de visionnage
             Parent root = fxmlLoader.load();
             Stage stage1 = new Stage();
             stage1.setTitle("Watch!");
@@ -986,11 +990,11 @@ public class NewScreenController {
     /** Aller sur son compte*/
     @FXML
     private void Compte(ActionEvent event){
-        System.out.println("User going to his account.");
+        System.out.println("Utilisateur va sur son compte.");
         Stage stage = (Stage) watchBtn.getScene().getWindow();
-        stage.close();
+        stage.close(); //fermeture de la fenêtre
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("compte-view.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("compte-view.fxml")); //ouverture de la fenêtre de compte
             Parent root = fxmlLoader.load();
             Stage stage1 = new Stage();
             stage1.setTitle("Compte!");
@@ -1004,11 +1008,11 @@ public class NewScreenController {
     /** Aller sur la page de recherche*/
     @FXML
     private void Search(ActionEvent event){
-        System.out.println("User searching a video.");
+        System.out.println("Utilisateur va sur la page de recherche.");
         Stage stage = (Stage) watchBtn.getScene().getWindow();
-        stage.close();
+        stage.close(); //fermeture de la fenêtre
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("search-view.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("search-view.fxml")); //ouverture de la fenêtre de recherche
             Parent root = fxmlLoader.load();
             Stage stage1 = new Stage();
             stage1.setTitle("Search!");
@@ -1023,16 +1027,17 @@ public class NewScreenController {
     @FXML
     private void AjouterPlaylist(ActionEvent actionEvent) {
         ClientFonction tech = new ClientFonction();
-        tech.AjouterFilmPlaylist();
+        tech.AjouterFilmPlaylist(); //appel de la fonction d'ajout à la playlist
     }
 
     /** Noter la vidéo*/
     @FXML
     private void Noter(ActionEvent event) {
-        String notation = noteField.getText();
+        String notation = noteField.getText(); //récupération de la note
         float note = Float.parseFloat(notation);
 
         ClientFonction tech = new ClientFonction();
+        //appel de la fonction de notation
         tech.Notage(note);
     }
 
@@ -1040,6 +1045,6 @@ public class NewScreenController {
     @FXML
     private void SupprimerPlaylist(ActionEvent event) {
         ClientFonction tech = new ClientFonction();
-        tech.SupprimerFilmPlaylist();
+        tech.SupprimerFilmPlaylist(); //appel de la fonction de suppression de la playlist
     }
 }

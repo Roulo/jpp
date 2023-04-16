@@ -51,7 +51,7 @@ public class CompteView{
     @FXML
     private void LoadData(ActionEvent event) {
         Compte Don = new Compte();
-        Don.Charger(genreList,genre);
+        Don.Charger(genreList,genre); //charger les données
     }
 
     /** Ouvrir l'interface de playlist*/
@@ -60,7 +60,7 @@ public class CompteView{
         Stage stage = (Stage) listeBtn.getScene().getWindow(); //je prend la page
         stage.close(); //je la ferme
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("compte-view-liste.fxml")); //je charge la page
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("compte-view-liste.fxml")); //je charge la page de playlist
             Parent root = fxmlLoader.load(); //je la charge
             Stage stage1 = new Stage();
             stage1.setTitle("Liste des vidéos");
@@ -83,7 +83,7 @@ public class CompteView{
         vBox.setSpacing(10);
 
         Compte com = new Compte();
-        com.ListePerso(vBox);
+        com.ListePerso(vBox); //je charge la liste perso
 
         ((AnchorPane)resultat.getParent()).getChildren().add(vBox);
     }
@@ -101,7 +101,7 @@ public class CompteView{
             Stage stage = (Stage) listeBtn.getScene().getWindow(); //je prend la page
             stage.close(); //je la ferme
             try {
-                FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("compte-view-addvideos.fxml")); //je charge la page
+                FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("compte-view-addvideos.fxml")); //je charge la page d'ajout de vidéo
                 Parent root = fxmlLoader.load(); //je la charge
                 Stage stage1 = new Stage();
                 stage1.setTitle("UPDATE des vidéos");
@@ -117,6 +117,7 @@ public class CompteView{
     /** Ajouter une vidéo*/
     @FXML
     private void Add(ActionEvent event){
+        //récupérer les données
         String title = titre.getText();
         String director = real.getText();
         String actor = acteurs.getText();
@@ -151,10 +152,11 @@ public class CompteView{
 
         AdminFonction tech = new AdminFonction();
 
+        //si vide on affiche un message d'erreur
         if ((title.isEmpty()) || (director.isEmpty()) || (anee.isEmpty()) || (resume.isEmpty()) || (link.isEmpty()) || (genre.isEmpty())) {
             System.out.println("Un des champs est vide, Veuillez la compléter");
         }
-        else {
+        else { //sinon on ajoute la vidéo
             tech.AjouterFilm(resultat, title, director, year, duration, resume, link, note, genre);
         }
     }
@@ -189,14 +191,13 @@ public class CompteView{
     /** Supprimer une vidéo*/
     @FXML
     private void Delete(ActionEvent event){
-        // à coder
         String title = titre.getText();
         AdminFonction tech = new AdminFonction();
 
-        if (title.isEmpty()) {
+        if (title.isEmpty()) { //si vide on affiche un message d'erreur
             System.out.println("Le champ est vide, Veuillez remplir le champ");
         }
-        else {
+        else { //sinon on supprime la vidéo
             tech.SupprimerFilm(resultat,title);
         }
     }
@@ -236,17 +237,16 @@ public class CompteView{
         String mdp1 = mdp.getText();
         int administrateur=0;
 
-        if (adminBox.isSelected()) {
+        if (adminBox.isSelected()) { //si l'admin est coché
             administrateur=1;
-
         }
 
         AdminFonction tech = new AdminFonction();
 
-        if ((identifiant.isEmpty()) || (mdp1.isEmpty())) {
+        if ((identifiant.isEmpty()) || (mdp1.isEmpty())) { //si vide on affiche un message d'erreur
             System.out.println("Des champs sont vides, Veuillez remplir les champs");
         }
-        else {
+        else { //sinon on ajoute le compte
             tech.AjouterClient(resultat,identifiant,mdp1,administrateur);
         }
 
@@ -287,10 +287,10 @@ public class CompteView{
 
         AdminFonction tech = new AdminFonction();
 
-        if (identifiant.isEmpty()) {
+        if (identifiant.isEmpty()) { //si vide on affiche un message d'erreur
             System.out.println("Des champs sont vides, Veuillez remplir les champs");
         }
-        else {
+        else { //sinon on supprime le compte
             tech.SupprimerClient(resultat,identifiant);
         }
     }
@@ -345,10 +345,10 @@ public class CompteView{
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open Resource File");
         fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif")); //choper que les images
         File selectedFile = fileChooser.showOpenDialog(null);
 
-        if (selectedFile != null) {
+        if (selectedFile != null) { //si le fichier est valide
             System.out.println(selectedFile.getName());
             System.out.println(selectedFile.getAbsolutePath());
             System.out.println(selectedFile.toURI().toString());
@@ -357,7 +357,7 @@ public class CompteView{
             image = new Image(selectedFile.toURI().toString());
             imageView.setImage(image);
 
-            String path = "src\\main\\images\\" + selectedFile.getName();
+            String path = "src\\main\\images\\" + selectedFile.getName(); //le mettre dans le dossier images
             System.out.println(path);
 
             try {
