@@ -19,7 +19,6 @@ public class ClientFonction implements ClientDAO {
     }
 
     public void Notage(float note){
-
         int id_now;
         String video_now;
         int id_video_now;
@@ -56,14 +55,12 @@ public class ClientFonction implements ClientDAO {
                 }catch (SQLException g) {
                     g.printStackTrace();
                 }
-
             }catch (SQLException f) {
                 f.printStackTrace();
             }
         }catch (SQLException e) {
             e.printStackTrace();
         }
-
     };
 
 
@@ -158,7 +155,6 @@ public class ClientFonction implements ClientDAO {
         }catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 
 
@@ -208,6 +204,5 @@ public class ClientFonction implements ClientDAO {
         }catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 }

@@ -24,6 +24,7 @@ public class HelloController extends CompteView {
     }
 
     @FXML private TextField Username; @FXML private TextField Password;
+    @FXML private Button Inscription; @FXML private Button Connexion;
 
     @FXML
     private void Sinscrire(ActionEvent event) {
