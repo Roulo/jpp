@@ -6,13 +6,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.*;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.scene.web.WebView;
 
@@ -26,6 +30,11 @@ public class NewScreenController {
     @FXML private Button profileBtn; @FXML private Button displayBtn; @FXML private Button AjouterBtn; @FXML private Button noteBtn; @FXML private MenuButton noteMenu;
     @FXML private TextField noteField; @FXML private Label noteLabel;
     @FXML private ScrollPane scrollPane;
+    @FXML private AnchorPane Pane1; @FXML private AnchorPane Pane2;
+    @FXML private SplitPane splitpane;
+    @FXML private Button searchBtn;
+
+
     private static final String DB_URL = "jdbc:mysql://localhost:3306/temporaire?user=root&password=";
     private Connection conn;
     public NewScreenController() {
@@ -42,6 +51,11 @@ public class NewScreenController {
     private void initialize() {
         int id_now;
         String query = "SELECT status.id_current FROM status WHERE status.id = 1;"; // choper id_current
+
+        Pane1.setStyle("-fx-background-color: rgb(50,50,50)");
+        Pane2.setStyle("-fx-background-color: rgb(50,50,50)");
+        splitpane.setStyle("-fx-background-color: rgb(50,50,50)");
+        scrollPane.setStyle("-fx-background-color: rgb(50,50,50)");
 
         try {
             ResultSet resultSet2 = conn.createStatement().executeQuery(query);
@@ -69,6 +83,12 @@ public class NewScreenController {
                 // afficher les vidéos dans la gridpane
                 while (resultSet.next() && videosDisplayed < 12) {
                     Label label = new Label(resultSet.getString("titre"));
+                    //change the color of the label
+                    label.setStyle("-fx-text-fill: white");
+                    label.setFont(Font.font("System", FontWeight.BOLD, 15));
+                    //center the text
+                    label.setAlignment(Pos.CENTER);
+
                     String title = resultSet.getString("titre");
                     File file = new File("src\\main\\images\\" + title + ".jpg");
                     Image image = new Image(file.toURI().toString());
@@ -91,6 +111,7 @@ public class NewScreenController {
                         noteLabel.setVisible(true);
                         scrollPane.setVvalue(0);
                         watchBtn.setVisible(true);
+                        searchBtn.setVisible(false);
 
                         System.out.println(label.getText() + " selected");
                         try {
@@ -117,31 +138,37 @@ public class NewScreenController {
 
                             statement.executeUpdate("UPDATE compte SET selected_video = '" + teaser + "' WHERE id = "+id_now+";");
 
-                            System.out.println("Titre: " + titre);
-                            System.out.println("Résumé: " + resume);
-                            System.out.println("Catégorie: " + categorie);
-                            System.out.println("Date: " + date);
-                            System.out.println("Durée: " + duree);
-                            System.out.println("Réalisateur: " + realisateur);
-                            System.out.println("Note: " + note);
-
                             ((AnchorPane)disconnectBtn.getParent()).getChildren().remove(vBox);
                             VBox vBox1 = new VBox();
                             vBox1.setPadding(new Insets(10));
                             vBox1.setSpacing(10);
-                            vBox1.getChildren().add(new Label("Titre: " + titre));
+                            Label titreLabel = new Label("Titre: " + titre);
+                            titreLabel.setStyle("-fx-text-fill: white");
+                            vBox1.getChildren().add(titreLabel);
 
                             Label resumeLabel = new Label("Résumé: " + resume);
+                            Label categorieLabel = new Label("Catégorie: " + categorie);
+                            Label dateLabel = new Label("Date: " + date);
+                            Label dureeLabel = new Label("Durée: " + duree);
+                            Label realisateurLabel = new Label("Réalisateur: " + realisateur);
+                            Label noteLabel = new Label("Note: " + note);
                             resumeLabel.setTooltip(new Tooltip(resume));
                             resumeLabel.setMaxWidth(190);
                             resumeLabel.setWrapText(true);
-                            vBox1.getChildren().add(resumeLabel);
 
-                            vBox1.getChildren().add(new Label("Catégorie: " + categorie));
-                            vBox1.getChildren().add(new Label("Date: " + date));
-                            vBox1.getChildren().add(new Label("Durée: " + duree));
-                            vBox1.getChildren().add(new Label("Réalisateur: " + realisateur));
-                            vBox1.getChildren().add(new Label("Note: " + note));
+                            resumeLabel.setStyle("-fx-text-fill: white");
+                            categorieLabel.setStyle("-fx-text-fill: white");
+                            dateLabel.setStyle("-fx-text-fill: white");
+                            dureeLabel.setStyle("-fx-text-fill: white");
+                            realisateurLabel.setStyle("-fx-text-fill: white");
+                            noteLabel.setStyle("-fx-text-fill: white");
+
+                            vBox1.getChildren().add(resumeLabel);
+                            vBox1.getChildren().add(categorieLabel);
+                            vBox1.getChildren().add(dateLabel);
+                            vBox1.getChildren().add(dureeLabel);
+                            vBox1.getChildren().add(realisateurLabel);
+                            vBox1.getChildren().add(noteLabel);
                             ((AnchorPane)watchBtn.getParent()).getChildren().add(vBox1);
 
                             ((AnchorPane)disconnectBtn.getParent()).getChildren().remove(vBox);
@@ -158,6 +185,7 @@ public class NewScreenController {
                         noteLabel.setVisible(true);
                         scrollPane.setVvalue(0);
                         watchBtn.setVisible(true);
+                        searchBtn.setVisible(false);
 
                         System.out.println(label.getText() + " selected");
                         try {
@@ -196,19 +224,33 @@ public class NewScreenController {
                             VBox vBox1 = new VBox();
                             vBox1.setPadding(new Insets(10));
                             vBox1.setSpacing(10);
-                            vBox1.getChildren().add(new Label("Titre: " + titre));
+                            Label titreLabel = new Label("Titre: " + titre);
+                            titreLabel.setStyle("-fx-text-fill: white");
+                            vBox1.getChildren().add(titreLabel);
 
                             Label resumeLabel = new Label("Résumé: " + resume);
+                            Label categorieLabel = new Label("Catégorie: " + categorie);
+                            Label dateLabel = new Label("Date: " + date);
+                            Label dureeLabel = new Label("Durée: " + duree);
+                            Label realisateurLabel = new Label("Réalisateur: " + realisateur);
+                            Label noteLabel = new Label("Note: " + note);
                             resumeLabel.setTooltip(new Tooltip(resume));
                             resumeLabel.setMaxWidth(190);
                             resumeLabel.setWrapText(true);
-                            vBox1.getChildren().add(resumeLabel);
 
-                            vBox1.getChildren().add(new Label("Catégorie: " + categorie));
-                            vBox1.getChildren().add(new Label("Date: " + date));
-                            vBox1.getChildren().add(new Label("Durée: " + duree));
-                            vBox1.getChildren().add(new Label("Réalisateur: " + realisateur));
-                            vBox1.getChildren().add(new Label("Note: " + note));
+                            resumeLabel.setStyle("-fx-text-fill: white");
+                            categorieLabel.setStyle("-fx-text-fill: white");
+                            dateLabel.setStyle("-fx-text-fill: white");
+                            dureeLabel.setStyle("-fx-text-fill: white");
+                            realisateurLabel.setStyle("-fx-text-fill: white");
+                            noteLabel.setStyle("-fx-text-fill: white");
+
+                            vBox1.getChildren().add(resumeLabel);
+                            vBox1.getChildren().add(categorieLabel);
+                            vBox1.getChildren().add(dateLabel);
+                            vBox1.getChildren().add(dureeLabel);
+                            vBox1.getChildren().add(realisateurLabel);
+                            vBox1.getChildren().add(noteLabel);
                             ((AnchorPane)watchBtn.getParent()).getChildren().add(vBox1);
 
                             ((AnchorPane)disconnectBtn.getParent()).getChildren().remove(vBox);
@@ -228,7 +270,8 @@ public class NewScreenController {
                 vBox.getChildren().add(new Label(" ")); // Séparation
                 vBox.getChildren().add(new Label(" "));
                 Label label123 = new Label("Tendance du moment");
-                label123.setStyle("-fx-font-weight: bold; -fx-font-size: 18;");
+                label123.setFont(Font.font("System", FontWeight.BOLD, 20));
+                label123.setStyle("-fx-text-fill: white");
                 vBox.getChildren().add(label123);
                 ResultSet resultSetPrio = statement.executeQuery("SELECT titre FROM videos WHERE prio='1'");
 
@@ -242,6 +285,11 @@ public class NewScreenController {
                 // afficher les vidéos dans la gridpane
                 while (resultSetPrio.next() && videosDisplayedPrio < 12) {
                     Label label = new Label(resultSetPrio.getString("titre"));
+                    //change the color of the label
+                    label.setStyle("-fx-text-fill: white");
+                    label.setFont(Font.font("System", FontWeight.BOLD, 15));
+                    //center the text
+                    label.setAlignment(Pos.CENTER);
                     String title = resultSetPrio.getString("titre");
                     File file = new File("src\\main\\images\\" + title + ".jpg");
                     Image image = new Image(file.toURI().toString());
@@ -264,6 +312,7 @@ public class NewScreenController {
                         noteLabel.setVisible(true);
                         scrollPane.setVvalue(0);
                         watchBtn.setVisible(true);
+                        searchBtn.setVisible(false);
 
                         System.out.println(label.getText() + " selected");
                         try {
@@ -302,19 +351,33 @@ public class NewScreenController {
                             VBox vBox1 = new VBox();
                             vBox1.setPadding(new Insets(10));
                             vBox1.setSpacing(10);
-                            vBox1.getChildren().add(new Label("Titre: " + titre));
+                            Label titreLabel = new Label("Titre: " + titre);
+                            titreLabel.setStyle("-fx-text-fill: white");
+                            vBox1.getChildren().add(titreLabel);
 
                             Label resumeLabel = new Label("Résumé: " + resume);
+                            Label categorieLabel = new Label("Catégorie: " + categorie);
+                            Label dateLabel = new Label("Date: " + date);
+                            Label dureeLabel = new Label("Durée: " + duree);
+                            Label realisateurLabel = new Label("Réalisateur: " + realisateur);
+                            Label noteLabel = new Label("Note: " + note);
                             resumeLabel.setTooltip(new Tooltip(resume));
                             resumeLabel.setMaxWidth(190);
                             resumeLabel.setWrapText(true);
-                            vBox1.getChildren().add(resumeLabel);
 
-                            vBox1.getChildren().add(new Label("Catégorie: " + categorie));
-                            vBox1.getChildren().add(new Label("Date: " + date));
-                            vBox1.getChildren().add(new Label("Durée: " + duree));
-                            vBox1.getChildren().add(new Label("Réalisateur: " + realisateur));
-                            vBox1.getChildren().add(new Label("Note: " + note));
+                            resumeLabel.setStyle("-fx-text-fill: white");
+                            categorieLabel.setStyle("-fx-text-fill: white");
+                            dateLabel.setStyle("-fx-text-fill: white");
+                            dureeLabel.setStyle("-fx-text-fill: white");
+                            realisateurLabel.setStyle("-fx-text-fill: white");
+                            noteLabel.setStyle("-fx-text-fill: white");
+
+                            vBox1.getChildren().add(resumeLabel);
+                            vBox1.getChildren().add(categorieLabel);
+                            vBox1.getChildren().add(dateLabel);
+                            vBox1.getChildren().add(dureeLabel);
+                            vBox1.getChildren().add(realisateurLabel);
+                            vBox1.getChildren().add(noteLabel);
                             ((AnchorPane)watchBtn.getParent()).getChildren().add(vBox1);
 
                             ((AnchorPane)disconnectBtn.getParent()).getChildren().remove(vBox);
@@ -331,6 +394,7 @@ public class NewScreenController {
                         noteLabel.setVisible(true);
                         scrollPane.setVvalue(0);
                         watchBtn.setVisible(true);
+                        searchBtn.setVisible(false);
 
                         System.out.println(label.getText() + " selected");
                         try {
@@ -368,19 +432,33 @@ public class NewScreenController {
                             VBox vBox1 = new VBox();
                             vBox1.setPadding(new Insets(10));
                             vBox1.setSpacing(10);
-                            vBox1.getChildren().add(new Label("Titre: " + titre));
+                            Label titreLabel = new Label("Titre: " + titre);
+                            titreLabel.setStyle("-fx-text-fill: white");
+                            vBox1.getChildren().add(titreLabel);
 
                             Label resumeLabel = new Label("Résumé: " + resume);
+                            Label categorieLabel = new Label("Catégorie: " + categorie);
+                            Label dateLabel = new Label("Date: " + date);
+                            Label dureeLabel = new Label("Durée: " + duree);
+                            Label realisateurLabel = new Label("Réalisateur: " + realisateur);
+                            Label noteLabel = new Label("Note: " + note);
                             resumeLabel.setTooltip(new Tooltip(resume));
                             resumeLabel.setMaxWidth(190);
                             resumeLabel.setWrapText(true);
-                            vBox1.getChildren().add(resumeLabel);
 
-                            vBox1.getChildren().add(new Label("Catégorie: " + categorie));
-                            vBox1.getChildren().add(new Label("Date: " + date));
-                            vBox1.getChildren().add(new Label("Durée: " + duree));
-                            vBox1.getChildren().add(new Label("Réalisateur: " + realisateur));
-                            vBox1.getChildren().add(new Label("Note: " + note));
+                            resumeLabel.setStyle("-fx-text-fill: white");
+                            categorieLabel.setStyle("-fx-text-fill: white");
+                            dateLabel.setStyle("-fx-text-fill: white");
+                            dureeLabel.setStyle("-fx-text-fill: white");
+                            realisateurLabel.setStyle("-fx-text-fill: white");
+                            noteLabel.setStyle("-fx-text-fill: white");
+
+                            vBox1.getChildren().add(resumeLabel);
+                            vBox1.getChildren().add(categorieLabel);
+                            vBox1.getChildren().add(dateLabel);
+                            vBox1.getChildren().add(dureeLabel);
+                            vBox1.getChildren().add(realisateurLabel);
+                            vBox1.getChildren().add(noteLabel);
                             ((AnchorPane)watchBtn.getParent()).getChildren().add(vBox1);
 
                             ((AnchorPane)disconnectBtn.getParent()).getChildren().remove(vBox);
@@ -400,7 +478,9 @@ public class NewScreenController {
                 vBox.getChildren().add(new Label(" "));
                 vBox.getChildren().add(new Label(" "));
                 Label labelDrame = new Label("Drame");
-                labelDrame.setStyle("-fx-font-weight: bold; -fx-font-size: 18;");
+                labelDrame.setFont(Font.font("System", FontWeight.BOLD, 20));
+                //change the color of the label
+                labelDrame.setStyle("-fx-text-fill: white");
                 vBox.getChildren().add(labelDrame);
                 // Display videos with genre="Drame"
                 ResultSet resultSetDrame = statement.executeQuery("SELECT DISTINCT videos.titre FROM videos, genre, definit WHERE videos.id= definit.id__Videos AND definit.id=10;");
@@ -415,12 +495,20 @@ public class NewScreenController {
                 //affichage des videos dans la gridpane
                 while (resultSetDrame.next() && videosDisplayedDrame < 12) {
                     Label label = new Label(resultSetDrame.getString("titre"));
+                    //change the color of the label
+                    label.setStyle("-fx-text-fill: white");
+                    //15, bold
+                    label.setFont(Font.font("System", FontWeight.BOLD, 15));
                     String title = resultSetDrame.getString("titre");
                     File file = new File("src\\main\\images\\" + title + ".jpg");
                     Image image = new Image(file.toURI().toString());
                     ImageView imageView = new ImageView(image);
                     imageView.setFitWidth(130);imageView.setFitHeight(176.15);
+                    //add a white border to the image
+                    imageView.setStyle("-fx-border-color: white");
+
                     gridPaneDrame.add(label, colDrame, rowDrame);
+
                     gridPaneDrame.add(imageView, colDrame, rowDrame+1);
                     colDrame++;
                     if (colDrame == 4) {
@@ -435,9 +523,9 @@ public class NewScreenController {
                         noteBtn.setVisible(true);
                         noteField.setVisible(true);
                         noteLabel.setVisible(true);
-                        //return at the beginning of the scrollpane
                         scrollPane.setVvalue(0);
                         watchBtn.setVisible(true);
+                        searchBtn.setVisible(false);
 
                         System.out.println(label.getText() + " selected");
                         try {
@@ -464,32 +552,37 @@ public class NewScreenController {
 
                             statement.executeUpdate("UPDATE compte SET selected_video = '" + teaser + "' WHERE id = "+id_now+";");
 
-                            System.out.println("Titre: " + titre);
-                            System.out.println("Résumé: " + resume);
-                            System.out.println("Catégorie: " + categorie);
-                            System.out.println("Date: " + date);
-                            System.out.println("Durée: " + duree);
-                            System.out.println("Réalisateur: " + realisateur);
-                            System.out.println("Note: " + note);
-                            System.out.println("Teaser: " + teaser);
-
                             ((AnchorPane)disconnectBtn.getParent()).getChildren().remove(vBox);
                             VBox vBox1 = new VBox();
                             vBox1.setPadding(new Insets(10));
                             vBox1.setSpacing(10);
-                            vBox1.getChildren().add(new Label("Titre: " + titre));
+                            Label titreLabel = new Label("Titre: " + titre);
+                            titreLabel.setStyle("-fx-text-fill: white");
+                            vBox1.getChildren().add(titreLabel);
 
                             Label resumeLabel = new Label("Résumé: " + resume);
+                            Label categorieLabel = new Label("Catégorie: " + categorie);
+                            Label dateLabel = new Label("Date: " + date);
+                            Label dureeLabel = new Label("Durée: " + duree);
+                            Label realisateurLabel = new Label("Réalisateur: " + realisateur);
+                            Label noteLabel = new Label("Note: " + note);
                             resumeLabel.setTooltip(new Tooltip(resume));
                             resumeLabel.setMaxWidth(190);
                             resumeLabel.setWrapText(true);
-                            vBox1.getChildren().add(resumeLabel);
 
-                            vBox1.getChildren().add(new Label("Catégorie: " + categorie));
-                            vBox1.getChildren().add(new Label("Date: " + date));
-                            vBox1.getChildren().add(new Label("Durée: " + duree));
-                            vBox1.getChildren().add(new Label("Réalisateur: " + realisateur));
-                            vBox1.getChildren().add(new Label("Note: " + note));
+                            resumeLabel.setStyle("-fx-text-fill: white");
+                            categorieLabel.setStyle("-fx-text-fill: white");
+                            dateLabel.setStyle("-fx-text-fill: white");
+                            dureeLabel.setStyle("-fx-text-fill: white");
+                            realisateurLabel.setStyle("-fx-text-fill: white");
+                            noteLabel.setStyle("-fx-text-fill: white");
+
+                            vBox1.getChildren().add(resumeLabel);
+                            vBox1.getChildren().add(categorieLabel);
+                            vBox1.getChildren().add(dateLabel);
+                            vBox1.getChildren().add(dureeLabel);
+                            vBox1.getChildren().add(realisateurLabel);
+                            vBox1.getChildren().add(noteLabel);
                             ((AnchorPane)watchBtn.getParent()).getChildren().add(vBox1);
 
                             ((AnchorPane)disconnectBtn.getParent()).getChildren().remove(vBox);
@@ -506,6 +599,7 @@ public class NewScreenController {
                         noteLabel.setVisible(true);
                         scrollPane.setVvalue(0);
                         watchBtn.setVisible(true);
+                        searchBtn.setVisible(false);
 
                         System.out.println(label.getText() + " selected");
                         try {
@@ -532,32 +626,37 @@ public class NewScreenController {
 
                             statement.executeUpdate("UPDATE compte SET selected_video = '" + teaser + "' WHERE id = "+id_now+";");
 
-                            System.out.println("Titre: " + titre);
-                            System.out.println("Résumé: " + resume);
-                            System.out.println("Catégorie: " + categorie);
-                            System.out.println("Date: " + date);
-                            System.out.println("Durée: " + duree);
-                            System.out.println("Réalisateur: " + realisateur);
-                            System.out.println("Note: " + note);
-                            System.out.println("Teaser: " + teaser);
-
                             ((AnchorPane)disconnectBtn.getParent()).getChildren().remove(vBox);
                             VBox vBox1 = new VBox();
                             vBox1.setPadding(new Insets(10));
                             vBox1.setSpacing(10);
-                            vBox1.getChildren().add(new Label("Titre: " + titre));
+                            Label titreLabel = new Label("Titre: " + titre);
+                            titreLabel.setStyle("-fx-text-fill: white");
+                            vBox1.getChildren().add(titreLabel);
 
                             Label resumeLabel = new Label("Résumé: " + resume);
+                            Label categorieLabel = new Label("Catégorie: " + categorie);
+                            Label dateLabel = new Label("Date: " + date);
+                            Label dureeLabel = new Label("Durée: " + duree);
+                            Label realisateurLabel = new Label("Réalisateur: " + realisateur);
+                            Label noteLabel = new Label("Note: " + note);
                             resumeLabel.setTooltip(new Tooltip(resume));
                             resumeLabel.setMaxWidth(190);
                             resumeLabel.setWrapText(true);
-                            vBox1.getChildren().add(resumeLabel);
 
-                            vBox1.getChildren().add(new Label("Catégorie: " + categorie));
-                            vBox1.getChildren().add(new Label("Date: " + date));
-                            vBox1.getChildren().add(new Label("Durée: " + duree));
-                            vBox1.getChildren().add(new Label("Réalisateur: " + realisateur));
-                            vBox1.getChildren().add(new Label("Note: " + note));
+                            resumeLabel.setStyle("-fx-text-fill: white");
+                            categorieLabel.setStyle("-fx-text-fill: white");
+                            dateLabel.setStyle("-fx-text-fill: white");
+                            dureeLabel.setStyle("-fx-text-fill: white");
+                            realisateurLabel.setStyle("-fx-text-fill: white");
+                            noteLabel.setStyle("-fx-text-fill: white");
+
+                            vBox1.getChildren().add(resumeLabel);
+                            vBox1.getChildren().add(categorieLabel);
+                            vBox1.getChildren().add(dateLabel);
+                            vBox1.getChildren().add(dureeLabel);
+                            vBox1.getChildren().add(realisateurLabel);
+                            vBox1.getChildren().add(noteLabel);
                             ((AnchorPane)watchBtn.getParent()).getChildren().add(vBox1);
 
                             ((AnchorPane)disconnectBtn.getParent()).getChildren().remove(vBox);
@@ -575,7 +674,8 @@ public class NewScreenController {
                 vBox.getChildren().add(new Label(" "));
                 vBox.getChildren().add(new Label(" "));
                 Label labelAction = new Label("Action");
-                labelAction.setStyle("-fx-font-weight: bold; -fx-font-size: 18;");
+                labelAction.setFont(Font.font("System", FontWeight.BOLD, 20));
+                labelAction.setStyle("-fx-text-fill: white");
                 vBox.getChildren().add(labelAction);
                 // Display videos with genre="Action"
                 ResultSet resultSetAction = statement.executeQuery("SELECT DISTINCT videos.titre FROM videos, genre, definit WHERE videos.id= definit.id__Videos AND definit.id=1;");
@@ -590,6 +690,11 @@ public class NewScreenController {
                 // Afficher les vidéos dans la gridpane
                 while (resultSetAction.next() && videosDisplayedAction < 12) {
                     Label label = new Label(resultSetAction.getString("titre"));
+                    //change the color of the label
+                    label.setStyle("-fx-text-fill: white");
+                    label.setFont(Font.font("System", FontWeight.BOLD, 15));
+                    //center the text
+                    label.setAlignment(Pos.CENTER);
                     String title = resultSetAction.getString("titre");
                     File file = new File("src\\main\\images\\" + title + ".jpg");
                     Image image = new Image(file.toURI().toString());
@@ -610,9 +715,9 @@ public class NewScreenController {
                         noteBtn.setVisible(true);
                         noteField.setVisible(true);
                         noteLabel.setVisible(true);
-                        //return at the beginning of the scrollpane
                         scrollPane.setVvalue(0);
                         watchBtn.setVisible(true);
+                        searchBtn.setVisible(false);
 
                         System.out.println(label.getText() + " selected");
                         try {
@@ -639,32 +744,37 @@ public class NewScreenController {
 
                             statement.executeUpdate("UPDATE compte SET selected_video = '" + teaser + "' WHERE id = "+id_now+";");
 
-                            System.out.println("Titre: " + titre);
-                            System.out.println("Résumé: " + resume);
-                            System.out.println("Catégorie: " + categorie);
-                            System.out.println("Date: " + date);
-                            System.out.println("Durée: " + duree);
-                            System.out.println("Réalisateur: " + realisateur);
-                            System.out.println("Note: " + note);
-                            System.out.println("Teaser: " + teaser);
-
                             ((AnchorPane)disconnectBtn.getParent()).getChildren().remove(vBox);
                             VBox vBox1 = new VBox();
                             vBox1.setPadding(new Insets(10));
                             vBox1.setSpacing(10);
-                            vBox1.getChildren().add(new Label("Titre: " + titre));
+                            Label titreLabel = new Label("Titre: " + titre);
+                            titreLabel.setStyle("-fx-text-fill: white");
+                            vBox1.getChildren().add(titreLabel);
 
                             Label resumeLabel = new Label("Résumé: " + resume);
+                            Label categorieLabel = new Label("Catégorie: " + categorie);
+                            Label dateLabel = new Label("Date: " + date);
+                            Label dureeLabel = new Label("Durée: " + duree);
+                            Label realisateurLabel = new Label("Réalisateur: " + realisateur);
+                            Label noteLabel = new Label("Note: " + note);
                             resumeLabel.setTooltip(new Tooltip(resume));
                             resumeLabel.setMaxWidth(190);
                             resumeLabel.setWrapText(true);
-                            vBox1.getChildren().add(resumeLabel);
 
-                            vBox1.getChildren().add(new Label("Catégorie: " + categorie));
-                            vBox1.getChildren().add(new Label("Date: " + date));
-                            vBox1.getChildren().add(new Label("Durée: " + duree));
-                            vBox1.getChildren().add(new Label("Réalisateur: " + realisateur));
-                            vBox1.getChildren().add(new Label("Note: " + note));
+                            resumeLabel.setStyle("-fx-text-fill: white");
+                            categorieLabel.setStyle("-fx-text-fill: white");
+                            dateLabel.setStyle("-fx-text-fill: white");
+                            dureeLabel.setStyle("-fx-text-fill: white");
+                            realisateurLabel.setStyle("-fx-text-fill: white");
+                            noteLabel.setStyle("-fx-text-fill: white");
+
+                            vBox1.getChildren().add(resumeLabel);
+                            vBox1.getChildren().add(categorieLabel);
+                            vBox1.getChildren().add(dateLabel);
+                            vBox1.getChildren().add(dureeLabel);
+                            vBox1.getChildren().add(realisateurLabel);
+                            vBox1.getChildren().add(noteLabel);
                             ((AnchorPane)watchBtn.getParent()).getChildren().add(vBox1);
 
                             ((AnchorPane)disconnectBtn.getParent()).getChildren().remove(vBox);
@@ -681,6 +791,7 @@ public class NewScreenController {
                         noteLabel.setVisible(true);
                         scrollPane.setVvalue(0);
                         watchBtn.setVisible(true);
+                        searchBtn.setVisible(false);
 
                         System.out.println(label.getText() + " selected");
                         try {
@@ -707,32 +818,37 @@ public class NewScreenController {
 
                             statement.executeUpdate("UPDATE compte SET selected_video = '" + teaser + "' WHERE id = "+id_now+";");
 
-                            System.out.println("Titre: " + titre);
-                            System.out.println("Résumé: " + resume);
-                            System.out.println("Catégorie: " + categorie);
-                            System.out.println("Date: " + date);
-                            System.out.println("Durée: " + duree);
-                            System.out.println("Réalisateur: " + realisateur);
-                            System.out.println("Note: " + note);
-                            System.out.println("Teaser: " + teaser);
-
                             ((AnchorPane)disconnectBtn.getParent()).getChildren().remove(vBox);
                             VBox vBox1 = new VBox();
                             vBox1.setPadding(new Insets(10));
                             vBox1.setSpacing(10);
-                            vBox1.getChildren().add(new Label("Titre: " + titre));
+                            Label titreLabel = new Label("Titre: " + titre);
+                            titreLabel.setStyle("-fx-text-fill: white");
+                            vBox1.getChildren().add(titreLabel);
 
                             Label resumeLabel = new Label("Résumé: " + resume);
+                            Label categorieLabel = new Label("Catégorie: " + categorie);
+                            Label dateLabel = new Label("Date: " + date);
+                            Label dureeLabel = new Label("Durée: " + duree);
+                            Label realisateurLabel = new Label("Réalisateur: " + realisateur);
+                            Label noteLabel = new Label("Note: " + note);
                             resumeLabel.setTooltip(new Tooltip(resume));
                             resumeLabel.setMaxWidth(190);
                             resumeLabel.setWrapText(true);
-                            vBox1.getChildren().add(resumeLabel);
 
-                            vBox1.getChildren().add(new Label("Catégorie: " + categorie));
-                            vBox1.getChildren().add(new Label("Date: " + date));
-                            vBox1.getChildren().add(new Label("Durée: " + duree));
-                            vBox1.getChildren().add(new Label("Réalisateur: " + realisateur));
-                            vBox1.getChildren().add(new Label("Note: " + note));
+                            resumeLabel.setStyle("-fx-text-fill: white");
+                            categorieLabel.setStyle("-fx-text-fill: white");
+                            dateLabel.setStyle("-fx-text-fill: white");
+                            dureeLabel.setStyle("-fx-text-fill: white");
+                            realisateurLabel.setStyle("-fx-text-fill: white");
+                            noteLabel.setStyle("-fx-text-fill: white");
+
+                            vBox1.getChildren().add(resumeLabel);
+                            vBox1.getChildren().add(categorieLabel);
+                            vBox1.getChildren().add(dateLabel);
+                            vBox1.getChildren().add(dureeLabel);
+                            vBox1.getChildren().add(realisateurLabel);
+                            vBox1.getChildren().add(noteLabel);
                             ((AnchorPane)watchBtn.getParent()).getChildren().add(vBox1);
 
                             ((AnchorPane)disconnectBtn.getParent()).getChildren().remove(vBox);
@@ -752,7 +868,7 @@ public class NewScreenController {
                 vBox.getChildren().add(new Label(" "));
                 vBox.getChildren().add(new Label(" "));
                 Label labelAventure = new Label("Aventure");
-                labelAventure.setStyle("-fx-font-weight: bold; -fx-font-size: 18;");
+                labelAventure.setFont(Font.font("System", FontWeight.BOLD, 20));
                 vBox.getChildren().add(labelAventure);
                 // Display videos with genre="Aventure"
                 ResultSet resultSetAventure = statement.executeQuery("SELECT DISTINCT videos.titre FROM videos, genre, definit WHERE videos.id= definit.id__Videos AND definit.id=9;");
@@ -766,7 +882,11 @@ public class NewScreenController {
                 int videosDisplayedAventure = 0;
                 // afficher les vidéos dans la gridpane
                 while (resultSetAventure.next() && videosDisplayedAventure < 12) {
-                    Label label = new Label(resultSetAventure.getString("titre"));
+                    Label label = new Label(resultSetAventure.getString("titre"));//change the color of the label
+                    label.setStyle("-fx-text-fill: white");
+                    label.setFont(Font.font("System", FontWeight.BOLD, 15));
+                    //center the text
+                    label.setAlignment(Pos.CENTER);
                     String title = resultSetAventure.getString("titre");
                     File file = new File("src\\main\\images\\" + title + ".jpg");
                     Image image = new Image(file.toURI().toString());
@@ -787,8 +907,9 @@ public class NewScreenController {
                         noteBtn.setVisible(true);
                         noteField.setVisible(true);
                         noteLabel.setVisible(true);
-                        //return at the beginning of the scrollpane
                         scrollPane.setVvalue(0);
+                        watchBtn.setVisible(true);
+                        searchBtn.setVisible(false);
 
                         System.out.println(label.getText() + " selected");
                         try {
@@ -815,32 +936,37 @@ public class NewScreenController {
 
                             statement.executeUpdate("UPDATE compte SET selected_video = '" + teaser + "' WHERE id = "+id_now+";");
 
-                            System.out.println("Titre: " + titre);
-                            System.out.println("Résumé: " + resume);
-                            System.out.println("Catégorie: " + categorie);
-                            System.out.println("Date: " + date);
-                            System.out.println("Durée: " + duree);
-                            System.out.println("Réalisateur: " + realisateur);
-                            System.out.println("Note: " + note);
-                            System.out.println("Teaser: " + teaser);
-
                             ((AnchorPane)disconnectBtn.getParent()).getChildren().remove(vBox);
                             VBox vBox1 = new VBox();
                             vBox1.setPadding(new Insets(10));
                             vBox1.setSpacing(10);
-                            vBox1.getChildren().add(new Label("Titre: " + titre));
+                            Label titreLabel = new Label("Titre: " + titre);
+                            titreLabel.setStyle("-fx-text-fill: white");
+                            vBox1.getChildren().add(titreLabel);
 
                             Label resumeLabel = new Label("Résumé: " + resume);
+                            Label categorieLabel = new Label("Catégorie: " + categorie);
+                            Label dateLabel = new Label("Date: " + date);
+                            Label dureeLabel = new Label("Durée: " + duree);
+                            Label realisateurLabel = new Label("Réalisateur: " + realisateur);
+                            Label noteLabel = new Label("Note: " + note);
                             resumeLabel.setTooltip(new Tooltip(resume));
                             resumeLabel.setMaxWidth(190);
                             resumeLabel.setWrapText(true);
-                            vBox1.getChildren().add(resumeLabel);
 
-                            vBox1.getChildren().add(new Label("Catégorie: " + categorie));
-                            vBox1.getChildren().add(new Label("Date: " + date));
-                            vBox1.getChildren().add(new Label("Durée: " + duree));
-                            vBox1.getChildren().add(new Label("Réalisateur: " + realisateur));
-                            vBox1.getChildren().add(new Label("Note: " + note));
+                            resumeLabel.setStyle("-fx-text-fill: white");
+                            categorieLabel.setStyle("-fx-text-fill: white");
+                            dateLabel.setStyle("-fx-text-fill: white");
+                            dureeLabel.setStyle("-fx-text-fill: white");
+                            realisateurLabel.setStyle("-fx-text-fill: white");
+                            noteLabel.setStyle("-fx-text-fill: white");
+
+                            vBox1.getChildren().add(resumeLabel);
+                            vBox1.getChildren().add(categorieLabel);
+                            vBox1.getChildren().add(dateLabel);
+                            vBox1.getChildren().add(dureeLabel);
+                            vBox1.getChildren().add(realisateurLabel);
+                            vBox1.getChildren().add(noteLabel);
                             ((AnchorPane)watchBtn.getParent()).getChildren().add(vBox1);
 
                             ((AnchorPane)disconnectBtn.getParent()).getChildren().remove(vBox);
@@ -856,6 +982,8 @@ public class NewScreenController {
                         noteField.setVisible(true);
                         noteLabel.setVisible(true);
                         scrollPane.setVvalue(0);
+                        watchBtn.setVisible(true);
+                        searchBtn.setVisible(false);
 
                         System.out.println(label.getText() + " selected");
                         try {
@@ -882,32 +1010,38 @@ public class NewScreenController {
 
                             statement.executeUpdate("UPDATE compte SET selected_video = '" + teaser + "' WHERE id = "+id_now+";");
 
-                            System.out.println("Titre: " + titre);
-                            System.out.println("Résumé: " + resume);
-                            System.out.println("Catégorie: " + categorie);
-                            System.out.println("Date: " + date);
-                            System.out.println("Durée: " + duree);
-                            System.out.println("Réalisateur: " + realisateur);
-                            System.out.println("Note: " + note);
-                            System.out.println("Teaser: " + teaser);
-
                             ((AnchorPane)disconnectBtn.getParent()).getChildren().remove(vBox);
                             VBox vBox1 = new VBox();
                             vBox1.setPadding(new Insets(10));
                             vBox1.setSpacing(10);
-                            vBox1.getChildren().add(new Label("Titre: " + titre));
+                            Label titreLabel = new Label("Titre: " + titre);
+                            titreLabel.setStyle("-fx-text-fill: white");
+                            vBox1.getChildren().add(titreLabel);
 
                             Label resumeLabel = new Label("Résumé: " + resume);
+                            Label categorieLabel = new Label("Catégorie: " + categorie);
+                            Label dateLabel = new Label("Date: " + date);
+                            Label dureeLabel = new Label("Durée: " + duree);
+                            Label realisateurLabel = new Label("Réalisateur: " + realisateur);
+                            Label noteLabel = new Label("Note: " + note);
                             resumeLabel.setTooltip(new Tooltip(resume));
                             resumeLabel.setMaxWidth(190);
                             resumeLabel.setWrapText(true);
-                            vBox1.getChildren().add(resumeLabel);
 
-                            vBox1.getChildren().add(new Label("Catégorie: " + categorie));
-                            vBox1.getChildren().add(new Label("Date: " + date));
-                            vBox1.getChildren().add(new Label("Durée: " + duree));
-                            vBox1.getChildren().add(new Label("Réalisateur: " + realisateur));
-                            vBox1.getChildren().add(new Label("Note: " + note));
+                            resumeLabel.setStyle("-fx-text-fill: white");
+                            categorieLabel.setStyle("-fx-text-fill: white");
+                            dateLabel.setStyle("-fx-text-fill: white");
+                            dureeLabel.setStyle("-fx-text-fill: white");
+                            realisateurLabel.setStyle("-fx-text-fill: white");
+                            noteLabel.setStyle("-fx-text-fill: white");
+
+                            vBox1.getChildren().add(resumeLabel);
+                            vBox1.getChildren().add(categorieLabel);
+                            vBox1.getChildren().add(dateLabel);
+                            vBox1.getChildren().add(dureeLabel);
+                            vBox1.getChildren().add(realisateurLabel);
+                            vBox1.getChildren().add(noteLabel);
+
                             ((AnchorPane)watchBtn.getParent()).getChildren().add(vBox1);
 
                             ((AnchorPane)disconnectBtn.getParent()).getChildren().remove(vBox);
