@@ -72,7 +72,7 @@ public class NewScreenController {
                 imageIcon.setSmooth(true);
                 imageIcon.setCache(true);
                 //set the size of the image
-                imageIcon.setFitWidth(300);
+                imageIcon.setFitWidth(300); imageIcon.setFitHeight(100);
                 //center the image in the vbox
                 vBox.getChildren().add(imageIcon);
                 VBox.setMargin(imageIcon, new Insets(0, 0, 0, 100));
@@ -864,6 +864,7 @@ public class NewScreenController {
                 vBox.getChildren().add(new Label(" "));
                 Label labelAventure = new Label("Aventure");
                 labelAventure.setFont(Font.font("System", FontWeight.BOLD, 20));
+                labelAventure.setStyle("-fx-text-fill: white");
                 vBox.getChildren().add(labelAventure);
                 // Display videos with genre="Aventure"
                 ResultSet resultSetAventure = statement.executeQuery("SELECT DISTINCT videos.titre FROM videos, genre, definit WHERE videos.id= definit.id__Videos AND definit.id=9;");
