@@ -7,7 +7,7 @@
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.jpp.CompteView">
     <SplitPane dividerPositions="0.5134048257372654" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0">
-        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="300.0">
+        <AnchorPane fx:id="Pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="300.0">
             <Label layoutX="86.0" layoutY="14.0" prefHeight="30.0" prefWidth="144.0" text="MON COMPTE">
                 <font>
                     <Font name="System Bold" size="20.0" />
@@ -33,7 +33,7 @@
                 <Cursor fx:constant="DEFAULT" />
             </cursor>
         </AnchorPane>
-        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="300.0">
+        <AnchorPane fx:id="Pane2" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="300.0">
             <Label fx:id="resultat" layoutX="-1000.0" layoutY="-1000.0" prefHeight="30.0" prefWidth="109.0" text="RESULTAT"><font><Font name="System Bold" size="20.0" /></font></Label>
 
             <Label layoutX="12.0" layoutY="14.0" prefHeight="18.0" prefWidth="234.0" text="Nom d'utilisateur" />

@@ -556,27 +556,28 @@ public class NewScreenController {
                             VBox vBox1 = new VBox();
                             vBox1.setPadding(new Insets(10));
                             vBox1.setSpacing(10);
-                            Label titreLabel = new Label("Titre: " + titre);
-                            titreLabel.setStyle("-fx-text-fill: white");
-                            vBox1.getChildren().add(titreLabel);
 
+                            Label titreLabel = new Label("Titre: " + titre);
                             Label resumeLabel = new Label("Résumé: " + resume);
                             Label categorieLabel = new Label("Catégorie: " + categorie);
                             Label dateLabel = new Label("Date: " + date);
                             Label dureeLabel = new Label("Durée: " + duree);
                             Label realisateurLabel = new Label("Réalisateur: " + realisateur);
                             Label noteLabel = new Label("Note: " + note);
+
                             resumeLabel.setTooltip(new Tooltip(resume));
                             resumeLabel.setMaxWidth(190);
                             resumeLabel.setWrapText(true);
 
                             resumeLabel.setStyle("-fx-text-fill: white");
+                            titreLabel.setStyle("-fx-text-fill: white");
                             categorieLabel.setStyle("-fx-text-fill: white");
                             dateLabel.setStyle("-fx-text-fill: white");
                             dureeLabel.setStyle("-fx-text-fill: white");
                             realisateurLabel.setStyle("-fx-text-fill: white");
                             noteLabel.setStyle("-fx-text-fill: white");
 
+                            vBox1.getChildren().add(titreLabel);
                             vBox1.getChildren().add(resumeLabel);
                             vBox1.getChildren().add(categorieLabel);
                             vBox1.getChildren().add(dateLabel);

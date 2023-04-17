@@ -27,6 +27,11 @@ import java.sql.*;
 public class CompteView{
     private static final String DB_URL = "jdbc:mysql://localhost:3306/temporaire?user=root&password=";
     private Connection conn;
+    @FXML private AnchorPane Pane; @FXML private AnchorPane Pane2;
+
+    public void initialize(){
+        Pane.setStyle("-fx-background-color: rgb(50,50,50)");
+    }
 
     /** Nouveau CompteView*/
     public CompteView() {

@@ -10,12 +10,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
@@ -28,6 +28,8 @@ import java.util.List;
 public class SearchView {
     private static final String DB_URL = "jdbc:mysql://localhost:3306/temporaire?user=root&password=";
     private Connection conn;
+
+    @FXML private AnchorPane Pane; @FXML private AnchorPane Pane1; @FXML private AnchorPane Pane2;
 
     public SearchView() {
         try {
@@ -47,6 +49,8 @@ public class SearchView {
         Donnes dona = new Donnes();
         //charger les données
         dona.ChargerData(genrebox,genreList,trierbox,trierList);
+
+        Pane.setStyle("-fx-background-color: rgb(50,50,50)");
     }
 
     /** Retour au menu principal*/
@@ -134,6 +138,17 @@ public class SearchView {
 
                 while (resultSet.next()) {
                     Label label = new Label(resultSet.getString("titre"));
+                    label.setStyle("-fx-text-fill: white");
+                    label.setFont(Font.font("Arial", FontWeight.BOLD, 15));
+
+                    Label labelannee = new Label(resultSet.getString("annee"));
+                    labelannee.setStyle("-fx-text-fill: white");
+                    labelannee.setFont(Font.font("Arial", FontWeight.BOLD, 15));
+
+//                    Label labelgenre = new Label(resultSet.getString("genre"));
+//                    labelgenre.setStyle("-fx-text-fill: white");
+//                    labelgenre.setFont(Font.font("Arial", FontWeight.BOLD, 15));
+
                     label.setOnMouseClicked(event -> {
                         System.out.println(label.getText() + " selected");
                         titre.setVisible(false);
@@ -177,13 +192,35 @@ public class SearchView {
                             VBox vBox1 = new VBox();
                             vBox1.setPadding(new Insets(10));
                             vBox1.setSpacing(10);
-                            vBox1.getChildren().add(new Label("Titre: " + titre));
-                            vBox1.getChildren().add(new Label("Résumé: " + resume));
-                            vBox1.getChildren().add(new Label("Catégorie: " + categorie));
-                            vBox1.getChildren().add(new Label("Date: " + date));
-                            vBox1.getChildren().add(new Label("Durée: " + duree));
-                            vBox1.getChildren().add(new Label("Réalisateur: " + realisateur));
-                            vBox1.getChildren().add(new Label("Note: " + note));
+
+                            Label titreLabel = new Label("Titre: " + titre);
+                            Label resumeLabel = new Label("Résumé: " + resume);
+                            Label categorieLabel = new Label("Catégorie: " + categorie);
+                            Label dateLabel = new Label("Date: " + date);
+                            Label dureeLabel = new Label("Durée: " + duree);
+                            Label realisateurLabel = new Label("Réalisateur: " + realisateur);
+                            Label noteLabel = new Label("Note: " + note);
+
+                            resumeLabel.setTooltip(new Tooltip(resume));
+                            resumeLabel.setMaxWidth(190);
+                            resumeLabel.setWrapText(true);
+
+                            resumeLabel.setStyle("-fx-text-fill: white");
+                            titreLabel.setStyle("-fx-text-fill: white");
+                            categorieLabel.setStyle("-fx-text-fill: white");
+                            dateLabel.setStyle("-fx-text-fill: white");
+                            dureeLabel.setStyle("-fx-text-fill: white");
+                            realisateurLabel.setStyle("-fx-text-fill: white");
+                            noteLabel.setStyle("-fx-text-fill: white");
+
+                            vBox1.getChildren().add(titreLabel);
+                            vBox1.getChildren().add(resumeLabel);
+                            vBox1.getChildren().add(categorieLabel);
+                            vBox1.getChildren().add(dateLabel);
+                            vBox1.getChildren().add(dureeLabel);
+                            vBox1.getChildren().add(realisateurLabel);
+                            vBox1.getChildren().add(noteLabel);
+
                             ((AnchorPane)backBtn.getParent()).getChildren().add(vBox1);
 
                             ((AnchorPane)resultat.getParent()).getChildren().remove(vBox);
@@ -191,7 +228,11 @@ public class SearchView {
                             throw new RuntimeException(e);
                         }
                     });
-                    vBox.getChildren().add(label);
+
+                    vBox.getChildren().addAll(label, labelannee);
+                    //space
+                    Label space = new Label(" ");
+                    vBox.getChildren().add(space);
                 }
                 ((AnchorPane)resultat.getParent()).getChildren().add(vBox);
             } catch (SQLException e) {
@@ -250,6 +291,8 @@ public class SearchView {
 
                 while (resultSet.next()) {
                     Label label = new Label(resultSet.getString("titre"));
+                    label.setStyle("-fx-text-fill: white");
+                    label.setFont(Font.font("Arial", FontWeight.BOLD, 15));
                     label.setOnMouseClicked(event -> {
                         System.out.println(label.getText() + " selected");
                         titre.setVisible(false);real.setVisible(false);annee.setVisible(false);searchBtn.setVisible(false);loadBtn.setVisible(false);a.setVisible(false);b.setVisible(false);c.setVisible(false);d.setVisible(false);z.setVisible(false);genrebox.setVisible(false);trierbox.setVisible(false);
@@ -281,13 +324,36 @@ public class SearchView {
                             VBox vBox1 = new VBox();
                             vBox1.setPadding(new Insets(10));
                             vBox1.setSpacing(10);
-                            vBox1.getChildren().add(new Label("Titre: " + titre));
-                            vBox1.getChildren().add(new Label("Résumé: " + resume));
-                            vBox1.getChildren().add(new Label("Catégorie: " + categorie));
-                            vBox1.getChildren().add(new Label("Date: " + date));
-                            vBox1.getChildren().add(new Label("Durée: " + duree));
-                            vBox1.getChildren().add(new Label("Réalisateur: " + realisateur));
-                            vBox1.getChildren().add(new Label("Note: " + note));
+
+
+                            Label titreLabel = new Label("Titre: " + titre);
+                            Label resumeLabel = new Label("Résumé: " + resume);
+                            Label categorieLabel = new Label("Catégorie: " + categorie);
+                            Label dateLabel = new Label("Date: " + date);
+                            Label dureeLabel = new Label("Durée: " + duree);
+                            Label realisateurLabel = new Label("Réalisateur: " + realisateur);
+                            Label noteLabel = new Label("Note: " + note);
+
+                            resumeLabel.setTooltip(new Tooltip(resume));
+                            resumeLabel.setMaxWidth(190);
+                            resumeLabel.setWrapText(true);
+
+                            resumeLabel.setStyle("-fx-text-fill: white");
+                            titreLabel.setStyle("-fx-text-fill: white");
+                            categorieLabel.setStyle("-fx-text-fill: white");
+                            dateLabel.setStyle("-fx-text-fill: white");
+                            dureeLabel.setStyle("-fx-text-fill: white");
+                            realisateurLabel.setStyle("-fx-text-fill: white");
+                            noteLabel.setStyle("-fx-text-fill: white");
+
+                            vBox1.getChildren().add(titreLabel);
+                            vBox1.getChildren().add(resumeLabel);
+                            vBox1.getChildren().add(categorieLabel);
+                            vBox1.getChildren().add(dateLabel);
+                            vBox1.getChildren().add(dureeLabel);
+                            vBox1.getChildren().add(realisateurLabel);
+                            vBox1.getChildren().add(noteLabel);
+
                             ((AnchorPane) backBtn.getParent()).getChildren().add(vBox1);
 
                             ((AnchorPane) resultat.getParent()).getChildren().remove(vBox);

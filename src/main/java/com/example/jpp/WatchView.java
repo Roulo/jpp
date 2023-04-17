@@ -7,6 +7,7 @@ import javafx.fxml.*;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -16,6 +17,8 @@ import java.sql.*;
 public class WatchView extends CompteView {
     private static final String DB_URL = "jdbc:mysql://localhost:3306/temporaire?user=root&password=";
     private Connection conn;
+
+    @FXML private AnchorPane Pane; @FXML private AnchorPane Pane1; @FXML private AnchorPane Pane2;
 
     public WatchView() {
         try {

@@ -14,16 +14,9 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.Scanner;
 
-
-import javafx.application.Application;
 import javafx.event.EventHandler;
-import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 
 /** Page de connexion*/
