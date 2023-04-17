@@ -66,6 +66,17 @@ public class NewScreenController {
                 vBox.setPadding(new Insets(10));
                 vBox.setSpacing(10);
 
+                // add in the vBox the app icon
+                ImageView imageIcon = new ImageView(new Image("file:src/main/images/icon.png"));
+                //delete the white background of the image
+                imageIcon.setSmooth(true);
+                imageIcon.setCache(true);
+                //set the size of the image
+                imageIcon.setFitWidth(300);
+                //center the image in the vbox
+                vBox.getChildren().add(imageIcon);
+                VBox.setMargin(imageIcon, new Insets(0, 0, 0, 100));
+
                 displayBtn.setVisible(false);
 
                 // GridPane
@@ -258,9 +269,6 @@ public class NewScreenController {
                 }
                 vBox.getChildren().add(gridPane);
                 // End of GridPane
-
-
-
 
                 // Prio 1
                 vBox.getChildren().add(new Label(" ")); // Séparation
@@ -466,10 +474,6 @@ public class NewScreenController {
                 }
                 vBox.getChildren().add(gridPanePrio);
 
-
-
-
-
                 // Display videos with genre="Drame"
                 vBox.getChildren().add(new Label(" "));
                 vBox.getChildren().add(new Label(" "));
@@ -665,8 +669,6 @@ public class NewScreenController {
                 }
                 vBox.getChildren().add(gridPaneDrame);
 
-
-
                 // Display videos with genre="Action"
                 vBox.getChildren().add(new Label(" "));
                 vBox.getChildren().add(new Label(" "));
@@ -857,10 +859,6 @@ public class NewScreenController {
                 }
                 vBox.getChildren().add(gridPaneAction);
 
-
-
-
-
                 // Display videos with genre="Aventure"
                 vBox.getChildren().add(new Label(" "));
                 vBox.getChildren().add(new Label(" "));
@@ -1049,8 +1047,6 @@ public class NewScreenController {
                     /////////////////////////////
                 }
                 vBox.getChildren().add(gridPaneAventure);
-
-
 
 
 

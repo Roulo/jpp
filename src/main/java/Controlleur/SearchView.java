@@ -203,14 +203,6 @@ public class SearchView {
                             resumeLabel.setMaxWidth(190);
                             resumeLabel.setWrapText(true);
 
-                            resumeLabel.setStyle("-fx-text-fill: white");
-                            titreLabel.setStyle("-fx-text-fill: white");
-                            categorieLabel.setStyle("-fx-text-fill: white");
-                            dateLabel.setStyle("-fx-text-fill: white");
-                            dureeLabel.setStyle("-fx-text-fill: white");
-                            realisateurLabel.setStyle("-fx-text-fill: white");
-                            noteLabel.setStyle("-fx-text-fill: white");
-
                             vBox1.getChildren().add(titreLabel);
                             vBox1.getChildren().add(resumeLabel);
                             vBox1.getChildren().add(categorieLabel);
@@ -335,14 +327,6 @@ public class SearchView {
                             resumeLabel.setTooltip(new Tooltip(resume));
                             resumeLabel.setMaxWidth(190);
                             resumeLabel.setWrapText(true);
-
-                            resumeLabel.setStyle("-fx-text-fill: white");
-                            titreLabel.setStyle("-fx-text-fill: white");
-                            categorieLabel.setStyle("-fx-text-fill: white");
-                            dateLabel.setStyle("-fx-text-fill: white");
-                            dureeLabel.setStyle("-fx-text-fill: white");
-                            realisateurLabel.setStyle("-fx-text-fill: white");
-                            noteLabel.setStyle("-fx-text-fill: white");
 
                             vBox1.getChildren().add(titreLabel);
                             vBox1.getChildren().add(resumeLabel);
