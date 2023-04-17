@@ -18,11 +18,13 @@ public class AdminFonction implements AdminDAO {
         }
     }
 
-
+    //Fonction pour détecter la nature de l'utilisateur
     public int AdminCommand(){
         String quoi;
         String query = "SELECT status FROM status";
         ResultSet resultSet1;
+
+        //Requete SQL
         try {
             resultSet1 = conn.createStatement().executeQuery(query);
 
@@ -31,7 +33,7 @@ public class AdminFonction implements AdminDAO {
 
             quoi = resultSet1.getString("status");
 
-
+            //Test si l'utilisateur est admin
             if (quoi.equals("Admin")) {
                 System.out.println("Vous êtes admin");
                 //Enable all buttons
@@ -51,6 +53,7 @@ public class AdminFonction implements AdminDAO {
 
     };
 
+    //Fonction pour ajouter un nouveau utilisateur
     public void AjouterClient(Label resultat,String identifiant, String mdp1, int administrateur){
         String sorte;
         if (administrateur==1) sorte = "Admin";
@@ -58,6 +61,7 @@ public class AdminFonction implements AdminDAO {
 
         String query = "INSERT INTO compte (identifiant, mdp, admin, id_Liste, id_Historique, selected_video) VALUES ('" +identifiant+ "','" +mdp1+ "','" +sorte+ "', 2, 2, 'a');";
 
+        //requete SQL pour ajouter l'utilisateur à la base de donnée
         try {
             conn.createStatement().executeUpdate(query);
             resultat.setText("Compte ajoutée avec succès");
@@ -67,11 +71,14 @@ public class AdminFonction implements AdminDAO {
             e.printStackTrace();
         }
     };
+
+    //Fonction pour supprimer un utilisateur de la base de donnée
     public void SupprimerClient(Label resultat,String identifiant){
 
         String query = "DELETE FROM compte WHERE identifiant = '" + identifiant + "';";
         System.out.println();
 
+        //requete SQL pour la suppresion
         try {
             conn.createStatement().executeUpdate(query);
             resultat.setText("Compte supprimé avec succès");
@@ -81,9 +88,10 @@ public class AdminFonction implements AdminDAO {
             e.printStackTrace();
         }
     };
-
+    //Ajouter un film a la base de donnée
     public void AjouterFilm(Label resultat, String title, String director, int year, int duration, String resume, String link,int note, String genre){
         String query = "INSERT INTO videos (titre, realisateur, annee, duree, resume, teaser, note, prio) VALUES ('" + title + "', '" + director + "', '" + year + "', '" + duration + "', '" + resume + "', '" + link + "', '" + note + "','0')";
+        //requete SQL
         try {
             conn.createStatement().executeUpdate(query);
             resultat.setText("Video ajoutée avec succès");
@@ -91,7 +99,7 @@ public class AdminFonction implements AdminDAO {
 
             int id_neutral;
             int id_genre;
-
+            //Recupération de l'id video
             query = "SELECT videos.id FROM videos WHERE videos.titre ='"+title+"';";
             try {
                 ResultSet resultSet1 = conn.createStatement().executeQuery(query);
@@ -99,7 +107,7 @@ public class AdminFonction implements AdminDAO {
                 resultSet1.next();
 
                 id_neutral = resultSet1.getInt("id");
-                //System.out.println("id_vid="+id_neutral);
+                //Recuperation de l'id genre du film
                 query = "SELECT genre.id FROM genre WHERE genre.type ='"+genre+"';";
 
                 try {
@@ -108,7 +116,7 @@ public class AdminFonction implements AdminDAO {
                     resultSet1.next();
 
                     id_genre = resultSet1.getInt("id");
-                    //System.out.println("id_genre="+id_genre);
+                    //Lien entre le film et son genre
                     query = "INSERT INTO definit (id, id__Videos) VALUES ("+id_genre+","+id_neutral+");";
 
                     try {
@@ -128,20 +136,20 @@ public class AdminFonction implements AdminDAO {
             e.printStackTrace();
         }
     };
-
+    //Supprimer le film de la base de donnée
     public void SupprimerFilm(Label resultat, String title){
 
         int id_film;
 
         String query = "SELECT videos.id FROM videos WHERE videos.titre='"+title+"';";
-
+        //Recup de l'id du film
         try {
             ResultSet resultSet1 = conn.createStatement().executeQuery(query);
             resultSet1.next();
 
             id_film = resultSet1.getInt("id");
 
-
+            //Suppression du film qui a cet id
             query = "DELETE FROM definit WHERE id__Videos="+id_film+";";
             try {
                 conn.createStatement().executeUpdate(query);
