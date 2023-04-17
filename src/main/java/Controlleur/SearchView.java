@@ -1,7 +1,6 @@
-package com.example.jpp;
+package Controlleur;
 
 import Modele.Donnes;
-import com.almasb.fxgl.entity.action.Action;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -12,7 +11,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -205,14 +203,6 @@ public class SearchView {
                             resumeLabel.setMaxWidth(190);
                             resumeLabel.setWrapText(true);
 
-                            resumeLabel.setStyle("-fx-text-fill: white");
-                            titreLabel.setStyle("-fx-text-fill: white");
-                            categorieLabel.setStyle("-fx-text-fill: white");
-                            dateLabel.setStyle("-fx-text-fill: white");
-                            dureeLabel.setStyle("-fx-text-fill: white");
-                            realisateurLabel.setStyle("-fx-text-fill: white");
-                            noteLabel.setStyle("-fx-text-fill: white");
-
                             vBox1.getChildren().add(titreLabel);
                             vBox1.getChildren().add(resumeLabel);
                             vBox1.getChildren().add(categorieLabel);
@@ -337,14 +327,6 @@ public class SearchView {
                             resumeLabel.setTooltip(new Tooltip(resume));
                             resumeLabel.setMaxWidth(190);
                             resumeLabel.setWrapText(true);
-
-                            resumeLabel.setStyle("-fx-text-fill: white");
-                            titreLabel.setStyle("-fx-text-fill: white");
-                            categorieLabel.setStyle("-fx-text-fill: white");
-                            dateLabel.setStyle("-fx-text-fill: white");
-                            dureeLabel.setStyle("-fx-text-fill: white");
-                            realisateurLabel.setStyle("-fx-text-fill: white");
-                            noteLabel.setStyle("-fx-text-fill: white");
 
                             vBox1.getChildren().add(titreLabel);
                             vBox1.getChildren().add(resumeLabel);

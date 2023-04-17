@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="SqlDialectMappings">
+    <file url="file://$PROJECT_DIR$/src/main/java/Controlleur/CompteView.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/Controlleur/HelloController.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/Controlleur/NewScreenController.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/Controlleur/SearchView.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/Controlleur/WatchView.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/Modele/AdminFonction.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/Modele/ClientFonction.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/Modele/Connexion.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/Modele/Donnes.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/Modele/Visionnage.java" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/main/java/com/example/jpp/CompteView.java" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/main/java/com/example/jpp/HelloController.java" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/main/java/com/example/jpp/NewScreenController.java" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/main/java/com/example/jpp/SearchView.java" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/main/java/com/example/jpp/WatchView.java" dialect="GenericSQL" />
   </component>
 </project>

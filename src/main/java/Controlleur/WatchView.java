@@ -1,4 +1,4 @@
-package com.example.jpp;
+package Controlleur;
 
 import Modele.ClientFonction;
 import Modele.Visionnage;
@@ -19,6 +19,13 @@ public class WatchView extends CompteView {
     private Connection conn;
 
     @FXML private AnchorPane Pane; @FXML private AnchorPane Pane1; @FXML private AnchorPane Pane2;
+    @FXML private Label z;
+
+    public void initialize() {
+        Pane.setStyle("-fx-background-color: rgb(50,50,50);");
+        z.setFont(javafx.scene.text.Font.font("System", 12));
+        z.setStyle("-fx-text-fill: #ffffff;");
+    }
 
     public WatchView() {
         try {

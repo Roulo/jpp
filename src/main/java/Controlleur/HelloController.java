@@ -1,4 +1,4 @@
-package com.example.jpp;
+package Controlleur;
 
 import Modele.Connexion;
 import javafx.event.*;

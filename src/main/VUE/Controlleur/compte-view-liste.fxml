@@ -5,8 +5,8 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.jpp.CompteView">
-    <SplitPane dividerPositions="0.5134048257372654" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controlleur.CompteView">
+    <SplitPane dividerPositions="0.5134048257372654" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="1000.0">
         <AnchorPane fx:id="Pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="300.0">
             <Label layoutX="86.0" layoutY="14.0" prefHeight="30.0" prefWidth="144.0" text="MON COMPTE">
                 <font>
@@ -24,7 +24,7 @@
             <Label layoutX="165.0" layoutY="301.0" prefHeight="18.0" prefWidth="109.0" text="Supprimer film" />
             <Button fx:id="supprBtn" disable="false" layoutX="165.0" layoutY="319.0" mnemonicParsing="false" onAction="#Supprimer" text="Supprimer un film" />
             <Label layoutX="9.0" layoutY="244.0" prefHeight="18.0" prefWidth="144.0" text="Ajouter compte" />
-            <Button fx:id="adduserBtn" disable="false" layoutX="9.0" layoutY="262.0" mnemonicParsing="false" onAction="#AjouterCompte" text="Ajouter un compte" />
+            <Button fx:id="addcompteBtn" disable="false" layoutX="9.0" layoutY="262.0" mnemonicParsing="false" onAction="#AjouterCompte" text="Ajouter un compte" />
             <Label layoutX="164.0" layoutY="244.0" prefHeight="18.0" prefWidth="109.0" text="Supprimer compte" />
             <Button fx:id="delcompteBtn" disable="false" layoutX="164.0" layoutY="262.0" mnemonicParsing="false" onAction="#SupprimerCompte" text="Supprimer un compte" />
             <Label layoutX="179.0" layoutY="154.0" prefHeight="18.0" prefWidth="103.0" text="Reprendre la vidéo" />
@@ -33,15 +33,10 @@
                 <Cursor fx:constant="DEFAULT" />
             </cursor>
         </AnchorPane>
-        <AnchorPane fx:id="Pane2" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="300.0">
-            <Label fx:id="resultat" layoutX="-1000.0" layoutY="-1000.0" prefHeight="30.0" prefWidth="109.0" text="RESULTAT"><font><Font name="System Bold" size="20.0" /></font></Label>
-
-            <Button fx:id="addcompteBtn" layoutX="83.0" layoutY="207.0" mnemonicParsing="false" onAction="#AddCompte" prefHeight="37.0" prefWidth="96.0" text="Ajouter" />
-            <Label layoutX="12.0" layoutY="14.0" prefHeight="18.0" prefWidth="234.0" text="Nom d'utilisateur" />
-            <TextField fx:id="username" layoutX="14.0" layoutY="33.0" prefHeight="26.0" prefWidth="233.0" />
-            <Label layoutX="12.0" layoutY="63.0" prefHeight="18.0" prefWidth="234.0" text="Mot de passe" />
-            <TextField fx:id="mdp" layoutX="14.0" layoutY="81.0" prefHeight="26.0" prefWidth="233.0" />
-         <CheckBox fx:id="adminBox" layoutX="14.0" layoutY="119.0" mnemonicParsing="false" text="Admin" />
+        <AnchorPane fx:id="Pane2" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="700.0">
+            <Label fx:id="resultat" layoutX="577.0" layoutY="14.0" prefHeight="30.0" prefWidth="109.0" text="RESULTAT"><font><Font name="System Bold" size="20.0" /></font></Label>
+            <Button fx:id="chargerlistBtn" layoutX="321.0" layoutY="213.0" mnemonicParsing="false"
+                    onAction="#ChargerListe" text="Charger la liste"/>
         </AnchorPane>
     </SplitPane>
 </VBox>
