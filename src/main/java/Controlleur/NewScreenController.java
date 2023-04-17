@@ -1,12 +1,8 @@
-package com.example.jpp;
+package Controlleur;
 
-import Modele.Client;
 import Modele.ClientFonction;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.*;
-import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;

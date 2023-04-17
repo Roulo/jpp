@@ -10,8 +10,8 @@ module com.example.jpp {
     requires com.almasb.fxgl.all;
     requires java.sql;
 
-    opens com.example.jpp to javafx.fxml;
-    exports com.example.jpp;
+    opens Controlleur to javafx.fxml;
+    exports Controlleur;
     exports Modele;
     opens Modele to javafx.fxml;
 }
